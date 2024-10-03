@@ -1,0 +1,11 @@
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/bin/Debug/net8.0/MyTicket.Persistence.deps.json
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/bin/Debug/net8.0/MyTicket.Persistence.dll
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/bin/Debug/net8.0/MyTicket.Persistence.pdb
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/MyTicket.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/MyTicket.Persistence.AssemblyInfoInputs.cache
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/MyTicket.Persistence.AssemblyInfo.cs
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/MyTicket.Persistence.csproj.CoreCompileInputs.cache
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/MyTicket.Persistence.dll
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/refint/MyTicket.Persistence.dll
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/MyTicket.Persistence.pdb
+/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/Debug/net8.0/ref/MyTicket.Persistence.dll

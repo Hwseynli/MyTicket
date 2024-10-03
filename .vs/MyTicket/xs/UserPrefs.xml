@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{2DA042DE-2856-4844-9444-9691409544F8}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Core.MyTicket.Application FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Infrastructure.MyTicket.Persistence FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.MyTicket.Api FirstBuild="True" PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Infrastructure.MyTicket.Infrastructure FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Core.MyTicket.Domain FirstBuild="True" />
+</Properties>

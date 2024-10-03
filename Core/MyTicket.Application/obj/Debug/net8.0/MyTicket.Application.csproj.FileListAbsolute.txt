@@ -1,0 +1,11 @@
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Application.deps.json
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Application.dll
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Application.pdb
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.AssemblyInfoInputs.cache
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.AssemblyInfo.cs
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.csproj.CoreCompileInputs.cache
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.dll
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/refint/MyTicket.Application.dll
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.pdb
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/ref/MyTicket.Application.dll
