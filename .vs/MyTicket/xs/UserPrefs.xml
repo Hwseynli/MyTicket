@@ -1,18 +1,34 @@
 ﻿<Properties StartupConfiguration="{2DA042DE-2856-4844-9444-9691409544F8}|https">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Core.MyTicket.Application FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Infrastructure.MyTicket.Persistence FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.MyTicket.Api FirstBuild="True" PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.MyTicket.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
-        <State name="__root__" />
+        <State name="__root__">
+          <Node name="MyTicket">
+            <Node name="Core">
+              <Node name="MyTicket.Domain">
+                <Node name="Entities" expanded="True">
+                  <Node name="User.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="Infrastructure">
+              <Node name="MyTicket.Infrastructure">
+                <Node name="Utils" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="MyTicket.Api">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Infrastructure.MyTicket.Infrastructure FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Core.MyTicket.Domain FirstBuild="True" />
 </Properties>

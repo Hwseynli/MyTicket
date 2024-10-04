@@ -16,6 +16,7 @@
 /Users/zeyneb/Projects/MyTicket/MyTicket.Api/obj/Debug/net8.0/MyTicket.Api.csproj.CoreCompileInputs.cache
 /Users/zeyneb/Projects/MyTicket/MyTicket.Api/obj/Debug/net8.0/MyTicket.Api.MvcApplicationPartsAssemblyInfo.cs
 /Users/zeyneb/Projects/MyTicket/MyTicket.Api/obj/Debug/net8.0/MyTicket.Api.MvcApplicationPartsAssemblyInfo.cache
+/Users/zeyneb/Projects/MyTicket/MyTicket.Api/obj/Debug/net8.0/MyTicket.Api.sourcelink.json
 /Users/zeyneb/Projects/MyTicket/MyTicket.Api/obj/Debug/net8.0/staticwebassets.build.json
 /Users/zeyneb/Projects/MyTicket/MyTicket.Api/obj/Debug/net8.0/staticwebassets.development.json
 /Users/zeyneb/Projects/MyTicket/MyTicket.Api/obj/Debug/net8.0/staticwebassets/msbuild.MyTicket.Api.Microsoft.AspNetCore.StaticWebAssets.props

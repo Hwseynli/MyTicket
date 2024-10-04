@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "MyTicket.Domain/1.0.0": {
+        "dependencies": {
+          "MyTicket.Infrastructure": "1.0.0"
+        },
         "runtime": {
           "MyTicket.Domain.dll": {}
+        }
+      },
+      "MyTicket.Infrastructure/1.0.0": {
+        "runtime": {
+          "MyTicket.Infrastructure.dll": {}
         }
       }
     }
   },
   "libraries": {
     "MyTicket.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MyTicket.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
