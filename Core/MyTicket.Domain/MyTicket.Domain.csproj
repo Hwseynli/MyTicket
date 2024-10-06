@@ -10,11 +10,15 @@
     <None Remove="Entities\" />
     <None Remove="Common\" />
     <None Remove="Exceptions\" />
+    <None Remove="Entities\Enums\" />
+    <None Remove="Entities\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Common\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Entities\Enums\" />
+    <Folder Include="Entities\Users\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\MyTicket.Infrastructure\MyTicket.Infrastructure.csproj" />

@@ -1,5 +1,5 @@
 ﻿using MyTicket.Domain.Common;
-using MyTicket.Domain.Entities;
+using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
 
 namespace MyTicket.Domain;

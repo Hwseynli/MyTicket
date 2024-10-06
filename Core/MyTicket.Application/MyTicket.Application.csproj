@@ -6,4 +6,60 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Interfaces\" />
+    <None Remove="Interfaces\IRepositories\" />
+    <None Remove="Interfaces\IManagers\" />
+    <None Remove="Exceptions\" />
+    <None Remove="Common\" />
+    <None Remove="Common\Behaviour\" />
+    <None Remove="Features\" />
+    <None Remove="Features\Commands\" />
+    <None Remove="Features\Commands\User\" />
+    <None Remove="Features\Commands\User\ViewModels\" />
+    <None Remove="Features\Commands\User\Register\" />
+    <None Remove="Features\Commands\User\Login\" />
+    <None Remove="Features\Commands\User\RefreshToken\" />
+    <None Remove="Features\Queries\" />
+    <None Remove="Features\Queries\User\" />
+    <None Remove="Features\Queries\User\ViewModels\" />
+    <None Remove="Features\Commands\User\UpdateUser\" />
+    <None Remove="Features\Commands\User\ForgotPassword\" />
+    <None Remove="Features\Commands\User\ForgotPassword\ResetPassword\" />
+    <None Remove="Features\Commands\User\ForgotPassword\SendOtp\" />
+    <None Remove="Features\Commands\User\ForgotPassword\VerifyOtp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Interfaces\IRepositories\" />
+    <Folder Include="Interfaces\IManagers\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Common\" />
+    <Folder Include="Common\Behaviour\" />
+    <Folder Include="Features\" />
+    <Folder Include="Features\Commands\" />
+    <Folder Include="Features\Commands\User\" />
+    <Folder Include="Features\Commands\User\ViewModels\" />
+    <Folder Include="Features\Commands\User\Register\" />
+    <Folder Include="Features\Commands\User\Login\" />
+    <Folder Include="Features\Commands\User\RefreshToken\" />
+    <Folder Include="Features\Queries\" />
+    <Folder Include="Features\Queries\User\" />
+    <Folder Include="Features\Queries\User\ViewModels\" />
+    <Folder Include="Features\Commands\User\UpdateUser\" />
+    <Folder Include="Features\Commands\User\ForgotPassword\" />
+    <Folder Include="Features\Commands\User\ForgotPassword\ResetPassword\" />
+    <Folder Include="Features\Commands\User\ForgotPassword\SendOtp\" />
+    <Folder Include="Features\Commands\User\ForgotPassword\VerifyOtp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.0" />
+  </ItemGroup>
 </Project>

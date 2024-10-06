@@ -1,4 +1,4 @@
-﻿using MyTicket.Domain.Entities;
+﻿using MyTicket.Domain.Entities.Users;
 
 namespace MyTicket.Domain;
 public class Editable<TUser> : Auditable<TUser> where TUser : User
