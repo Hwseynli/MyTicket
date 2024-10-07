@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "erOW3eTGt7xr3vL7BhAmvZ4O7zFqwY2PzfcT8UR0vdE=",
+  "Source": "MyTicket.AdminPanel",
+  "BasePath": "_content/MyTicket.AdminPanel",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -28,6 +28,10 @@
     <None Remove="Features\Commands\User\ForgotPassword\ResetPassword\" />
     <None Remove="Features\Commands\User\ForgotPassword\SendOtp\" />
     <None Remove="Features\Commands\User\ForgotPassword\VerifyOtp\" />
+    <None Remove="Features\Commands\Admin\" />
+    <None Remove="Features\Commands\Admin\User\" />
+    <None Remove="Features\Queries\Admin\" />
+    <None Remove="Features\Queries\Admin\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -51,6 +55,10 @@
     <Folder Include="Features\Commands\User\ForgotPassword\ResetPassword\" />
     <Folder Include="Features\Commands\User\ForgotPassword\SendOtp\" />
     <Folder Include="Features\Commands\User\ForgotPassword\VerifyOtp\" />
+    <Folder Include="Features\Commands\Admin\" />
+    <Folder Include="Features\Commands\Admin\User\" />
+    <Folder Include="Features\Queries\Admin\" />
+    <Folder Include="Features\Queries\Admin\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/MyTicket.AdminPanel.props" />
+</Project>
