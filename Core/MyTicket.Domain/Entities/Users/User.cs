@@ -30,10 +30,14 @@ public class User : BaseEntity
         Birthday = birthday;
         PhoneNumber = phoneNumber;
         Email = email;
-        Activated = true;
+        Activated = false;
         IsDeleted = false;
         PasswordHash = PasswordHasher.HashPassword(password);
         RoleId = 2;
+    }
+    public void SetForLogin()
+    {
+        Activated = true;
     }
     public void SetDetailsForUpdate(string firstName, string lastName, string phoneNumber, string email, string passwordHash, Gender gender, DateTime? dateTime)
     {

@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTicket.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTicket.Persistence", "Infrastructure\MyTicket.Persistence\MyTicket.Persistence.csproj", "{39BF5E68-FBDD-4F8D-BAC4-5486C3C8C657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTicket.Api", "MyTicket.Api\MyTicket.Api.csproj", "{2DA042DE-2856-4844-9444-9691409544F8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTicket.AdminPanel", "MyTicket.AdminPanel\MyTicket.AdminPanel.csproj", "{249141CD-F0DD-4551-AC11-4D806659BB5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTicket", "MyTicket\MyTicket.csproj", "{C69AF17F-4EB4-4317-8204-282DC563DEAA}"
@@ -43,10 +41,6 @@ Global
 		{39BF5E68-FBDD-4F8D-BAC4-5486C3C8C657}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39BF5E68-FBDD-4F8D-BAC4-5486C3C8C657}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39BF5E68-FBDD-4F8D-BAC4-5486C3C8C657}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DA042DE-2856-4844-9444-9691409544F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DA042DE-2856-4844-9444-9691409544F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DA042DE-2856-4844-9444-9691409544F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DA042DE-2856-4844-9444-9691409544F8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{249141CD-F0DD-4551-AC11-4D806659BB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{249141CD-F0DD-4551-AC11-4D806659BB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{249141CD-F0DD-4551-AC11-4D806659BB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
