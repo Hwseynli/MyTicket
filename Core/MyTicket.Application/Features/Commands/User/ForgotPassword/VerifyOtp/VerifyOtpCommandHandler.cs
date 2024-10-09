@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using MyTicket.Application.Exceptions;
-using MyTicket.Application.Interfaces.IRepositories;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 
 namespace MyTicket.Application.Features.Commands.User.ForgotPassword.VerifyOtp;
 public class VerifyOtpCommandHandler : IRequestHandler<VerifyOtpCommand, bool>

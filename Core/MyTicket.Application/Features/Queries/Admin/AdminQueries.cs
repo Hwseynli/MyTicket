@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using MyTicket.Application.Features.Queries.Admin.ViewModels;
-using MyTicket.Application.Interfaces.IRepositories;
+﻿using MyTicket.Application.Features.Queries.Admin.ViewModels;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 
 namespace MyTicket.Application.Features.Queries.Admin;
 public class AdminQueries : IAdminQueries

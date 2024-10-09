@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
-using MyTicket.Application.Interfaces.IRepositories;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 using MyTicket.Domain.Entities.Enums;
 using MyTicket.Infrastructure.Utils;
 

@@ -1,7 +1,7 @@
 ﻿using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Queries.User.ViewModels;
 using MyTicket.Application.Interfaces.IManagers;
-using MyTicket.Application.Interfaces.IRepositories;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 
 namespace MyTicket.Application.Features.Queries.User;
 public class UserQueries : IUserQueries

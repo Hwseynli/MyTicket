@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MyTicket.Application.Interfaces.IRepositories;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 
 namespace MyTicket.Application.Features.Commands.User.Register;
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, bool>

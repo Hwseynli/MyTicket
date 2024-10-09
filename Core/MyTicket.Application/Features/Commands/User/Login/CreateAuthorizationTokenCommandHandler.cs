@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using System.Security.Cryptography;
+using MediatR;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Commands.User.ViewModels;
 using MyTicket.Application.Interfaces.IManagers;
-using MyTicket.Application.Interfaces.IRepositories;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 using MyTicket.Infrastructure.Utils;
-using System.Security.Cryptography;
 
 namespace MyTicket.Application.Features.Commands.User.Login
 {

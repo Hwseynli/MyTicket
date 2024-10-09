@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using MyTicket.Application.Interfaces.IManagers;
-using MyTicket.Application.Interfaces.IRepositories;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 
 namespace MyTicket.Application.Features.Commands.User.UpdateUser;
 public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>

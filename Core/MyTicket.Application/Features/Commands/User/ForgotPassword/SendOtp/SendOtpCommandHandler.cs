@@ -2,7 +2,7 @@
 using MediatR;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
-using MyTicket.Application.Interfaces.IRepositories;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Application.Features.Commands.User.ForgotPassword.SendOtp
