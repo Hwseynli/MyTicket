@@ -1,3 +1,9 @@
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.csproj.AssemblyReference.cache
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.AssemblyInfoInputs.cache
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.AssemblyInfo.cs
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.csproj.CoreCompileInputs.cache
+/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.sourcelink.json
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Application.deps.json
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Application.dll
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Application.pdb
@@ -5,12 +11,6 @@
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Infrastructure.dll
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Domain.pdb
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/bin/Debug/net8.0/MyTicket.Infrastructure.pdb
-/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.csproj.AssemblyReference.cache
-/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.GeneratedMSBuildEditorConfig.editorconfig
-/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.AssemblyInfoInputs.cache
-/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.AssemblyInfo.cs
-/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.csproj.CoreCompileInputs.cache
-/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.sourcelink.json
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.06C120C9.Up2Date
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/MyTicket.Application.dll
 /Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/obj/Debug/net8.0/refint/MyTicket.Application.dll

@@ -1,5 +1,4 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Commands.User.ViewModels;
 using MyTicket.Application.Interfaces.IManagers;
@@ -20,7 +19,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, J
     public async Task<JwtTokenDto> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         var refreshToken = request.RefreshToken.Split("_");
-        var user = await _userRepository.GetByIdAsync(p => p.RefreshToken == request.RefreshToken);
+        var user = await _userRepository.GetAsync(p => p.RefreshToken == request.RefreshToken);
         if (user == null
             || !user.Activated
             || user.IsDeleted)

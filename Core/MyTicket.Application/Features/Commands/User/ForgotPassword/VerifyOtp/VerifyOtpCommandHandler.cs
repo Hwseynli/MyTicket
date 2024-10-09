@@ -13,7 +13,7 @@ public class VerifyOtpCommandHandler : IRequestHandler<VerifyOtpCommand, bool>
 
     public async Task<bool> Handle(VerifyOtpCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetByIdAsync
+        var user = await _userRepository.GetAsync
             (u => u.OtpCode != null && u.OtpCode == request.OtpCode &&
             u.OtpGeneratedTime != null &&
             u.OtpGeneratedTime.Value.AddMinutes(15) >= DateTime.UtcNow);

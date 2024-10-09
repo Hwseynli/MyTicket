@@ -1,40 +1,31 @@
 ﻿<Properties StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https">
-  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MyTicket.AdminPanel/Program.cs">
+    <Files>
+      <File FileName="MyTicket.AdminPanel/Controllers/AdminController.cs" Line="1" Column="1" />
+      <File FileName="MyTicket.AdminPanel/Infrastructure/SeedDatas/AppSeedDbContext.cs" Line="23" Column="1" />
+      <File FileName="MyTicket.AdminPanel/Program.cs" Line="175" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MyTicket" expanded="True">
-            <Node name="Core" expanded="True">
-              <Node name="MyTicket.Application">
-                <Node name="Features">
-                  <Node name="Commands">
-                    <Node name="User" expanded="True">
-                      <Node name="Login" expanded="True" />
-                    </Node>
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="MyTicket.Domain" expanded="True">
-                <Node name="Entities" expanded="True">
-                  <Node name="Users" expanded="True" />
-                </Node>
-              </Node>
-            </Node>
+            <Node name="Core" expanded="True" />
             <Node name="Infrastructure" expanded="True" />
             <Node name="MyTicket.AdminPanel">
-              <Node name="Controllers" selected="True" />
-              <Node name="Infrastructure" expanded="True">
-                <Node name="SeedDatas" expanded="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <Breakpoint file="/Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/Infrastructure/SeedDatas/AppSeedDbContext.cs" relfile="MyTicket.AdminPanel/Infrastructure/SeedDatas/AppSeedDbContext.cs" line="26" column="1" />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

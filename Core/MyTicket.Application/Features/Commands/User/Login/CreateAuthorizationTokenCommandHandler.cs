@@ -20,7 +20,7 @@ namespace MyTicket.Application.Features.Commands.User.Login
 
         public async Task<JwtTokenDto> Handle(CreateAuthorizationTokenCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetByIdAsync(x => x.Email.ToLower() == request.EmailOrPhoneNumber.ToLower()
+            var user = await _userRepository.GetAsync(x => x.Email.ToLower() == request.EmailOrPhoneNumber.ToLower()
                                                               || x.PhoneNumber == request.EmailOrPhoneNumber,"Role");
 
             if (user == null

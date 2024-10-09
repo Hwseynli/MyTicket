@@ -17,7 +17,7 @@ public class UserQueries : IUserQueries
     public async Task<UserProfileDto> GetUserProfileAsync()
     {
         //var id = _userManager.GetCurrentUserId();
-        var user = await _userRepository.GetByIdAsync((u => u.Id == _userManager.GetCurrentUserId()));
+        var user = await _userRepository.GetAsync((u => u.Id == _userManager.GetCurrentUserId()));
         if (user == null)
         {
             throw new NotFoundException("User not found.");

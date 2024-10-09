@@ -26,7 +26,7 @@ namespace MyTicket.Application.Features.Commands.User.ForgotPassword.SendOtp
             if (!validationResult.IsValid)
                 throw new Exceptions.ValidationException(validationResult.Errors);
 
-            var user = await _userRepository.GetByIdAsync(u => u.Email == request.Email);
+            var user = await _userRepository.GetAsync(u => u.Email == request.Email);
             if (user == null)
                 throw new NotFoundException("User not found.");
 

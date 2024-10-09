@@ -39,6 +39,10 @@ public class User : BaseEntity
     {
         Activated = true;
     }
+    public void SetForLogout()
+    {
+        Activated = false;
+    }
     public void SetDetailsForUpdate(string firstName, string lastName, string phoneNumber, string email, string passwordHash, Gender gender, DateTime? dateTime)
     {
         FirstName = firstName;
