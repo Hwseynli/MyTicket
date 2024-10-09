@@ -25,7 +25,7 @@ public class LogoutUserCommandHandler : IRequestHandler<LogoutUserCommand, bool>
             throw new UnAuthorizedException();
 
         user.UpdateRefreshToken(null); // Refresh tokenini sıfırla, sessiyanı bitir
-        user.SetForLogout();
+        user.SetForLoginOrLogout(false,false);
         await _userRepository.Commit(cancellationToken); // Dəyişiklikləri saxla
 
         return true;

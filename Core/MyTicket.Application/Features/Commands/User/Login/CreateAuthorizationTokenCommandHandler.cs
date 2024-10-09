@@ -31,7 +31,7 @@ namespace MyTicket.Application.Features.Commands.User.Login
             // Şifrəni yoxlamaq üçün PasswordHasher istifadə edilir
             if (user.PasswordHash != PasswordHasher.HashPassword(request.Password))
                 throw new UnAuthorizedException("Invalid password");
-            user.SetForLogin();
+            user.SetForLoginOrLogout(true,false);
             // Refresh token yaradılır
             var random = GenerateRandomNumber();
             var refreshToken = $"{random}_{user.Id}_{DateTime.UtcNow.AddDays(20)}";

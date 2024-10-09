@@ -17,6 +17,7 @@ public class User : BaseEntity
     public DateTime LastPasswordChangeDateTime { get; private set; }
     public string? RefreshToken { get; private set; }
     public bool IsDeleted { get; private set; }
+    public DateTime DeletedTime { get; private set; }
     public bool Activated { get; private set; }
     //ForgotPassword üçün :
     public string? OtpCode { get; private set; }
@@ -35,13 +36,17 @@ public class User : BaseEntity
         PasswordHash = PasswordHasher.HashPassword(password);
         RoleId = 2;
     }
-    public void SetForLogin()
+    public void SetForLoginOrLogout(bool isActivated, bool isDeleted=false)
     {
-        Activated = true;
+        Activated = isActivated;
+        IsDeleted = IsDeleted;
     }
-    public void SetForLogout()
+    public void SetForSoftDelete()
     {
         Activated = false;
+        IsDeleted = true;
+        DeletedTime = DateTime.UtcNow.AddHours(4);
+        UpdateRefreshToken(null);
     }
     public void SetDetailsForUpdate(string firstName, string lastName, string phoneNumber, string email, string passwordHash, Gender gender, DateTime? dateTime)
     {
