@@ -33,12 +33,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controllers\" />
-    <None Remove="Infrastructure\" />
     <None Remove="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Infrastructure\" />
     <Folder Include="Middleware\" />
   </ItemGroup>
 </Project>

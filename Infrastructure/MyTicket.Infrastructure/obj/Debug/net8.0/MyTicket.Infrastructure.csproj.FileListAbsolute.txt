@@ -10,3 +10,15 @@
 /Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/refint/MyTicket.Infrastructure.dll
 /Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.pdb
 /Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/ref/MyTicket.Infrastructure.dll
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/bin/Debug/net8.0/MyTicket.Infrastructure.deps.json
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/bin/Debug/net8.0/MyTicket.Infrastructure.dll
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/bin/Debug/net8.0/MyTicket.Infrastructure.pdb
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.AssemblyInfoInputs.cache
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.AssemblyInfo.cs
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.sourcelink.json
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.dll
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/refint/MyTicket.Infrastructure.dll
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/MyTicket.Infrastructure.pdb
+/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/Debug/net8.0/ref/MyTicket.Infrastructure.dll

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Polly;
 using Polly.Retry;
 
-namespace MyTicket.AdminPanel.Infrastructure.SeedDatas;
+namespace MyTicket.Infrastructure.SeedDatas;
 public class AppSeedDbContext
 {
     public async Task SeedAsync(AppDbContext context, ILogger<AppSeedDbContext> logger)

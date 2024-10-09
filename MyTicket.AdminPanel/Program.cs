@@ -5,10 +5,8 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyTicket.Application;
-using MyTicket.AdminPanel.Infrastructure.SeedDatas;
 using MyTicket.AdminPanel.Middleware;
 using MyTicket.Persistence;
-using MyTicket.Persistence.Context;
 using Serilog;
 using Serilog.Events;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -17,12 +15,9 @@ using System.Security.Claims;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddPersistenceRegistration(builder.Configuration);
 builder.Services.AddApplicationRegistration();
-//var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-//var jsonFilePath = $"appsettings.{environment}.json";
 
 var environment = builder.Environment;
 IConfiguration configuration = new ConfigurationBuilder()
@@ -79,8 +74,8 @@ builder.Services.AddAuthentication(opt =>
 });
 
 builder.Services.AddAuthorization();
-//Logger
 
+//Logger
 var serilogLogger = new LoggerConfiguration()
     .WriteTo.File(configuration["Serilog:WriteTo:1:Args:path"],
     rollingInterval: RollingInterval.Day,
@@ -122,7 +117,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<AppSeedDbContext>();
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
@@ -154,15 +148,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-////For seedDatas
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
-    var logger = services.GetRequiredService<ILogger<AppSeedDbContext>>();
-    var seed = services.GetRequiredService<AppSeedDbContext>();
-    await seed.SeedAsync(context, logger);
-}
 if (environment.IsStaging() && environment.IsProduction())
 {
     app.UseFileServer(new FileServerOptions
