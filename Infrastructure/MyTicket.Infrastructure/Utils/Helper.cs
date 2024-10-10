@@ -1,4 +1,6 @@
-﻿namespace MyTicket.Infrastructure.Utils;
+﻿using System.Text.RegularExpressions;
+
+namespace MyTicket.Infrastructure.Utils;
 public static class Helper
 {
     public static bool IsEmail(string input)
@@ -8,7 +10,13 @@ public static class Helper
 
     public static bool IsPhoneNumber(string input)
     {
-        // Check if it's a valid phone number (basic length check and digit check)
-        return input.All(char.IsDigit) && input.Length >= 10 && input.Length <= 15;
+        // Beynəlxalq telefon nömrəsi üçün regex şərti
+        string pattern = @"^\+?[1-9]\d{1,14}$";
+
+        // Telefon nömrəsinin boşluqları və tireləri çıxarılsın
+        input = input.Replace(" ", "").Replace("-", "");
+
+        // Regex pattern ilə yoxla
+        return Regex.IsMatch(input, pattern);
     }
 }
