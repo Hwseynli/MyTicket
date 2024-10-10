@@ -23,14 +23,13 @@ namespace MyTicket.Application.Features.Commands.User.Login
             var user = await _userRepository.GetAsync(x => x.Email.ToLower() == request.EmailOrPhoneNumber.ToLower()
                                                               || x.PhoneNumber == request.EmailOrPhoneNumber,"Role");
 
-            if (user == null
-                || user.PasswordHash != PasswordHasher.HashPassword(request.Password)
-                || user.IsDeleted)
+            if (user == null)
                 throw new UnAuthorizedException("Invalid credentials");
 
             // Şifrəni yoxlamaq üçün PasswordHasher istifadə edilir
             if (user.PasswordHash != PasswordHasher.HashPassword(request.Password))
                 throw new UnAuthorizedException("Invalid password");
+
             user.SetForLoginOrLogout(true,false);
             // Refresh token yaradılır
             var random = GenerateRandomNumber();

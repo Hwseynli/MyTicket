@@ -36,6 +36,8 @@
     <None Remove="Interfaces\IRepositories\Users\" />
     <None Remove="Features\Commands\Admin\User\AssignRoles\" />
     <None Remove="Features\Commands\User\Delete\" />
+    <None Remove="Features\Commands\User\Delete\SoftDeleteConfirm\" />
+    <None Remove="Features\Commands\User\Delete\SoftDeleteRequest\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -67,6 +69,8 @@
     <Folder Include="Interfaces\IRepositories\Users\" />
     <Folder Include="Features\Commands\Admin\User\AssignRoles\" />
     <Folder Include="Features\Commands\User\Delete\" />
+    <Folder Include="Features\Commands\User\Delete\SoftDeleteConfirm\" />
+    <Folder Include="Features\Commands\User\Delete\SoftDeleteRequest\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

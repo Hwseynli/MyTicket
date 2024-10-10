@@ -6,6 +6,7 @@ using MyTicket.Application.Interfaces.IRepositories;
 using MyTicket.Persistence.Concrete;
 using MyTicket.Persistence.Context;
 using MyTicket.Persistence.Repositories;
+using MyTicket.Persistence.Services;
 
 namespace MyTicket.Persistence;
 public static class ServiceRegistration
@@ -38,5 +39,6 @@ public static class ServiceRegistration
         services.AddScoped<IUserManager, UserManager>();
         services.AddScoped<IEmailManager, EmailManager>();
 
+        services.AddHostedService<HardDeleteBacgroundJob>();
     }
 }

@@ -37,10 +37,10 @@ public class User : BaseEntity
         PasswordHash = PasswordHasher.HashPassword(password);
         RoleId = 2;
     }
-    public void SetForLoginOrLogout(bool isActivated, bool? isDeleted=false,DateTime? dateTime=null)
+    public void SetForLoginOrLogout(bool isActivated, bool isDeleted=false,DateTime? dateTime=null)
     {
         Activated = isActivated;
-        IsDeleted = IsDeleted;
+        IsDeleted = isDeleted;
         DeletedTime = dateTime;
     }
     public void SetConfirmToken(string token)
@@ -51,7 +51,7 @@ public class User : BaseEntity
     {
         Activated = false;
         IsDeleted = true;
-        DeletedTime = DateTime.UtcNow.AddHours(4);
+        DeletedTime = DateTime.UtcNow;
         UpdateRefreshToken(null);
         ConfirmToken = null;
     }
