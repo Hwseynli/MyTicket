@@ -20,7 +20,6 @@ public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand,
             throw new BadRequestException("Invalid OTP or OTP has expired.");
 
         user.ResetPassword(PasswordHasher.HashPassword(request.NewPassword));
-        user.UpdateOtp(null); // OTP-i sil
         await _userRepository.Commit(cancellationToken);
 
         return true;

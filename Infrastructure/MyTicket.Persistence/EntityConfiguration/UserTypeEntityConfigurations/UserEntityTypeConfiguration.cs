@@ -56,6 +56,9 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.DeletedTime)
              .HasColumnName("deleted_time");
 
+        builder.Property(x => x.ConfirmToken)
+           .HasColumnName("confirm_token");
+
         builder.Property(x => x.RefreshToken)
            .HasColumnName("refresh_token");
 
@@ -68,10 +71,6 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.PasswordHash)
            .IsRequired()
            .HasColumnName("password_hash");
-
-        builder.Property(x => x.PasswordHash)
-             .IsRequired()
-             .HasColumnName("password_hash");
 
         builder.Property(x => x.LastPasswordChangeDateTime)
              .HasColumnName("last_password_change_date");

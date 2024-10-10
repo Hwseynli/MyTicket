@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eJIaN7IrNQSEG9b4VBeCUEogYqioPGzXXc2EttTEIXE=",
+  "Hash": "SokfY2bo/iyxtkxSxURzYhYe63Sod5BMtmEuERASMow=",
   "Source": "MyTicket",
   "BasePath": "_content/MyTicket",
   "Mode": "Default",
@@ -11,10 +11,10 @@
       "Version": 2,
       "Source": "MyTicket.AdminPanel",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishProperties": "",
       "AdditionalPublishPropertiesToRemove": "TargetFramework",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildProperties": "",
       "AdditionalBuildPropertiesToRemove": "TargetFramework"
     }
   ],
