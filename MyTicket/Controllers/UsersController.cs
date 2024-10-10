@@ -10,6 +10,7 @@ using MyTicket.Application.Features.Commands.User.Login;
 using MyTicket.Application.Features.Commands.User.Logout;
 using MyTicket.Application.Features.Commands.User.RefreshToken;
 using MyTicket.Application.Features.Commands.User.Register;
+using MyTicket.Application.Features.Commands.User.Subscriber.Create;
 using MyTicket.Application.Features.Commands.User.UpdateUser;
 using MyTicket.Application.Features.Queries.User;
 
@@ -25,6 +26,14 @@ public class UsersController : ControllerBase
     {
         _mediator = mediator;
         _userQueries = userQueries;
+    }
+
+    // POST: api/subscriber
+    [HttpPost("subscribe")]
+    public async Task<IActionResult> Subscribe([FromBody] CreateSubscriberCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return result ? Ok("You have successfully subscribed. A welcome email has been sent.") : BadRequest("Subscription failed.");
     }
 
     [HttpPost("register")]

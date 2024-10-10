@@ -38,6 +38,7 @@
     <None Remove="Features\Commands\User\Delete\" />
     <None Remove="Features\Commands\User\Delete\SoftDeleteConfirm\" />
     <None Remove="Features\Commands\User\Delete\SoftDeleteRequest\" />
+    <None Remove="Features\Commands\User\Subscriber\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -71,6 +72,7 @@
     <Folder Include="Features\Commands\User\Delete\" />
     <Folder Include="Features\Commands\User\Delete\SoftDeleteConfirm\" />
     <Folder Include="Features\Commands\User\Delete\SoftDeleteRequest\" />
+    <Folder Include="Features\Commands\User\Subscriber\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

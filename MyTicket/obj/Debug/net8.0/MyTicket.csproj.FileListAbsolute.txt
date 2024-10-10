@@ -338,3 +338,6 @@
 /Users/zeyneb/Downloads/MyTicket/MyTicket/obj/Debug/net8.0/MyTicket.pdb
 /Users/zeyneb/Downloads/MyTicket/MyTicket/obj/Debug/net8.0/MyTicket.genruntimeconfig.cache
 /Users/zeyneb/Downloads/MyTicket/MyTicket/obj/Debug/net8.0/ref/MyTicket.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.Http.dll
