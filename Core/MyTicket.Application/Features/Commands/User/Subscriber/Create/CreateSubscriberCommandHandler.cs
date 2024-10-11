@@ -9,11 +9,13 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
 {
     public readonly ISubscriberRepository _subscriberRepository;
     private readonly IEmailManager _emailManager;
+    private readonly ISmsManager _smsManager;
 
-    public CreateSubscriberCommandHandler(ISubscriberRepository subscriberRepository, IEmailManager emailManager)
+    public CreateSubscriberCommandHandler(ISubscriberRepository subscriberRepository, IEmailManager emailManager, ISmsManager smsManager)
     {
         _subscriberRepository = subscriberRepository;
         _emailManager = emailManager;
+        _smsManager = smsManager;
     }
 
     public async Task<bool> Handle(CreateSubscriberCommand request, CancellationToken cancellationToken)
@@ -42,6 +44,8 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
         if (isEmail)
         {
             subscriber.SetDetail(email:request.EmailOrPhoneNumber);
+            await _subscriberRepository.AddAsync(subscriber);
+            await _subscriberRepository.Commit(cancellationToken);
             var subject = "Xoş gəldiniz!";
             var body = "Bizə abunə olduğunuz üçün təşəkkür edirik!";
             await _emailManager.SendEmailAsync(request.EmailOrPhoneNumber, subject, body);
@@ -49,6 +53,12 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
         else
         {
             subscriber.SetDetail(phoneNumber:request.EmailOrPhoneNumber);
+            await _subscriberRepository.AddAsync(subscriber);
+            await _subscriberRepository.Commit(cancellationToken);
+            //// SMS göndəririk
+            //var subject = "Xoş gəldiniz!";
+            //var body = "Bizə abunə olduğunuz üçün təşəkkür edirik!";
+            //await _smsManager.SendSmsAsync(request.EmailOrPhoneNumber, subject, body);
         }
 
         return true;

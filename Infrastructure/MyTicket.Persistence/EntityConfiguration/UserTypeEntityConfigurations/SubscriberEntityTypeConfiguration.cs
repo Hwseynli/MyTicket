@@ -14,20 +14,19 @@ public class SubscriberEntityTypeConfiguration : IEntityTypeConfiguration<Subscr
                .HasColumnName("id");
 
         builder.Property(x => x.Email)
-               .IsRequired()
                .HasColumnName("email");
 
         builder.HasIndex(t => t.Email)
            .IsUnique();
 
         builder.Property(x => x.PhoneNumber)
-                .IsRequired()
                 .HasColumnName("phone_number");
 
         builder.HasIndex(t => t.PhoneNumber)
            .IsUnique();
 
         builder.Property(x => x.CreatedDateTime)
+            .IsRequired()
              .HasColumnName("created_date_time");
     }
 }

@@ -120,6 +120,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<AppSeedDbContext>();
 
 var app = builder.Build();
