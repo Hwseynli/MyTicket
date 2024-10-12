@@ -12,6 +12,7 @@
     <None Remove="Exceptions\" />
     <None Remove="Entities\Enums\" />
     <None Remove="Entities\Users\" />
+    <None Remove="Entities\Places\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -19,6 +20,7 @@
     <Folder Include="Exceptions\" />
     <Folder Include="Entities\Enums\" />
     <Folder Include="Entities\Users\" />
+    <Folder Include="Entities\Places\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\MyTicket.Infrastructure\MyTicket.Infrastructure.csproj" />

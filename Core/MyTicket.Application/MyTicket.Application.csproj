@@ -39,6 +39,16 @@
     <None Remove="Features\Commands\User\Delete\SoftDeleteConfirm\" />
     <None Remove="Features\Commands\User\Delete\SoftDeleteRequest\" />
     <None Remove="Features\Commands\User\Subscriber\" />
+    <None Remove="Features\Commands\Place\Create\" />
+    <None Remove="Interfaces\IRepositories\Places\" />
+    <None Remove="Features\Commands\Place\Hall\" />
+    <None Remove="Features\Commands\Place\Hall\Create\" />
+    <None Remove="Features\Commands\Place\Seat\" />
+    <None Remove="Features\Commands\Place\Seat\Create\" />
+    <None Remove="Features\Commands\Place\" />
+    <None Remove="Features\Commands\Place\Location\Update\" />
+    <None Remove="Features\Commands\Place\Hall\Update\" />
+    <None Remove="Features\Commands\Place\Seat\Update\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -73,6 +83,11 @@
     <Folder Include="Features\Commands\User\Delete\SoftDeleteConfirm\" />
     <Folder Include="Features\Commands\User\Delete\SoftDeleteRequest\" />
     <Folder Include="Features\Commands\User\Subscriber\" />
+    <Folder Include="Interfaces\IRepositories\Places\" />
+    <Folder Include="Features\Commands\Place\" />
+    <Folder Include="Features\Commands\Place\Location\Update\" />
+    <Folder Include="Features\Commands\Place\Hall\Update\" />
+    <Folder Include="Features\Commands\Place\Seat\Update\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

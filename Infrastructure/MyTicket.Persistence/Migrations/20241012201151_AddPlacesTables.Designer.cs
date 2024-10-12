@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyTicket.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241011114029_UpdateSubscriberTable")]
-    partial class UpdateSubscriberTable
+    [Migration("20241012201151_AddPlacesTables")]
+    partial class AddPlacesTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,144 @@ namespace MyTicket.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("address");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by_id");
+
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update_date_time");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("record_date_time");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer")
+                        .HasColumnName("update_by_id");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("places", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by_id");
+
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update_date_time");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("PlaceId")
+                        .HasColumnType("integer")
+                        .HasColumnName("place_id");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("record_date_time");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer")
+                        .HasColumnName("update_by_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaceId");
+
+                    b.ToTable("place_halls", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Places.Seat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by_id");
+
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update_date_time");
+
+                    b.Property<int>("PlaceHallId")
+                        .HasColumnType("integer")
+                        .HasColumnName("place_hall_id");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("price");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("record_date_time");
+
+                    b.Property<int>("RowNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("row_number");
+
+                    b.Property<int>("SeatNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("seat_number");
+
+                    b.Property<string>("SeatType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("seat_type");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer")
+                        .HasColumnName("update_by_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaceHallId");
+
+                    b.ToTable("seats", (string)null);
+                });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.Role", b =>
                 {
@@ -170,6 +308,28 @@ namespace MyTicket.Persistence.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Places.Place", "Place")
+                        .WithMany("PlaceHalls")
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Place");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Places.Seat", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Places.PlaceHall", "PlaceHall")
+                        .WithMany("Seats")
+                        .HasForeignKey("PlaceHallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlaceHall");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.User", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Users.Role", "Role")
@@ -179,6 +339,16 @@ namespace MyTicket.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
+                {
+                    b.Navigation("PlaceHalls");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
+                {
+                    b.Navigation("Seats");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.Role", b =>

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyTicket.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241010190135_AddSubscriberTable")]
-    partial class AddSubscriberTable
+    [Migration("20241012200505_AddUsersTables")]
+    partial class AddUsersTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,17 +53,15 @@ namespace MyTicket.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date_time");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("email");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("phone_number");
 
