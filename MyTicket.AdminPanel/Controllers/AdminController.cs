@@ -21,13 +21,22 @@ public class AdminController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
+    [HttpGet("users")]
     public async Task<IActionResult> GetAllUsersAsync()
     {
         var users = await _adminQueries.GetUsersAsync();
         if (users.Capacity <= 0)
             throw new NotFoundException();
         return Ok(users);
+    }
+
+    [HttpGet("subscribers")]
+    public async Task<IActionResult> GetAllSubscriberssAsync()
+    {
+        var subscribers = await _adminQueries.GetSubscribersAsync();
+        if (subscribers.Capacity <= 0)
+            throw new NotFoundException();
+        return Ok(subscribers);
     }
 
     [HttpPost("assign-role")]

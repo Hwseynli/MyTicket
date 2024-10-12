@@ -4,4 +4,5 @@ namespace MyTicket.Application.Features.Queries.Admin;
 public interface IAdminQueries
 {
     Task<List<UserDto>> GetUsersAsync();
+    Task<List<SubscriberDto>> GetSubscribersAsync();
 }
