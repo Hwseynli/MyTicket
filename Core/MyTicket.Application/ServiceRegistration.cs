@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MyTicket.Application.Common.Behaviour;
 using MyTicket.Application.Features.Queries.User;
 using MyTicket.Application.Features.Queries.Admin;
+using MyTicket.Application.Features.Queries.Location;
 
 namespace MyTicket.Application;
 public static class ServiceRegistration
@@ -17,5 +18,6 @@ public static class ServiceRegistration
 
         services.AddScoped<IUserQueries, UserQueries>();
         services.AddScoped<IAdminQueries, AdminQueries>();
+        services.AddScoped<ILocationQueries, LocationQueries>();
     }
 }

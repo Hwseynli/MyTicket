@@ -49,6 +49,8 @@
     <None Remove="Features\Commands\Place\Location\Update\" />
     <None Remove="Features\Commands\Place\Hall\Update\" />
     <None Remove="Features\Commands\Place\Seat\Update\" />
+    <None Remove="Features\Queries\Location\" />
+    <None Remove="Features\Queries\Location\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -88,6 +90,8 @@
     <Folder Include="Features\Commands\Place\Location\Update\" />
     <Folder Include="Features\Commands\Place\Hall\Update\" />
     <Folder Include="Features\Commands\Place\Seat\Update\" />
+    <Folder Include="Features\Queries\Location\" />
+    <Folder Include="Features\Queries\Location\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />
