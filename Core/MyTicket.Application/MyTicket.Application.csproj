@@ -51,6 +51,14 @@
     <None Remove="Features\Commands\Place\Seat\Update\" />
     <None Remove="Features\Queries\Location\" />
     <None Remove="Features\Queries\Location\ViewModels\" />
+    <None Remove="Features\Commands\Tag\" />
+    <None Remove="Features\Commands\Tag\Category\" />
+    <None Remove="Features\Commands\Tag\SubCategory\" />
+    <None Remove="Features\Commands\Tag\Category\Create\" />
+    <None Remove="Features\Commands\Tag\Category\Update\" />
+    <None Remove="Features\Commands\Tag\SubCategory\Create\" />
+    <None Remove="Features\Commands\Tag\SubCategory\Update\" />
+    <None Remove="Interfaces\IRepositories\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -92,6 +100,14 @@
     <Folder Include="Features\Commands\Place\Seat\Update\" />
     <Folder Include="Features\Queries\Location\" />
     <Folder Include="Features\Queries\Location\ViewModels\" />
+    <Folder Include="Features\Commands\Tag\" />
+    <Folder Include="Features\Commands\Tag\Category\" />
+    <Folder Include="Features\Commands\Tag\SubCategory\" />
+    <Folder Include="Features\Commands\Tag\Category\Create\" />
+    <Folder Include="Features\Commands\Tag\Category\Update\" />
+    <Folder Include="Features\Commands\Tag\SubCategory\Create\" />
+    <Folder Include="Features\Commands\Tag\SubCategory\Update\" />
+    <Folder Include="Interfaces\IRepositories\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

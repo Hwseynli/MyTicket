@@ -1,53 +1,30 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https">
   <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyTicket/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Core/MyTicket.Domain/Entities/Enums/SeatType.cs">
     <Files>
-      <File FileName="MyTicket/Program.cs" Line="126" Column="1" />
-      <File FileName="Core/MyTicket.Domain/Entities/Places/Place.cs" Line="8" Column="28" />
-      <File FileName="Core/MyTicket.Domain/Entities/Users/Role.cs" Line="7" Column="23" />
-      <File FileName="Core/MyTicket.Domain/Entities/Places/PlaceHall.cs" Line="9" Column="23" />
-      <File FileName="Core/MyTicket.Domain/Entities/Users/User.cs" Line="14" Column="19" />
-      <File FileName="Core/MyTicket.Application/Features/Commands/User/UpdateUser/UpdateUserCommandHandler.cs" Line="35" Column="26" />
-      <File FileName="Infrastructure/MyTicket.Persistence/Concrete/UserManager.cs" Line="33" Column="64" />
-      <File FileName="Infrastructure/MyTicket.Persistence/Repositories/Repository.cs" Line="64" Column="23" />
-      <File FileName="Infrastructure/MyTicket.Persistence/Concrete/EmailManager.cs" Line="48" Column="36" />
-      <File FileName="Infrastructure/MyTicket.Persistence/Concrete/ClaimManager.cs" Line="37" Column="14" />
-      <File FileName="MyTicket.AdminPanel/Program.cs" Line="155" Column="49" />
-      <File FileName="MyTicket/Infrastructure/SeedDatas/AppSeedDbContext.cs" Line="29" Column="27" />
+      <File FileName="MyTicket/Controllers/UsersController.cs" Line="1" Column="1" />
+      <File FileName="Core/MyTicket.Domain/Entities/Enums/SeatType.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MyTicket" expanded="True">
             <Node name="Core" expanded="True">
-              <Node name="MyTicket.Application" expanded="True">
-                <Node name="Features" expanded="True">
-                  <Node name="Commands" expanded="True" />
-                </Node>
-              </Node>
+              <Node name="MyTicket.Application" expanded="True" />
               <Node name="MyTicket.Domain" expanded="True">
-                <Node name="Entities" expanded="True">
-                  <Node name="Places" expanded="True" />
-                  <Node name="Users" expanded="True" />
-                </Node>
+                <Node name="Entities" selected="True" />
               </Node>
             </Node>
             <Node name="Infrastructure" expanded="True">
-              <Node name="MyTicket.Persistence">
-                <Node name="Concrete" expanded="True" />
-                <Node name="Repositories" expanded="True" />
-              </Node>
+              <Node name="MyTicket.Infrastructure" expanded="True" />
+              <Node name="MyTicket.Persistence" expanded="True" />
             </Node>
-            <Node name="MyTicket" expanded="True">
-              <Node name="Infrastructure" expanded="True">
-                <Node name="SeedDatas" expanded="True" />
-              </Node>
-              <Node name="Program.cs" selected="True" />
-            </Node>
-            <Node name="MyTicket.AdminPanel" expanded="True" />
+            <Node name="MyTicket" expanded="True" />
           </Node>
         </State>
       </Pad>

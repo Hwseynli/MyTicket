@@ -1,12 +1,9 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 
-namespace MyTicket.Application.Features.Commands.Place.Hall.Create
+namespace MyTicket.Application.Features.Commands.Place.Hall.Create;
+public class AddPlaceHallCommand : IRequest<bool>
 {
-    public class AddPlaceHallCommand : IRequest<bool>
-    {
-        public string Name { get; set; }
-        public int PlaceId { get; set; }
-    }
+    public string Name { get; set; }
+    public int PlaceId { get; set; }
 }
 

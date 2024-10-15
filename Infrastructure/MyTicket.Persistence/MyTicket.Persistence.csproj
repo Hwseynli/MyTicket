@@ -17,6 +17,8 @@
     <None Remove="Services\" />
     <None Remove="EntityConfiguration\PlaceEntityTypeConfigurations\" />
     <None Remove="Repositories\Places\" />
+    <None Remove="EntityConfiguration\CategoryEntityTypeConfigurations\" />
+    <None Remove="Repositories\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -29,6 +31,8 @@
     <Folder Include="Services\" />
     <Folder Include="EntityConfiguration\PlaceEntityTypeConfigurations\" />
     <Folder Include="Repositories\Places\" />
+    <Folder Include="EntityConfiguration\CategoryEntityTypeConfigurations\" />
+    <Folder Include="Repositories\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
