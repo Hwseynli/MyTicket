@@ -12,14 +12,12 @@ public class SubCategory : Editable<User>
     {
         Name = name;
         CategoryId = categoryId;
-        CreatedById = createdById;
-        RecordDateTime = DateTime.UtcNow.AddHours(4);
+        SetAuditDetails(createdById);
     }
     public void SetDetailsForUpdate(string name, int categoryId,int updatedById)
     {
         Name = name;
         CategoryId = categoryId;
-        UpdateById = updatedById;
-        LastUpdateDateTime = DateTime.UtcNow.AddHours(4);
+        SetEditFields(updatedById);
     }
 }

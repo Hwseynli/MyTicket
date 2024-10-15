@@ -12,13 +12,13 @@ public class Category : Editable<User>
         CreatedById = createdById;
         RecordDateTime = DateTime.UtcNow.AddHours(4);
         SubCategories = new List<SubCategory>();
+        SetAuditDetails(createdById);
     }
 
     public void SetDetailsForUpdate(string name, int updatedById)
     {
         Name = name;
-        UpdateById = updatedById;
-        LastUpdateDateTime = DateTime.UtcNow.AddHours(4);
+        SetEditFields(updatedById);
     }
 
     public void AddSubCategory(SubCategory subcategory)
