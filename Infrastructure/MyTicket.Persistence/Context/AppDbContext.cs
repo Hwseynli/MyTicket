@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyTicket.Domain.Entities.Categories;
+using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Users;
 
@@ -17,10 +18,11 @@ public class AppDbContext : DbContext
     public DbSet<Seat> Seats { get; set; }
     public DbSet<SubCategory> SubCategories { get; set; }
     public DbSet<Category> Categories { get; set; }
+    public DbSet<Event> Events { get; set; }
+    public DbSet<EventMedia> EventMedias { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 }
-

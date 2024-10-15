@@ -100,6 +100,113 @@ namespace MyTicket.Persistence.Migrations
                     b.ToTable("sub_categories", (string)null);
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by_id");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("end_date_time");
+
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update_date_time");
+
+                    b.Property<int>("PlaceHallId")
+                        .HasColumnType("integer")
+                        .HasColumnName("place_hall_id");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("record_date_time");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("start_date_time");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer")
+                        .HasColumnName("update_by_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaceHallId");
+
+                    b.ToTable("events", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.EventMedia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by_id");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer")
+                        .HasColumnName("event_id");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_main");
+
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update_date_time");
+
+                    b.Property<int>("MediaType")
+                        .HasColumnType("integer")
+                        .HasColumnName("media_type");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("url");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("record_date_time");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer")
+                        .HasColumnName("update_by_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("event_medias", (string)null);
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
                 {
                     b.Property<int>("Id")
@@ -394,6 +501,28 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Places.PlaceHall", "PlaceHall")
+                        .WithMany("Events")
+                        .HasForeignKey("PlaceHallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlaceHall");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.EventMedia", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Events.Event", "Event")
+                        .WithMany("EventMedias")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Places.Place", "Place")
@@ -432,6 +561,11 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("SubCategories");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
+                {
+                    b.Navigation("EventMedias");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
                 {
                     b.Navigation("PlaceHalls");
@@ -439,6 +573,8 @@ namespace MyTicket.Persistence.Migrations
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
                 {
+                    b.Navigation("Events");
+
                     b.Navigation("Seats");
                 });
 

@@ -5,26 +5,29 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Core/MyTicket.Domain/Entities/Enums/SeatType.cs">
-    <Files>
-      <File FileName="MyTicket/Controllers/UsersController.cs" Line="1" Column="1" />
-      <File FileName="Core/MyTicket.Domain/Entities/Enums/SeatType.cs" Line="1" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MyTicket" expanded="True">
             <Node name="Core" expanded="True">
               <Node name="MyTicket.Application" expanded="True" />
-              <Node name="MyTicket.Domain" expanded="True">
-                <Node name="Entities" selected="True" />
+              <Node name="MyTicket.Domain">
+                <Node name="Entities" expanded="True">
+                  <Node name="Events" expanded="True">
+                    <Node name="EventMedia.cs" selected="True" />
+                  </Node>
+                </Node>
               </Node>
             </Node>
             <Node name="Infrastructure" expanded="True">
-              <Node name="MyTicket.Infrastructure" expanded="True" />
-              <Node name="MyTicket.Persistence" expanded="True" />
+              <Node name="MyTicket.Persistence">
+                <Node name="EntityConfiguration" expanded="True">
+                  <Node name="EventEntityTypeConfigurations" expanded="True" />
+                  <Node name="PlaceEntityTypeConfigurations" expanded="True" />
+                </Node>
+              </Node>
             </Node>
-            <Node name="MyTicket" expanded="True" />
           </Node>
         </State>
       </Pad>

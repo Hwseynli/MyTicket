@@ -59,6 +59,10 @@
     <None Remove="Features\Commands\Tag\SubCategory\Create\" />
     <None Remove="Features\Commands\Tag\SubCategory\Update\" />
     <None Remove="Interfaces\IRepositories\Categories\" />
+    <None Remove="Features\Commands\Event\" />
+    <None Remove="Features\Commands\Event\Create\" />
+    <None Remove="Features\Commands\Event\ViewModels\" />
+    <None Remove="Interfaces\IRepositories\Events\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -108,6 +112,10 @@
     <Folder Include="Features\Commands\Tag\SubCategory\Create\" />
     <Folder Include="Features\Commands\Tag\SubCategory\Update\" />
     <Folder Include="Interfaces\IRepositories\Categories\" />
+    <Folder Include="Features\Commands\Event\" />
+    <Folder Include="Features\Commands\Event\Create\" />
+    <Folder Include="Features\Commands\Event\ViewModels\" />
+    <Folder Include="Interfaces\IRepositories\Events\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

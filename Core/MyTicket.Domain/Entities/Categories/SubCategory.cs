@@ -6,7 +6,6 @@ public class SubCategory : Editable<User>
     public string Name { get; private set; }
     public int CategoryId { get; set; }
     public Category Category { get; set; }
-    //public List<Event> Events { get; set; }
 
     public void SetDetails(string name, int categoryId,int createdById)
     {
