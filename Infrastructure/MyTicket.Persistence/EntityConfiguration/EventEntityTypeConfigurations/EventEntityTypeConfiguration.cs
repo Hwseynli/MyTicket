@@ -34,11 +34,21 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
             .IsRequired()
             .HasColumnName("place_hall_id");
 
+        builder.Property(x => x.AverageRating)
+           .IsRequired()
+           .HasColumnName("average_rating");
+
         builder.HasMany(ph => ph.EventMedias)
             .WithOne(s => s.Event)
             .HasForeignKey(s => s.EventId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(e => e.Ratings)
+         .WithOne(uer => uer.Event)
+         .HasForeignKey(uer => uer.EventId)
+         .OnDelete(DeleteBehavior.Cascade);
+
         // Audit Fields
         builder.Property(x => x.CreatedById)
             .HasColumnName("created_by_id");

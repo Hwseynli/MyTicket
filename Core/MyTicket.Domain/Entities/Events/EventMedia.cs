@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using MyTicket.Domain.Entities.Enums;
+﻿using MyTicket.Domain.Entities.Enums;
 using MyTicket.Domain.Entities.Users;
 
 namespace MyTicket.Domain.Entities.Events;

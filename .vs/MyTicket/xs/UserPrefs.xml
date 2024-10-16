@@ -1,31 +1,34 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https">
-  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
+﻿<Properties StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MyTicket" expanded="True">
             <Node name="Core" expanded="True">
-              <Node name="MyTicket.Application" expanded="True" />
-              <Node name="MyTicket.Domain">
-                <Node name="Entities" expanded="True">
-                  <Node name="Events" expanded="True">
-                    <Node name="EventMedia.cs" selected="True" />
+              <Node name="MyTicket.Application" expanded="True">
+                <Node name="Features" expanded="True">
+                  <Node name="Commands" expanded="True">
+                    <Node name="Rating" expanded="True" />
                   </Node>
                 </Node>
               </Node>
             </Node>
             <Node name="Infrastructure" expanded="True">
-              <Node name="MyTicket.Persistence">
-                <Node name="EntityConfiguration" expanded="True">
-                  <Node name="EventEntityTypeConfigurations" expanded="True" />
-                  <Node name="PlaceEntityTypeConfigurations" expanded="True" />
-                </Node>
+              <Node name="MyTicket.Persistence" expanded="True">
+                <Node name="EntityConfiguration" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="MyTicket">
+              <Node name="Controllers" expanded="True">
+                <Node name="EventsController.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -33,6 +36,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
 </Properties>

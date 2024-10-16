@@ -45,24 +45,16 @@
     <None Remove="Features\Commands\Place\Hall\Create\" />
     <None Remove="Features\Commands\Place\Seat\" />
     <None Remove="Features\Commands\Place\Seat\Create\" />
-    <None Remove="Features\Commands\Place\" />
-    <None Remove="Features\Commands\Place\Location\Update\" />
-    <None Remove="Features\Commands\Place\Hall\Update\" />
-    <None Remove="Features\Commands\Place\Seat\Update\" />
     <None Remove="Features\Queries\Location\" />
     <None Remove="Features\Queries\Location\ViewModels\" />
-    <None Remove="Features\Commands\Tag\" />
-    <None Remove="Features\Commands\Tag\Category\" />
-    <None Remove="Features\Commands\Tag\SubCategory\" />
-    <None Remove="Features\Commands\Tag\Category\Create\" />
-    <None Remove="Features\Commands\Tag\Category\Update\" />
-    <None Remove="Features\Commands\Tag\SubCategory\Create\" />
-    <None Remove="Features\Commands\Tag\SubCategory\Update\" />
     <None Remove="Interfaces\IRepositories\Categories\" />
-    <None Remove="Features\Commands\Event\" />
-    <None Remove="Features\Commands\Event\Create\" />
-    <None Remove="Features\Commands\Event\ViewModels\" />
     <None Remove="Interfaces\IRepositories\Events\" />
+    <None Remove="Features\Commands\Admin\Event\" />
+    <None Remove="Features\Commands\Admin\Place\" />
+    <None Remove="Features\Commands\Admin\Tag\" />
+    <None Remove="Features\Commands\Rating\" />
+    <None Remove="Features\Commands\Rating\RateEvent\" />
+    <None Remove="Features\Commands\Rating\GetQuery\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -98,24 +90,16 @@
     <Folder Include="Features\Commands\User\Delete\SoftDeleteRequest\" />
     <Folder Include="Features\Commands\User\Subscriber\" />
     <Folder Include="Interfaces\IRepositories\Places\" />
-    <Folder Include="Features\Commands\Place\" />
-    <Folder Include="Features\Commands\Place\Location\Update\" />
-    <Folder Include="Features\Commands\Place\Hall\Update\" />
-    <Folder Include="Features\Commands\Place\Seat\Update\" />
     <Folder Include="Features\Queries\Location\" />
     <Folder Include="Features\Queries\Location\ViewModels\" />
-    <Folder Include="Features\Commands\Tag\" />
-    <Folder Include="Features\Commands\Tag\Category\" />
-    <Folder Include="Features\Commands\Tag\SubCategory\" />
-    <Folder Include="Features\Commands\Tag\Category\Create\" />
-    <Folder Include="Features\Commands\Tag\Category\Update\" />
-    <Folder Include="Features\Commands\Tag\SubCategory\Create\" />
-    <Folder Include="Features\Commands\Tag\SubCategory\Update\" />
     <Folder Include="Interfaces\IRepositories\Categories\" />
-    <Folder Include="Features\Commands\Event\" />
-    <Folder Include="Features\Commands\Event\Create\" />
-    <Folder Include="Features\Commands\Event\ViewModels\" />
     <Folder Include="Interfaces\IRepositories\Events\" />
+    <Folder Include="Features\Commands\Admin\Event\" />
+    <Folder Include="Features\Commands\Admin\Place\" />
+    <Folder Include="Features\Commands\Admin\Tag\" />
+    <Folder Include="Features\Commands\Rating\" />
+    <Folder Include="Features\Commands\Rating\RateEvent\" />
+    <Folder Include="Features\Commands\Rating\GetQuery\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

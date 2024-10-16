@@ -20,6 +20,7 @@ public class AppDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Event> Events { get; set; }
     public DbSet<EventMedia> EventMedias { get; set; }
+    public DbSet<Rating> EventRatings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

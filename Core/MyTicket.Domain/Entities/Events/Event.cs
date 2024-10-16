@@ -8,10 +8,13 @@ public class Event : Editable<User>
     public string Title { get; private set; }
     public DateTime StartTime { get; private set; }
     public DateTime EndTime { get; private set; }
-    public string Description { get; private set; }
+    public string Description { get; set; }
     public List<EventMedia> EventMedias { get; private set; }
     public int PlaceHallId { get; private set; }
     public PlaceHall PlaceHall { get; private set; }
+    public bool IsDeleted { get; private set; } // Soft deletion
+    public List<Rating> Ratings { get; private set; }
+    public double AverageRating { get; set; } // Ortalama reytinq
 
     public void SetDetails(string name, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int placeHallId, int createdById, IEnumerable<Event> existingEvents)
     {
@@ -31,14 +34,16 @@ public class Event : Editable<User>
                 throw new DomainException("Eyni vaxtda eyni məkanda başqa bir tədbir var.");
             }
         }
-
+        AverageRating = 0;
         Title = name;
         StartTime = startTime;
         EndTime = endTime;
         Description = description;
         EventMedias = eventMedias ?? new List<EventMedia>();
+        Ratings = new List<Rating>();
         PlaceHallId = placeHallId;
         SetAuditDetails(createdById);
+        IsDeleted = false;
     }
 
     public void SetDetailsForUpdate(string name, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int updatedById)
@@ -54,5 +59,12 @@ public class Event : Editable<User>
         Description = description;
         EventMedias = eventMedias ?? new List<EventMedia>();
         SetEditFields(updatedById);
+    }
+
+    // Tədbirin soft deletion (silinməsi)
+    public void SoftDelete(int userId)
+    {
+        IsDeleted = true;
+        SetEditFields(userId);
     }
 }

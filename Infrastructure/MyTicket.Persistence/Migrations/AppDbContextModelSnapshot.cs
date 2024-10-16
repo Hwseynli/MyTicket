@@ -109,6 +109,10 @@ namespace MyTicket.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("double precision")
+                        .HasColumnName("average_rating");
+
                     b.Property<int>("CreatedById")
                         .HasColumnType("integer")
                         .HasColumnName("created_by_id");
@@ -121,6 +125,9 @@ namespace MyTicket.Persistence.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("end_date_time");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastUpdateDateTime")
                         .HasColumnType("timestamp with time zone")
@@ -205,6 +212,38 @@ namespace MyTicket.Persistence.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("event_medias", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("RatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("rated_at");
+
+                    b.Property<int>("RatingValue")
+                        .HasColumnType("integer")
+                        .HasColumnName("rating_value");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("event_ratings", (string)null);
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
@@ -523,6 +562,25 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Event");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Rating", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Events.Event", "Event")
+                        .WithMany("Ratings")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyTicket.Domain.Entities.Users.User", "User")
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Places.Place", "Place")
@@ -564,6 +622,8 @@ namespace MyTicket.Persistence.Migrations
             modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
                 {
                     b.Navigation("EventMedias");
+
+                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
@@ -581,6 +641,11 @@ namespace MyTicket.Persistence.Migrations
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Users.User", b =>
+                {
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }

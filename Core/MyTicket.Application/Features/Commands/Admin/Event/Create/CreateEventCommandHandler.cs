@@ -28,7 +28,7 @@ public class CreateEventCommandHandler
         (string mainImagePath, string mainImageFileName) = await request.MainImage.SaveAsync(_fileSettings.Value.CreateSubFolders(
             _fileSettings.Value.Path,
             _fileSettings.Value.EventSettings.EntityName,
-            request.Name,
+            request.Title,
             _fileSettings.Value.EventSettings.Media));
 
         // Event üçün obyekt yaratmaq
@@ -43,7 +43,7 @@ public class CreateEventCommandHandler
             (string mediaPath, string mediaFileName) = await eventMediaModel.File.SaveAsync(_fileSettings.Value.CreateSubFolders(
                 _fileSettings.Value.Path,
                 _fileSettings.Value.EventSettings.EntityName,
-                request.Name,
+                request.Title,
                 _fileSettings.Value.EventSettings.Media));
 
             var eventMedia = new EventMedia();
@@ -54,7 +54,22 @@ public class CreateEventCommandHandler
 
         // Tədbiri yaratmaq
         var eventEntity = new Domain.Entities.Events.Event();
-        eventEntity.SetDetails(request.Name, request.StartTime, request.EndTime, request.Description, eventMedias, request.PlaceHallId, userId, await _eventRepository.GetAllAsync(x=>x.PlaceHallId==request.PlaceHallId));
+        eventEntity.SetDetails(request.Title, request.StartTime, request.EndTime, request.Description, eventMedias, request.PlaceHallId, userId, await _eventRepository.GetAllAsync(x=>x.PlaceHallId==request.PlaceHallId));
+
+        // Əgər başlanğıc reytinqi varsa, əlavə et
+        if (request.InitialRatingValue.HasValue)
+        {
+            var rating = new Domain.Entities.Events.Rating
+            {
+                UserId = userId,
+                EventId = eventEntity.Id,
+                RatingValue = (RatingValue)request.InitialRatingValue.Value,
+                RatedAt = DateTime.UtcNow
+            };
+
+            // Rating obyektini tədbirə əlavə et
+            eventEntity.Ratings.Add(rating);
+        }
 
         // Tədbiri əlavə etmək və yadda saxlamaq
         await _eventRepository.AddAsync(eventEntity);

@@ -74,5 +74,10 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.LastPasswordChangeDateTime)
              .HasColumnName("last_password_change_date");
+
+        builder.HasMany(u => u.Ratings)
+              .WithOne(uer => uer.User)
+              .HasForeignKey(uer => uer.UserId)
+              .OnDelete(DeleteBehavior.Cascade);
     }
 }
