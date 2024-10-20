@@ -25,6 +25,11 @@ public class PlaceHallEntityTypeConfiguration : IEntityTypeConfiguration<PlaceHa
                .WithOne(s => s.PlaceHall)
                .HasForeignKey(s => s.PlaceHallId)
                .OnDelete(DeleteBehavior.Cascade);
+        // Relationships
+        builder.HasMany(ph => ph.Events)
+            .WithOne(e => e.PlaceHall)
+            .HasForeignKey(e => e.PlaceHallId)
+            .IsRequired();
 
         builder.Property(x => x.CreatedById)
             .HasColumnName("created_by_id");

@@ -1,7 +1,7 @@
 ﻿namespace MyTicket.Domain.Entities.Enums;
 public enum Gender
 {
-    Other,
+    Other = 0,
     Male,
     Female,
 }

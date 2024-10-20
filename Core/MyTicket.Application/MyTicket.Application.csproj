@@ -49,6 +49,9 @@
     <None Remove="Interfaces\IRepositories\Categories\" />
     <None Remove="Features\Commands\Admin\Place\" />
     <None Remove="Features\Commands\Admin\Tag\" />
+    <None Remove="Interfaces\IRepositories\Events\" />
+    <None Remove="Features\Commands\Admin\Event\" />
+    <None Remove="Features\Commands\Admin\Event\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -88,6 +91,9 @@
     <Folder Include="Interfaces\IRepositories\Categories\" />
     <Folder Include="Features\Commands\Admin\Place\" />
     <Folder Include="Features\Commands\Admin\Tag\" />
+    <Folder Include="Interfaces\IRepositories\Events\" />
+    <Folder Include="Features\Commands\Admin\Event\" />
+    <Folder Include="Features\Commands\Admin\Event\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

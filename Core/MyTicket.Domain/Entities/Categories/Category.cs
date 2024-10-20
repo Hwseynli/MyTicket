@@ -6,7 +6,7 @@ public class Category : Editable<User>
     public string Name { get; private set; }
     public List<SubCategory> SubCategories { get; set; }
 
-    public void SetDetails(string name,int createdById)
+    public void SetDetails(string name, int createdById)
     {
         Name = name;
         CreatedById = createdById;

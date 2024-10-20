@@ -19,6 +19,10 @@
     <None Remove="Repositories\Places\" />
     <None Remove="EntityConfiguration\CategoryEntityTypeConfigurations\" />
     <None Remove="Repositories\Categories\" />
+    <None Remove="EntityConfiguration\EventEntityTypeConfigurations\" />
+    <None Remove="EntityConfiguration\MediaEntityTypeConfigurations\" />
+    <None Remove="EntityConfiguration\RatingEntityTypeConfigurations\" />
+    <None Remove="Repositories\Events\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -33,6 +37,10 @@
     <Folder Include="Repositories\Places\" />
     <Folder Include="EntityConfiguration\CategoryEntityTypeConfigurations\" />
     <Folder Include="Repositories\Categories\" />
+    <Folder Include="EntityConfiguration\EventEntityTypeConfigurations\" />
+    <Folder Include="EntityConfiguration\MediaEntityTypeConfigurations\" />
+    <Folder Include="EntityConfiguration\RatingEntityTypeConfigurations\" />
+    <Folder Include="Repositories\Events\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
