@@ -13,17 +13,16 @@ public class SubscriberEntityTypeConfiguration : IEntityTypeConfiguration<Subscr
         builder.Property(x => x.Id)
                .HasColumnName("id");
 
-        builder.Property(x => x.Email)
-               .HasColumnName("email");
+        builder.Property(x => x.EmailOrPhoneNumber)
+               .IsRequired()
+               .HasColumnName("email_or_phone_number");
 
-        builder.HasIndex(t => t.Email)
+        builder.HasIndex(t => t.EmailOrPhoneNumber)
            .IsUnique();
 
-        builder.Property(x => x.PhoneNumber)
-                .HasColumnName("phone_number");
-
-        builder.HasIndex(t => t.PhoneNumber)
-           .IsUnique();
+        builder.Property(x => x.StringType)
+              .IsRequired()
+              .HasColumnName("string_type");
 
         builder.Property(x => x.CreatedDateTime)
             .IsRequired()

@@ -1,17 +1,18 @@
 ﻿using MyTicket.Domain.Common;
+using MyTicket.Domain.Entities.Enums;
 
 namespace MyTicket.Domain.Entities.Users;
 public class Subscriber : BaseEntity
 {
-    public string? Email { get; set; }
-    public string? PhoneNumber { get; set; }
+    public string EmailOrPhoneNumber { get; private set; }
+    public StringType StringType { get; private set; }
 
     public DateTime CreatedDateTime { get; set; }
 
-    public void SetDetail(string? email=null, string? phoneNumber=null)
+    public void SetDetail(string emailOrPhoneNumber, StringType stringType)
     {
-        Email = email;
-        PhoneNumber = phoneNumber;
+        EmailOrPhoneNumber = emailOrPhoneNumber;
+        StringType = stringType;
         CreatedDateTime = DateTime.UtcNow.AddHours(4);
     }
 }

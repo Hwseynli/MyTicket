@@ -1,20 +1,21 @@
 ﻿using MyTicket.Application.Exceptions;
+using MyTicket.Domain.Entities.Enums;
 
 namespace MyTicket.Application.Features.Queries.Admin.ViewModels;
 public class SubscriberDto
 {
     public int Id { get; set; }
-    public string? Email { get; set; }
-    public string? PhoneNumber { get; set; }
+    public string? EmailOrPhoneNumber { get; set; }
+    public StringType? StringType { get; set; }
     public DateTime CreatedTime { get; set; }
 
-    static SubscriberDto CreateDto(int id, string? phoneNumber, string? email, DateTime createdTime)
+    static SubscriberDto CreateDto(int id, StringType? stringType, string? emailOrPhoneNumber, DateTime createdTime)
     {
         return new SubscriberDto
         {
             Id = id,
-            PhoneNumber = phoneNumber,
-            Email = email,
+            StringType = stringType,
+            EmailOrPhoneNumber = emailOrPhoneNumber,
             CreatedTime = createdTime
         };
     }
@@ -28,8 +29,8 @@ public class SubscriberDto
         {
             var dto = CreateDto(
                 id: item.Id,
-                phoneNumber: item.PhoneNumber,
-                email: item.Email,
+                stringType: item.StringType,
+                emailOrPhoneNumber: item.EmailOrPhoneNumber,
                 createdTime:item.CreatedDateTime
                 );
             dtos.Add(dto);

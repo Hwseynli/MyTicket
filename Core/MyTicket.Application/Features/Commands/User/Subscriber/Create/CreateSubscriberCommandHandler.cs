@@ -2,6 +2,7 @@
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Users;
+using MyTicket.Domain.Entities.Enums;
 using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Application.Features.Commands.User.Subscriber.Create;
@@ -22,16 +23,10 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
     {
         bool exsist=false;
         bool isEmail = Helper.IsEmail(request.EmailOrPhoneNumber);
+        bool isPhoneNumber = Helper.IsPhoneNumber(request.EmailOrPhoneNumber);
 
         // Emailin və ya telefon nömrəsinin unikal olub-olmadığını yoxla
-        if (isEmail)
-        {
-            exsist =! await _subscriberRepository.IsPropertyUniqueAsync(x=>x.Email,request.EmailOrPhoneNumber);
-        }
-        else
-        {
-            exsist =! await _subscriberRepository.IsPropertyUniqueAsync(x => x.PhoneNumber, request.EmailOrPhoneNumber);
-        }
+            exsist =! await _subscriberRepository.IsPropertyUniqueAsync(x=>x.EmailOrPhoneNumber,request.EmailOrPhoneNumber);
 
         // Subscriber mövcuddursa, error at
         if (exsist)
@@ -43,16 +38,16 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
         // Xoş gəldiniz emailini göndər
         if (isEmail)
         {
-            subscriber.SetDetail(email:request.EmailOrPhoneNumber);
+            subscriber.SetDetail(request.EmailOrPhoneNumber, (StringType)1);
             await _subscriberRepository.AddAsync(subscriber);
             await _subscriberRepository.Commit(cancellationToken);
             var subject = "Xoş gəldiniz!";
             var body = "Bizə abunə olduğunuz üçün təşəkkür edirik!";
             await _emailManager.SendEmailAsync(request.EmailOrPhoneNumber, subject, body);
         }
-        else
+        else if(isPhoneNumber)
         {
-            subscriber.SetDetail(phoneNumber:request.EmailOrPhoneNumber);
+            subscriber.SetDetail(request.EmailOrPhoneNumber,0);
             await _subscriberRepository.AddAsync(subscriber);
             await _subscriberRepository.Commit(cancellationToken);
             //// SMS göndəririk
@@ -60,6 +55,8 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
             //var body = "Bizə abunə olduğunuz üçün təşəkkür edirik!";
             //await _smsManager.SendSmsAsync(request.EmailOrPhoneNumber, subject, body);
         }
+        else
+            throw new ValidationException();
 
         return true;
     }
