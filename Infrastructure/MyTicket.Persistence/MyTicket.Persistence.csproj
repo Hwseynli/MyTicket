@@ -19,8 +19,6 @@
     <None Remove="Repositories\Places\" />
     <None Remove="EntityConfiguration\CategoryEntityTypeConfigurations\" />
     <None Remove="Repositories\Categories\" />
-    <None Remove="Repositories\Events\" />
-    <None Remove="EntityConfiguration\EventEntityTypeConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -35,8 +33,6 @@
     <Folder Include="Repositories\Places\" />
     <Folder Include="EntityConfiguration\CategoryEntityTypeConfigurations\" />
     <Folder Include="Repositories\Categories\" />
-    <Folder Include="Repositories\Events\" />
-    <Folder Include="EntityConfiguration\EventEntityTypeConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />

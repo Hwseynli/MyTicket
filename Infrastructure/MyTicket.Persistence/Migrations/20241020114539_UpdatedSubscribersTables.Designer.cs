@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyTicket.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241016141654_AddEventsTables")]
-    partial class AddEventsTables
+    [Migration("20241020114539_UpdatedSubscribersTables")]
+    partial class UpdatedSubscribersTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,152 +101,6 @@ namespace MyTicket.Persistence.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("sub_categories", (string)null);
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("AverageRating")
-                        .HasColumnType("double precision")
-                        .HasColumnName("average_rating");
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("created_by_id");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("end_date_time");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("LastUpdateDateTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_update_date_time");
-
-                    b.Property<int>("PlaceHallId")
-                        .HasColumnType("integer")
-                        .HasColumnName("place_hall_id");
-
-                    b.Property<DateTime>("RecordDateTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("record_date_time");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("start_date_time");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
-
-                    b.Property<int?>("UpdateById")
-                        .HasColumnType("integer")
-                        .HasColumnName("update_by_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlaceHallId");
-
-                    b.ToTable("events", (string)null);
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.EventMedia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("created_by_id");
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("integer")
-                        .HasColumnName("event_id");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_main");
-
-                    b.Property<DateTime?>("LastUpdateDateTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_update_date_time");
-
-                    b.Property<int>("MediaType")
-                        .HasColumnType("integer")
-                        .HasColumnName("media_type");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("url");
-
-                    b.Property<DateTime>("RecordDateTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("record_date_time");
-
-                    b.Property<int?>("UpdateById")
-                        .HasColumnType("integer")
-                        .HasColumnName("update_by_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.ToTable("event_medias", (string)null);
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("RatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("rated_at");
-
-                    b.Property<int>("RatingValue")
-                        .HasColumnType("integer")
-                        .HasColumnName("rating_value");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("event_ratings", (string)null);
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
@@ -419,20 +273,18 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date_time");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("EmailOrPhoneNumber")
+                        .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("email");
+                        .HasColumnName("email_or_phone_number");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number");
+                    b.Property<int>("StringType")
+                        .HasColumnType("integer")
+                        .HasColumnName("string_type");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("PhoneNumber")
+                    b.HasIndex("EmailOrPhoneNumber")
                         .IsUnique();
 
                     b.ToTable("subscribers", (string)null);
@@ -543,47 +395,6 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
-                {
-                    b.HasOne("MyTicket.Domain.Entities.Places.PlaceHall", "PlaceHall")
-                        .WithMany("Events")
-                        .HasForeignKey("PlaceHallId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PlaceHall");
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.EventMedia", b =>
-                {
-                    b.HasOne("MyTicket.Domain.Entities.Events.Event", "Event")
-                        .WithMany("EventMedias")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Rating", b =>
-                {
-                    b.HasOne("MyTicket.Domain.Entities.Events.Event", "Event")
-                        .WithMany("Ratings")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MyTicket.Domain.Entities.Users.User", "User")
-                        .WithMany("Ratings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Places.Place", "Place")
@@ -622,13 +433,6 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
-                {
-                    b.Navigation("EventMedias");
-
-                    b.Navigation("Ratings");
-                });
-
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
                 {
                     b.Navigation("PlaceHalls");
@@ -636,19 +440,12 @@ namespace MyTicket.Persistence.Migrations
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
                 {
-                    b.Navigation("Events");
-
                     b.Navigation("Seats");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Users.User", b =>
-                {
-                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }

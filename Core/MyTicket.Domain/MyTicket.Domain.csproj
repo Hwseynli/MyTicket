@@ -14,7 +14,6 @@
     <None Remove="Entities\Users\" />
     <None Remove="Entities\Places\" />
     <None Remove="Entities\Categories\" />
-    <None Remove="Entities\Events\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -24,7 +23,6 @@
     <Folder Include="Entities\Users\" />
     <Folder Include="Entities\Places\" />
     <Folder Include="Entities\Categories\" />
-    <Folder Include="Entities\Events\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\MyTicket.Infrastructure\MyTicket.Infrastructure.csproj" />

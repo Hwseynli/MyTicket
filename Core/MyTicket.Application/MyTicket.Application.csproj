@@ -47,13 +47,8 @@
     <None Remove="Features\Queries\Location\" />
     <None Remove="Features\Queries\Location\ViewModels\" />
     <None Remove="Interfaces\IRepositories\Categories\" />
-    <None Remove="Interfaces\IRepositories\Events\" />
-    <None Remove="Features\Commands\Admin\Event\" />
     <None Remove="Features\Commands\Admin\Place\" />
     <None Remove="Features\Commands\Admin\Tag\" />
-    <None Remove="Features\Commands\Rating\" />
-    <None Remove="Features\Commands\Rating\RateEvent\" />
-    <None Remove="Features\Commands\Rating\GetQuery\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -91,13 +86,8 @@
     <Folder Include="Features\Queries\Location\" />
     <Folder Include="Features\Queries\Location\ViewModels\" />
     <Folder Include="Interfaces\IRepositories\Categories\" />
-    <Folder Include="Interfaces\IRepositories\Events\" />
-    <Folder Include="Features\Commands\Admin\Event\" />
     <Folder Include="Features\Commands\Admin\Place\" />
     <Folder Include="Features\Commands\Admin\Tag\" />
-    <Folder Include="Features\Commands\Rating\" />
-    <Folder Include="Features\Commands\Rating\RateEvent\" />
-    <Folder Include="Features\Commands\Rating\GetQuery\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

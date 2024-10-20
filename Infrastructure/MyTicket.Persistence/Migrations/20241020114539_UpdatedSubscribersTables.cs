@@ -5,7 +5,7 @@
 namespace MyTicket.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedSubscriberTables : Migration
+    public partial class UpdatedSubscribersTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
