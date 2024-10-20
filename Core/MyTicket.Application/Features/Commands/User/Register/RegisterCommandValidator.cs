@@ -12,10 +12,6 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
 
         RuleFor(command => command.FirstName).NotNull().MinimumLength(3).MaximumLength(30);
         RuleFor(command => command.LastName).NotNull().MinimumLength(3).MaximumLength(50);
-        RuleFor(u => u.Gender).NotNull()
-           .IsInEnum().WithMessage("Gender is invalid.");
-        RuleFor(u => u.Birthday)
-           .LessThan(DateTime.Now).WithMessage("Birthday must be in the past.");
         RuleFor(command => command.Password).MinimumLength(6).NotNull();
         RuleFor(command => command.Email).NotEmpty()
              .MustAsync(async (email, cancellation) =>

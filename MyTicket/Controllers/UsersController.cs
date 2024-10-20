@@ -7,7 +7,6 @@ using MyTicket.Application.Features.Commands.User.ForgotPassword.ResetPassword;
 using MyTicket.Application.Features.Commands.User.ForgotPassword.SendOtp;
 using MyTicket.Application.Features.Commands.User.ForgotPassword.VerifyOtp;
 using MyTicket.Application.Features.Commands.User.Login;
-using MyTicket.Application.Features.Commands.User.Logout;
 using MyTicket.Application.Features.Commands.User.RefreshToken;
 using MyTicket.Application.Features.Commands.User.Register;
 using MyTicket.Application.Features.Commands.User.Subscriber.Create;
@@ -45,13 +44,6 @@ public class UsersController : ControllerBase
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromForm] CreateAuthorizationTokenCommand command)
-    {
-        return Ok(await _mediator.Send(command));
-    }
-
-    [Authorize]
-    [HttpPost("logout")]
-    public async Task<IActionResult> Logout([FromForm] LogoutUserCommand command)
     {
         return Ok(await _mediator.Send(command));
     }

@@ -30,7 +30,7 @@ namespace MyTicket.Application.Features.Commands.User.Login
             if (user.PasswordHash != PasswordHasher.HashPassword(request.Password))
                 throw new UnAuthorizedException("Invalid password");
 
-            user.SetForLoginOrLogout(true,false);
+            user.SetForLogin(true);
             // Refresh token yaradılır
             var random = GenerateRandomNumber();
             var refreshToken = $"{random}_{user.Id}_{DateTime.UtcNow.AddDays(20)}";

@@ -26,12 +26,10 @@ public class User : BaseEntity
     public string? OtpCode { get; private set; }
     public DateTime? OtpGeneratedTime { get; private set; }
 
-    public void SetDetailsForRegister(string firstName, string lastName, string phoneNumber, string email, string password, Gender? gender = Enums.Gender.Other, DateTime? birthday = null)
+    public void SetDetailsForRegister(string firstName, string lastName, string phoneNumber, string email, string password)
     {
         FirstName = firstName;
         LastName = lastName;
-        Gender = gender;
-        Birthday = birthday;
         PhoneNumber = phoneNumber;
         Email = email;
         Activated = false;
@@ -40,11 +38,11 @@ public class User : BaseEntity
         RoleId = 2;
         Ratings = new List<Rating>();
     }
-    public void SetForLoginOrLogout(bool isActivated, bool isDeleted=false,DateTime? dateTime=null)
+    public void SetForLogin(bool isActivated)
     {
         Activated = isActivated;
-        IsDeleted = isDeleted;
-        DeletedTime = dateTime;
+        IsDeleted = false;
+        DeletedTime = null;
     }
     public void SetConfirmToken(string token)
     {
@@ -69,7 +67,6 @@ public class User : BaseEntity
         Activated = true;
         IsDeleted = false;
         PasswordHash = passwordHash;
-        
     }
     public void SetPasswordHash(string newPasswordHash)
     {

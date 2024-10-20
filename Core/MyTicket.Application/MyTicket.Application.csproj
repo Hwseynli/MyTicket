@@ -32,7 +32,6 @@
     <None Remove="Features\Commands\Admin\User\" />
     <None Remove="Features\Queries\Admin\" />
     <None Remove="Features\Queries\Admin\ViewModels\" />
-    <None Remove="Features\Commands\User\Logout\" />
     <None Remove="Interfaces\IRepositories\Users\" />
     <None Remove="Features\Commands\Admin\User\AssignRoles\" />
     <None Remove="Features\Commands\User\Delete\" />
@@ -82,7 +81,6 @@
     <Folder Include="Features\Commands\Admin\User\" />
     <Folder Include="Features\Queries\Admin\" />
     <Folder Include="Features\Queries\Admin\ViewModels\" />
-    <Folder Include="Features\Commands\User\Logout\" />
     <Folder Include="Interfaces\IRepositories\Users\" />
     <Folder Include="Features\Commands\Admin\User\AssignRoles\" />
     <Folder Include="Features\Commands\User\Delete\" />
