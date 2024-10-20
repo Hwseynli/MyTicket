@@ -21,16 +21,8 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
 
     public async Task<bool> Handle(CreateSubscriberCommand request, CancellationToken cancellationToken)
     {
-        bool exsist=false;
         bool isEmail = Helper.IsEmail(request.EmailOrPhoneNumber);
         bool isPhoneNumber = Helper.IsPhoneNumber(request.EmailOrPhoneNumber);
-
-        // Emailin və ya telefon nömrəsinin unikal olub-olmadığını yoxla
-            exsist =! await _subscriberRepository.IsPropertyUniqueAsync(x=>x.EmailOrPhoneNumber,request.EmailOrPhoneNumber);
-
-        // Subscriber mövcuddursa, error at
-        if (exsist)
-            throw new ValidationException();
 
         // Yeni subscriber yaradılır
         var subscriber = new Domain.Entities.Users.Subscriber();

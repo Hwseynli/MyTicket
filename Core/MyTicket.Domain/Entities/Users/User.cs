@@ -56,7 +56,7 @@ public class User : BaseEntity
         UpdateRefreshToken(null);
         ConfirmToken = null;
     }
-    public void SetDetailsForUpdate(string firstName, string lastName, string phoneNumber, string email, string passwordHash, Gender gender, DateTime? dateTime)
+    public void SetDetailsForUpdate(string firstName, string lastName, string phoneNumber, string email, Gender gender, DateTime? dateTime)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -66,7 +66,6 @@ public class User : BaseEntity
         Email = email;
         Activated = true;
         IsDeleted = false;
-        PasswordHash = passwordHash;
     }
     public void SetPasswordHash(string newPasswordHash)
     {

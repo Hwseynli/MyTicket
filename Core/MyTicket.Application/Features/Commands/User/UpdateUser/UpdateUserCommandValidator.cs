@@ -22,7 +22,6 @@ public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
             .MinimumLength(3).MaximumLength(50);
 
         RuleFor(command => command.Gender)
-            .NotEmpty().WithMessage("Gender is required.")
             .IsInEnum().WithMessage("Gender is invalid.");
 
         RuleFor(command => command.Birthday)

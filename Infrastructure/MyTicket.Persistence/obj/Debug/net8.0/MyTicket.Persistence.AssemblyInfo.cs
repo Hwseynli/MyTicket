@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyTicket.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a8ba504b634736e3130b6bd2eb127da6f809e0b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8185ab2e6f7a9cb8e16a4d3ccab90262cdfe6c80")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyTicket.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyTicket.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

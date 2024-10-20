@@ -11,7 +11,10 @@ public class CreateSubscriberCommandValidator : AbstractValidator<CreateSubscrib
 
         RuleFor(x => x.EmailOrPhoneNumber)
             .NotEmpty().WithMessage("Email or phone number is required.")
-            .Must(_subscriberRepository.IsValidEmailOrPhoneNumber).WithMessage("Invalid email or phone number format.");
+            .Must(_subscriberRepository.IsValidEmailOrPhoneNumber).WithMessage("Invalid email or phone number format.")
+        .MustAsync(async (phoneNumberOrEmail, cancellation) =>
+                await _subscriberRepository.IsPropertyUniqueAsync(u => u.EmailOrPhoneNumber, phoneNumberOrEmail))
+                .WithMessage("Phone number or email already exists."); ;
     }
 }
 
