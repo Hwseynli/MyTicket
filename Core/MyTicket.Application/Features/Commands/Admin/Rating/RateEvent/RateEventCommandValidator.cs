@@ -7,6 +7,7 @@ public class RateEventCommandValidator : AbstractValidator<RateEventCommand>
     {
         RuleFor(command => command.EventId).GreaterThan(0).WithMessage("UserId is required.");
         RuleFor(command => command.RatingValue).NotEmpty();
+            //GreaterThan(-1).WithMessage("rating value is required.");
     }
 }
 

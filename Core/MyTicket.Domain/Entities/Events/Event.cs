@@ -42,6 +42,13 @@ public class Event : Editable<User>
         IsDeleted = false;
     }
 
+    public void SetRatingsInEvent(Rating rating)
+    {
+        Ratings.Add(rating);
+        // Ortalama reytinqi yenidən hesablayırıq
+        AverageRating = Ratings.Average(r => (int)r.RatingValue);
+    }
+
     public void SetDetailsForUpdate(string name, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int categoryId, int updatedById)
     {
         if (string.IsNullOrEmpty(name) || !eventMedias.Any(x => x.Medias.Any(c => c.IsMain)))

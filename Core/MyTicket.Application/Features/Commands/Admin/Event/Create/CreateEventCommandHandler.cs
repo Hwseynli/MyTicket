@@ -55,7 +55,7 @@ namespace MyTicket.Application.Features.Commands.Admin.Event.Create
                 throw new DomainException("Eyni zaman aralığında həmin zalda başqa bir tədbir keçirilir.");
             }
 
-            if (request.EventMediaModels == null || request.EventMediaModels.All(m => m.MainImage == null))
+            if (request.EventMediaModels == null || request.EventMediaModels.All(m => m.MainImage == null&&m.MainImage.IsImage()))
                 throw new DomainException("Əsas şəkil əlavə olunmalıdır.");
 
             // Tədbir məlumatlarını yığmaq

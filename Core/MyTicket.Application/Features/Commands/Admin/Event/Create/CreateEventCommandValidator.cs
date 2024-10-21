@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MyTicket.Application.Features.Commands.Admin.Event.ViewModels;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Infrastructure.Extensions;
 
 namespace MyTicket.Application.Features.Commands.Admin.Event.Create;
 public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
@@ -55,6 +56,7 @@ public class EventMediaModelValidator : AbstractValidator<EventMediaModel>
 
         RuleFor(x => x.MainImage)
             .NotNull().WithMessage("Əsas şəkil boş ola bilməz.")
+            .Must((mainImage) => mainImage.IsImage()).WithMessage("Main image mütləq şəkil olmalıdır")
             .When(x => x.Medias == null || !x.Medias.Any())
                 .WithMessage("Əgər başqa media faylları əlavə edilməyibsə, əsas şəkil olmalıdır.");
     }

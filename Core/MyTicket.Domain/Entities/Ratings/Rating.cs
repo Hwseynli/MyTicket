@@ -7,20 +7,29 @@ using MyTicket.Domain.Exceptions;
 namespace MyTicket.Domain.Entities.Ratings;
 public class Rating : BaseEntity
 {
-    public int UserId { get; set; }
-    public User User { get; set; }
-    public int EventId { get; set; }
-    public Event Event { get; set; }
-    public RatingValue RatingValue { get; set; } // 1-5 ulduzlu qiymət
-    public DateTime RatedAt { get; set; } // Qiymətləndirmə tarixi
+    public int UserId { get; private set; }
+    public User User { get; private set; }
+    public int EventId { get; private set; }
+    public Event Event { get; private set; }
+    public RatingValue RatingValue { get; private set; } // 1-5 ulduzlu qiymət
+    public DateTime RatedAt { get; private set; } // Qiymətləndirmə tarixi
 
-    public void SetRating(int ratingValue)
+    public void SetRating(int ratingValue, int userId, int eventId)
     {
         if (ratingValue < 1 || ratingValue > 5)
             throw new DomainException("Reytinq 1-dən 5-ə qədər olmalıdır.");
 
         RatingValue = (RatingValue)ratingValue;
-        RatedAt = DateTime.UtcNow;
+        RatedAt = DateTime.UtcNow.AddHours(4);
+        EventId = eventId;
+        UserId = userId;
+    }
+    public void SetRatingForUpdate(int ratingValue)
+    {
+        if (ratingValue < 1 || ratingValue > 5)
+            throw new DomainException("Reytinq 1-dən 5-ə qədər olmalıdır.");
+
+        RatingValue = (RatingValue)ratingValue;
+        RatedAt = DateTime.UtcNow.AddHours(4);
     }
 }
-

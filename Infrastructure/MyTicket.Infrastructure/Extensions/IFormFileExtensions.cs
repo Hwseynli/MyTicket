@@ -16,11 +16,12 @@ public static class IFormFileExtensions
         return ($"{path}/{fileName}", fileName);
     }
 
-    public static bool IsImage(this IFormFile file)
+    public static bool IsImage(this IFormFile? file)
     {
+        if (file is null)
+            return false;
         string[] allowedExtensions = { ".png", ".jpg", ".jpeg" };
         string fileExtension = Path.GetExtension(file.FileName).ToLower();
         return allowedExtensions.Contains(fileExtension);
     }
 }
-

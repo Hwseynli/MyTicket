@@ -32,7 +32,7 @@ public class Repository<T> : IRepository<T> where T : class
         {
             foreach (var include in includes)
             {
-                query=query.Include(include);
+                query = query.Include(include);
             }
         }
         return await (filter == null ? query.ToListAsync() : query.Where(filter).ToListAsync());
@@ -45,7 +45,7 @@ public class Repository<T> : IRepository<T> where T : class
         {
             foreach (var include in includes)
             {
-                query=query.Include(include);
+                query = query.Include(include);
             }
         }
         return await (filter == null ? query.FirstOrDefaultAsync() : query.FirstOrDefaultAsync(filter));

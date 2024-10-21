@@ -18,25 +18,29 @@ public class RateEventCommandHandler : IRequestHandler<RateEventCommand, bool>
     public async Task<bool> Handle(RateEventCommand request, CancellationToken cancellationToken)
     {
         var userId = _userManager.GetCurrentUserId();
-        var eventEntity = await _eventRepository.GetAsync(x => x.Id == request.EventId);
+        var eventEntity = await _eventRepository.GetAsync(x => x.Id == request.EventId,"Ratings");
 
         if (eventEntity == null)
             throw new DomainException("Tədbir tapılmadı.");
 
-        // Tədbir üçün yeni reytinq əlavə edirik
-        var rating = new Domain.Entities.Ratings.Rating
+        // Check if the user has already rated the event
+        var existingRating = eventEntity.Ratings.FirstOrDefault(r => r.UserId == userId);
+
+        if (existingRating != null)
         {
-            UserId = userId,
-            EventId = request.EventId,
-            RatingValue = request.RatingValue,
-            RatedAt = DateTime.UtcNow
-        };
+            // Update the existing rating
+            existingRating.SetRatingForUpdate((int)request.RatingValue);
+        }
+        else
+        {
+            // Add a new rating if no existing rating is found
+            var newRating = new Domain.Entities.Ratings.Rating();
+            newRating.SetRating((int)request.RatingValue, userId, request.EventId);
+            eventEntity.SetRatingsInEvent(newRating);
+        }
 
-        eventEntity.Ratings.Add(rating);
-
-        // Ortalama reytinqi yenidən hesablayırıq
-        var averageRating = eventEntity.Ratings.Average(r => (int)r.RatingValue);
-        eventEntity.AverageRating = averageRating;
+        // Recalculate average rating
+        eventEntity.AverageRating = eventEntity.Ratings.Average(r => (int)r.RatingValue);
 
         _eventRepository.Update(eventEntity);
         await _eventRepository.Commit(cancellationToken);
