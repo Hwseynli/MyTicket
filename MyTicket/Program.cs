@@ -13,6 +13,7 @@ using Serilog.Events;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Security.Claims;
 using MyTicket.Persistence.Context;
+using MyTicket.Infrastructure.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -121,6 +122,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
+builder.Services.Configure<FileSettings>(configuration.GetSection(nameof(FileSettings)));
 builder.Services.AddScoped<AppSeedDbContext>();
 
 var app = builder.Build();

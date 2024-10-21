@@ -7,6 +7,7 @@ public class PlaceHall : Editable<User>
     public string Name { get; private set; }
     public int PlaceId { get; set; }
     public Place Place { get; set; }
+    public int SeatCount { get; set; }
     public List<Seat> Seats { get; set; }
     public List<Event> Events { get; set; }
 

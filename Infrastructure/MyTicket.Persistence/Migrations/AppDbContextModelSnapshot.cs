@@ -127,11 +127,21 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnName("end_date_time");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("language");
 
                     b.Property<DateTime?>("LastUpdateDateTime")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("last_update_date_time");
+
+                    b.Property<byte>("MinAge")
+                        .HasColumnType("smallint")
+                        .HasColumnName("min_age");
 
                     b.Property<int>("PlaceHallId")
                         .HasColumnType("integer")
@@ -176,13 +186,29 @@ namespace MyTicket.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by_id");
+
                     b.Property<int>("EventId")
                         .HasColumnType("integer")
                         .HasColumnName("event_id");
 
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update_date_time");
+
                     b.Property<int>("MediaType")
                         .HasColumnType("integer")
                         .HasColumnName("media_type");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("record_date_time");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer")
+                        .HasColumnName("update_by_id");
 
                     b.HasKey("Id");
 
@@ -313,6 +339,10 @@ namespace MyTicket.Persistence.Migrations
                     b.Property<DateTime>("RecordDateTime")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("record_date_time");
+
+                    b.Property<int>("SeatCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("seat_count");
 
                     b.Property<int?>("UpdateById")
                         .HasColumnType("integer")

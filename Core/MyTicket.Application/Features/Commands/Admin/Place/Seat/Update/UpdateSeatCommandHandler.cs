@@ -25,7 +25,7 @@ public class UpdateSeatCommandHandler : IRequestHandler<UpdateSeatCommand, bool>
         seat.SetDetail(request.Id,request.SeatNumber,request.SeatType,request.Price,request.PlaceHallId);
         seat.SetEditFields(_userManager.GetCurrentUserId());
 
-        await _seatRepository.Update(seat);
+        _seatRepository.Update(seat);
         await _seatRepository.Commit(cancellationToken);
 
         return true;

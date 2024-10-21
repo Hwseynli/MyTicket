@@ -28,7 +28,19 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
             .HasColumnName("start_date_time");
 
         builder.Property(x => x.EndTime)
-            .HasColumnName("end_date_time");
+           .HasColumnName("end_date_time");
+
+        builder.Property(x => x.Language)
+               .IsRequired()
+               .HasColumnName("language")
+               .HasConversion<string>(); // Enum dəyərinin string kimi saxlanılması
+
+        builder.Property(x => x.MinAge)
+               .IsRequired()
+               .HasColumnName("min_age");
+
+        builder.Property(x => x.IsDeleted)
+           .HasColumnName("is_deleted");
 
         builder.Property(x => x.PlaceHallId)
             .IsRequired()

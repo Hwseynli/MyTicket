@@ -19,7 +19,12 @@ public class PlaceHallEntityTypeConfiguration : IEntityTypeConfiguration<PlaceHa
                .HasColumnName("name");
 
         builder.Property(ph => ph.PlaceId)
+                .IsRequired()
                .HasColumnName("place_id");
+
+        builder.Property(ph => ph.SeatCount)
+                .IsRequired()
+              .HasColumnName("seat_count");
 
         builder.HasMany(ph => ph.Seats)
                .WithOne(s => s.PlaceHall)

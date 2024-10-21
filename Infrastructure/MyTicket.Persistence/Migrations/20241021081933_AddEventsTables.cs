@@ -12,6 +12,13 @@ namespace MyTicket.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<int>(
+                name: "seat_count",
+                table: "place_halls",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.CreateTable(
                 name: "events",
                 columns: table => new
@@ -22,9 +29,11 @@ namespace MyTicket.Persistence.Migrations
                     start_date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     end_date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
+                    language = table.Column<string>(type: "text", nullable: false),
+                    min_age = table.Column<byte>(type: "smallint", nullable: false),
                     sub_category_id = table.Column<int>(type: "integer", nullable: false),
                     place_hall_id = table.Column<int>(type: "integer", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
                     average_rating = table.Column<double>(type: "double precision", nullable: false),
                     created_by_id = table.Column<int>(type: "integer", nullable: false),
                     record_date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -55,7 +64,11 @@ namespace MyTicket.Persistence.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     media_type = table.Column<int>(type: "integer", nullable: false),
-                    event_id = table.Column<int>(type: "integer", nullable: false)
+                    event_id = table.Column<int>(type: "integer", nullable: false),
+                    created_by_id = table.Column<int>(type: "integer", nullable: false),
+                    record_date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    update_by_id = table.Column<int>(type: "integer", nullable: true),
+                    last_update_date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -167,6 +180,10 @@ namespace MyTicket.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "events");
+
+            migrationBuilder.DropColumn(
+                name: "seat_count",
+                table: "place_halls");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MyTicket.Domain.Entities.Categories;
+using MyTicket.Domain.Entities.Enums;
 using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Domain.Entities.Users;
@@ -11,6 +12,8 @@ public class Event : Editable<User>
     public DateTime StartTime { get; private set; }
     public DateTime EndTime { get; private set; }
     public string Description { get; private set; }
+    public LanguageType Language { get; set; }
+    public byte MinAge { get; set; }
     public List<EventMedia> EventMedias { get; private set; }
     public int SubCategoryId { get; private set; }
     public SubCategory SubCategory { get; private set; }
@@ -20,23 +23,14 @@ public class Event : Editable<User>
     public List<Rating> Ratings { get; private set; }
     public double AverageRating { get; set; } // Ortalama reytinq
 
-    public void SetDetails(string name, DateTime startTime, DateTime endTime, string description, int categoryId, int placeHallId, IEnumerable<Event> existingEvents)
+    public void SetDetails(string name, DateTime startTime, DateTime endTime, string description, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge)
     {
         if (startTime >= endTime)
             throw new DomainException("Başlanğıc vaxtı son vaxtdan əvvəl olmalıdır.");
 
-        // Eyni vaxtda eyni PlaceHall-da digər event olub olmadığını yoxlayırıq
-        foreach (var ev in existingEvents)
-        {
-            if (ev.PlaceHallId == placeHallId &&
-                ((startTime >= ev.StartTime && startTime < ev.EndTime) ||
-                (endTime > ev.StartTime && endTime <= ev.EndTime) ||
-                (startTime <= ev.StartTime && endTime >= ev.EndTime)))
-            {
-                throw new DomainException("Eyni vaxtda eyni məkanda başqa bir tədbir var.");
-            }
-        }
-        AverageRating = 0;
+        Language = language;
+        MinAge = minAge;
+        AverageRating = averageRating;
         Title = name;
         SubCategoryId = categoryId;
         StartTime = startTime;

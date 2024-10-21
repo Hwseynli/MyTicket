@@ -24,6 +24,19 @@ public class EventMediaEntityTypeConfiguration : IEntityTypeConfiguration<EventM
          .IsRequired()
          .HasColumnName("event_id");
 
+        // Audit Fields
+        builder.Property(x => x.CreatedById)
+            .HasColumnName("created_by_id");
+
+        builder.Property(x => x.LastUpdateDateTime)
+            .HasColumnName("last_update_date_time");
+
+        builder.Property(x => x.UpdateById)
+            .HasColumnName("update_by_id");
+
+        builder.Property(x => x.RecordDateTime)
+            .HasColumnName("record_date_time");
+
         builder.HasMany(x => x.Medias)
                .WithOne(x => x.EventMedia)
                .HasForeignKey(x => x.EventMediaId)

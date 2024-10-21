@@ -25,7 +25,7 @@ public class HardDeleteBacgroundJob : BackgroundService
 
                 foreach (var user in usersToDelete)
                 {
-                    await userRepository.HardDelete(user);
+                    userRepository.HardDelete(user);
                 }
 
                 await userRepository.Commit(stoppingToken);

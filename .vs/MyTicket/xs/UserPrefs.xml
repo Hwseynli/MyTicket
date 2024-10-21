@@ -1,39 +1,19 @@
 ﻿<Properties StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MyTicket" expanded="True">
-            <Node name="Core" expanded="True">
-              <Node name="MyTicket.Application" expanded="True">
-                <Node name="Features" expanded="True">
-                  <Node name="Commands" expanded="True">
-                    <Node name="Rating" expanded="True" />
-                  </Node>
-                </Node>
-              </Node>
-            </Node>
-            <Node name="Infrastructure" expanded="True">
-              <Node name="MyTicket.Persistence" expanded="True">
-                <Node name="EntityConfiguration" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="MyTicket">
-              <Node name="Controllers" expanded="True">
-                <Node name="EventsController.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="MyTicket" expanded="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

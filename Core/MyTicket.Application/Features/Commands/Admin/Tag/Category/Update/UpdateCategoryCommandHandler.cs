@@ -27,7 +27,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 
         category.SetDetailsForUpdate(request.Name, _userManager.GetCurrentUserId());
 
-        await _categoryRepository.Update(category);
+        _categoryRepository.Update(category);
         await _categoryRepository.Commit(cancellationToken);
 
         return true;

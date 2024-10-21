@@ -36,6 +36,7 @@ public class User : BaseEntity
         IsDeleted = false;
         PasswordHash = PasswordHasher.HashPassword(password);
         RoleId = 2;
+        Gender = Enums.Gender.Other;
         Ratings = new List<Rating>();
     }
     public void SetForLogin(bool isActivated)
@@ -75,7 +76,7 @@ public class User : BaseEntity
             LastPasswordChangeDateTime = DateTime.UtcNow.AddHours(4);
         }
     }
-    public void UpdateRefreshToken(string refreshToken)
+    public void UpdateRefreshToken(string? refreshToken)
     {
         RefreshToken = refreshToken;
     }

@@ -26,7 +26,7 @@ public class UpdatePlaceCommandHandler : IRequestHandler<UpdatePlaceCommand, boo
         request.Address = request.Address ?? place.Address;
 
         place.SetDetailsForUpdate(request.Name, request.Address, _userManager.GetCurrentUserId());
-        await _placeRepository.Update(place);
+        _placeRepository.Update(place);
         await _placeRepository.Commit(cancellationToken);
 
         return true;

@@ -32,7 +32,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, bool>
         user.SetDetailsForUpdate(request.FirstName, request.LastName, request.PhoneNumber, request.Email, request.Gender, request.Birthday);
 
         // Məlumatları yadda saxla
-        await _userRepository.Update(user);
+        _userRepository.Update(user);
         await _userRepository.Commit(cancellationToken);
 
         return true;

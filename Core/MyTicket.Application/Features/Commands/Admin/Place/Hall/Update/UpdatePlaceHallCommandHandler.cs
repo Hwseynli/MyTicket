@@ -26,7 +26,7 @@ public class UpdatePlaceHallCommandHandler : IRequestHandler<UpdatePlaceHallComm
 
         placeHall.SetEditFields(_userManager.GetCurrentUserId());
 
-        await _placeHallRepository.Update(placeHall);
+        _placeHallRepository.Update(placeHall);
         await _placeHallRepository.Commit(cancellationToken);
 
         return true;

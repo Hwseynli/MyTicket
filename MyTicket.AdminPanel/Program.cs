@@ -11,6 +11,7 @@ using Serilog;
 using Serilog.Events;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Security.Claims;
+using MyTicket.Infrastructure.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -117,7 +118,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddHttpContextAccessor();
-
+builder.Services.Configure<FileSettings>(configuration.GetSection(nameof(FileSettings)));
 var app = builder.Build();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 // Configure the HTTP request pipeline.

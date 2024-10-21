@@ -1,9 +1,9 @@
-﻿using MyTicket.Domain.Common;
-using MyTicket.Domain.Entities.Enums;
+﻿using MyTicket.Domain.Entities.Enums;
 using MyTicket.Domain.Entities.Medias;
+using MyTicket.Domain.Entities.Users;
 
 namespace MyTicket.Domain.Entities.Events;
-public class EventMedia : BaseEntity
+public class EventMedia : Editable<User>
 {
     public List<Media> Medias { get; private set; }
     public MediaType MediaType { get; private set; }

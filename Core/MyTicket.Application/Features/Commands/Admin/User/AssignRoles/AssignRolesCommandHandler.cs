@@ -34,7 +34,7 @@ public class AssignRolesCommandHandler : IRequestHandler<AssignRolesCommand, boo
         user.RoleId = request.RoleId;
         user.Role = role;
 
-        await _userRepository.Update(user);
+        _userRepository.Update(user);
         await _userRepository.Commit(cancellationToken);
 
         return true;

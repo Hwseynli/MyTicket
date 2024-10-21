@@ -10,10 +10,11 @@ public class Media : Editable<User>
     public int EventMediaId { get; private set; }
     public EventMedia EventMedia { get; private set; }
 
-    public void SetDetails(string name, string url)
+    public void SetDetails(string name, string url, bool isMain=false)
     {
         Name = name;
         Path = url;
+        IsMain = isMain;
     }
 }
 
