@@ -441,6 +441,48 @@ namespace MyTicket.Persistence.Migrations
                     b.ToTable("event_ratings", (string)null);
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Settings.Setting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by_id");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("key");
+
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_update_date_time");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("record_date_time");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer")
+                        .HasColumnName("update_by_id");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("settings", (string)null);
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.Role", b =>
                 {
                     b.Property<int>("Id")

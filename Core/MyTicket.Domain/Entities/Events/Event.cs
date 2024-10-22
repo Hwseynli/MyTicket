@@ -45,8 +45,7 @@ public class Event : Editable<User>
     public void SetRatingsInEvent(Rating rating)
     {
         Ratings.Add(rating);
-        // Ortalama reytinqi yenidən hesablayırıq
-        AverageRating = Ratings.Average(r => (int)r.RatingValue);
+        AverageRating = (AverageRating * (Ratings.Count - 1) + (int)rating.RatingValue) / Ratings.Count;
     }
 
     public void SetDetailsForUpdate(string name, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int categoryId, int updatedById)

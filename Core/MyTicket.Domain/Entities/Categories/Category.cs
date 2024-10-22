@@ -1,4 +1,5 @@
 ﻿using MyTicket.Domain.Entities.Users;
+using MyTicket.Domain.Exceptions;
 
 namespace MyTicket.Domain.Entities.Categories;
 public class Category : Editable<User>
@@ -23,6 +24,9 @@ public class Category : Editable<User>
 
     public void AddSubCategory(SubCategory subcategory)
     {
+        if (subcategory.CategoryId != Id)
+            throw new DomainException("SubCategory fərqli kateqoriyaya aid ola bilməz.");
+
         SubCategories.Add(subcategory);
     }
 }

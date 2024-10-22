@@ -1,13 +1,11 @@
 ﻿using FluentValidation;
-using MyTicket.Application.Interfaces.IRepositories.Categories;
 
 namespace MyTicket.Application.Features.Commands.Tag.Category.Update;
 public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
 {
-    private readonly ICategoryRepository _categoryRepository;
-    public UpdateCategoryCommandValidator(ICategoryRepository categoryRepository)
+    public UpdateCategoryCommandValidator()
     {
-        _categoryRepository = categoryRepository;
+        RuleFor(command => command.Id).GreaterThan(0).WithMessage("CategoryId is required.");
         RuleFor(c => c.Name)
             .NotEmpty()
             .MinimumLength(3)

@@ -3,6 +3,7 @@ using MyTicket.Domain.Entities.Categories;
 using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Ratings;
+using MyTicket.Domain.Entities.Settings;
 using MyTicket.Domain.Entities.Users;
 
 namespace MyTicket.Persistence.Context;
@@ -22,6 +23,7 @@ public class AppDbContext : DbContext
     public DbSet<Event> Events { get; set; }
     public DbSet<EventMedia> EventMedias { get; set; }
     public DbSet<Rating> EventRatings { get; set; }
+    public DbSet<Setting> Settings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

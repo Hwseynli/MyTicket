@@ -23,6 +23,8 @@
     <None Remove="EntityConfiguration\MediaEntityTypeConfigurations\" />
     <None Remove="EntityConfiguration\RatingEntityTypeConfigurations\" />
     <None Remove="Repositories\Events\" />
+    <None Remove="EntityConfiguration\SettingEntityTypeConfigurations\" />
+    <None Remove="Repositories\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -41,6 +43,8 @@
     <Folder Include="EntityConfiguration\MediaEntityTypeConfigurations\" />
     <Folder Include="EntityConfiguration\RatingEntityTypeConfigurations\" />
     <Folder Include="Repositories\Events\" />
+    <Folder Include="EntityConfiguration\SettingEntityTypeConfigurations\" />
+    <Folder Include="Repositories\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />

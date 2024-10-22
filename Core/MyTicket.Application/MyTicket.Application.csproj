@@ -57,6 +57,10 @@
     <None Remove="Features\Commands\Admin\Rating\RateEvent\" />
     <None Remove="Features\Queries\Event\" />
     <None Remove="Features\Queries\Event\ViewModels\" />
+    <None Remove="Features\Commands\Admin\Event\Update\" />
+    <None Remove="Features\Commands\Admin\Setting\" />
+    <None Remove="Interfaces\IRepositories\Settings\" />
+    <None Remove="Features\Commands\Admin\Setting\Update\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -104,6 +108,10 @@
     <Folder Include="Features\Commands\Admin\Rating\RateEvent\" />
     <Folder Include="Features\Queries\Event\" />
     <Folder Include="Features\Queries\Event\ViewModels\" />
+    <Folder Include="Features\Commands\Admin\Event\Update\" />
+    <Folder Include="Features\Commands\Admin\Setting\" />
+    <Folder Include="Interfaces\IRepositories\Settings\" />
+    <Folder Include="Features\Commands\Admin\Setting\Update\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />
