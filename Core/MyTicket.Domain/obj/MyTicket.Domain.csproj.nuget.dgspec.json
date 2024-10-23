@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj": {}
+    "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj": {}
   },
   "projects": {
-    "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj": {
+    "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj",
+        "projectUniqueName": "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj",
         "projectName": "MyTicket.Domain",
-        "projectPath": "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj",
+        "projectPath": "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj",
         "packagesPath": "/Users/zeyneb/.nuget/packages/",
-        "outputPath": "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Domain/obj/",
+        "outputPath": "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/zeyneb/.nuget/NuGet/NuGet.Config"
@@ -27,8 +27,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj": {
-                "projectPath": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj"
+              "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj": {
+                "projectPath": "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj"
               }
             }
           }
@@ -37,6 +37,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -62,14 +67,14 @@
         }
       }
     },
-    "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj": {
+    "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj",
+        "projectUniqueName": "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj",
         "projectName": "MyTicket.Infrastructure",
-        "projectPath": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj",
+        "projectPath": "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/MyTicket.Infrastructure.csproj",
         "packagesPath": "/Users/zeyneb/.nuget/packages/",
-        "outputPath": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/",
+        "outputPath": "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/zeyneb/.nuget/NuGet/NuGet.Config"
@@ -91,6 +96,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {

@@ -26,6 +26,10 @@ public class PlaceHallEntityTypeConfiguration : IEntityTypeConfiguration<PlaceHa
                 .IsRequired()
               .HasColumnName("seat_count");
 
+        builder.Property(ph => ph.RowCount)
+               .IsRequired()
+             .HasColumnName("row_count");
+
         builder.HasMany(ph => ph.Seats)
                .WithOne(s => s.PlaceHall)
                .HasForeignKey(s => s.PlaceHallId)

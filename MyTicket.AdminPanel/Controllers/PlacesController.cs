@@ -5,8 +5,6 @@ using MyTicket.Application.Features.Commands.Place.Hall.Create;
 using MyTicket.Application.Features.Commands.Place.Hall.Update;
 using MyTicket.Application.Features.Commands.Place.Location.Create;
 using MyTicket.Application.Features.Commands.Place.Location.Update;
-using MyTicket.Application.Features.Commands.Place.Seat.Create;
-using MyTicket.Application.Features.Commands.Place.Seat.Update;
 
 namespace MyTicket.AdminPanel.Controllers;
 [ApiController]
@@ -49,20 +47,5 @@ public class PlacesController : ControllerBase
     {
         var result = await _mediator.Send(command);
         return result ? Ok("PlaceHall updated successfully.") : BadRequest("Update failed.");
-    }
-
-    // POST: api/places/halls/seats
-    [HttpPost("add-seats")]
-    public async Task<IActionResult> AddSeat([FromBody] AddSeatCommand command)
-    {
-        var result = await _mediator.Send(command);
-        return result ? Ok("Seat successfully added.") : BadRequest("Failed to add seat.");
-    }
-
-    [HttpPut("update-seats")]
-    public async Task<IActionResult> Update([FromBody] UpdateSeatCommand command)
-    {
-        var result = await _mediator.Send(command);
-        return result ? Ok("Seat updated successfully.") : BadRequest("Update failed.");
     }
 }

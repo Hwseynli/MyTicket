@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
+using MyTicket.Application.Features.Commands.Place.Hall.Update;
 
-namespace MyTicket.Application.Features.Commands.Place.Hall.Create;
-public class AddPlaceHallCommandValidator : AbstractValidator<AddPlaceHallCommand>
+namespace MyTicket.Application.Features.Commands.Admin.Place.Hall.Update;
+public class UpdatePlaceHallCommandValidator : AbstractValidator<UpdatePlaceHallCommand>
 {
-    public AddPlaceHallCommandValidator()
+    public UpdatePlaceHallCommandValidator()
     {
+        RuleFor(ph => ph.Id).GreaterThan(0).WithMessage("Hall ID valid olmalıdır.");
         RuleFor(ph => ph.Name)
             .NotEmpty()
             .MinimumLength(3)
@@ -13,7 +15,7 @@ public class AddPlaceHallCommandValidator : AbstractValidator<AddPlaceHallComman
         RuleFor(ph => ph.SeatCount)
             .GreaterThan(0)
             .WithMessage("SeatCount valid olmalıdır.")
-            .Must((command, seatCount) => seatCount % command.RowCount == 0)
+            .Must((command, seatCount) => seatCount!=0 && seatCount % command.RowCount == 0)
             .WithMessage("SeatCount RowCount-a tam bölünməlidir.");
 
         RuleFor(ph => ph.RowCount)
@@ -25,4 +27,3 @@ public class AddPlaceHallCommandValidator : AbstractValidator<AddPlaceHallComman
             .WithMessage("PlaceId valid olmalıdır.");
     }
 }
-

@@ -12,7 +12,7 @@ public class Seat : Editable<User>
     public int PlaceHallId { get; private set; }
     public PlaceHall? PlaceHall { get; private set; }
 
-    public void SetDetail(int rowNumber, int seatNumber, SeatType seatType, decimal price, int placeHallId)
+    public void SetDetail(int rowNumber, int seatNumber, SeatType seatType, decimal price, int userId)
     {
         if (rowNumber <= 0 || seatNumber <= 0)
             throw new DomainException("Sətir və oturacaq nömrələri sıfır və ya mənfi ola bilməz.");
@@ -23,9 +23,9 @@ public class Seat : Editable<User>
         SeatNumber = seatNumber;
         SeatType = seatType;
         Price = price;
-        PlaceHallId = placeHallId;
+        SetAuditDetails(userId);
     }
-    public void SetDetailForUpdate(int rowNumber, int seatNumber, SeatType seatType, decimal price, int placeHallId)
+    public void SetDetailForUpdate(int rowNumber, int seatNumber, SeatType seatType, decimal price, int modifiedById)
     {
         if (rowNumber <= 0 || seatNumber <= 0)
             throw new DomainException("Sətir və oturacaq nömrələri sıfır və ya mənfi ola bilməz.");
@@ -36,7 +36,29 @@ public class Seat : Editable<User>
         SeatNumber = seatNumber;
         SeatType = seatType;
         Price = price;
-        PlaceHallId = placeHallId;
+        SetEditFields(modifiedById);
+    }
+
+    public SeatType DetermineSeatType(int row, int totalRows)
+    {
+        // Burada hər sıranın tipini təyin edirik
+        if (row <= totalRows / 3)
+            return SeatType.FrontRow;
+        else if (row > totalRows / 3 && row <= 2 * totalRows / 3)
+            return SeatType.MiddleRow;
+        else
+            return SeatType.BackRow;
+    }
+
+    public decimal CalculateSeatPrice(SeatType seatType)
+    {
+        // Burada sıraya əsasən qiymət hesablanır
+        if (seatType == SeatType.FrontRow)
+            return 100m; // FrontRow qiyməti
+        else if (seatType==SeatType.BackRow)
+            return 50m; // BackRow qiyməti
+        else
+            return 75m; // MiddleRow qiyməti
     }
 }
 

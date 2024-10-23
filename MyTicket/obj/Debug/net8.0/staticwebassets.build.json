@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "eJIaN7IrNQSEG9b4VBeCUEogYqioPGzXXc2EttTEIXE=",
+  "Hash": "q1PSfhsr+IMjaL1NKApmCMKTKj0iAh8LN+7cj+tsnms=",
   "Source": "MyTicket",
   "BasePath": "_content/MyTicket",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "/Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/MyTicket.AdminPanel.csproj",
+      "Identity": "/Users/zeyneb/Downloads/MyTicket/MyTicket.AdminPanel/MyTicket.AdminPanel.csproj",
       "Version": 2,
       "Source": "MyTicket.AdminPanel",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
