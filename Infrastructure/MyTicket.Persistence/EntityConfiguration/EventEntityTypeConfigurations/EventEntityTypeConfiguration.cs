@@ -20,6 +20,10 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
             .IsRequired()
             .HasColumnName("title");
 
+        builder.Property(x => x.MinPrice)
+           .IsRequired()
+           .HasColumnName("min_price");
+
         builder.Property(x => x.Description)
             .HasColumnName("description");
 
@@ -64,6 +68,11 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
          .WithOne(uer => uer.Event)
          .HasForeignKey(uer => uer.EventId)
          .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(e => e.Tickets)
+       .WithOne(uer => uer.Event)
+       .HasForeignKey(uer => uer.EventId)
+       .OnDelete(DeleteBehavior.Cascade);
 
         // Audit Fields
         builder.Property(x => x.CreatedById)

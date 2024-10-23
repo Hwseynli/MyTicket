@@ -1,4 +1,5 @@
 ﻿using MyTicket.Domain.Entities.Enums;
+using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
 
@@ -11,6 +12,7 @@ public class Seat : Editable<User>
     public decimal Price { get; private set; }
     public int PlaceHallId { get; private set; }
     public PlaceHall? PlaceHall { get; private set; }
+    public List<Ticket> Tickets { get; private set; }
 
     public void SetDetail(int rowNumber, int seatNumber, SeatType seatType, decimal price, int userId)
     {
@@ -23,6 +25,7 @@ public class Seat : Editable<User>
         SeatNumber = seatNumber;
         SeatType = seatType;
         Price = price;
+        Tickets = new List<Ticket>();
         SetAuditDetails(userId);
     }
     public void SetDetailForUpdate(int rowNumber, int seatNumber, SeatType seatType, decimal price, int modifiedById)

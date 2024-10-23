@@ -17,6 +17,9 @@ public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
                 .WithMessage("Bu başlıqda tədbir yaradılıb istəyirsinizsə update edin ya da başqa ad ilə yaradın")
               .MaximumLength(100).WithMessage("Tədbirin adı maksimum 100 simvol ola bilər.");
 
+        RuleFor(x => x.MinPrice)
+           .GreaterThan(0).WithMessage("Price düzgün olmalıdır.");
+
         RuleFor(x => x.StartTime)
             .NotEmpty().WithMessage("Tədbirin başlanma vaxtı boş ola bilməz.")
             .GreaterThan(DateTime.Now).WithMessage("Tədbirin başlanma vaxtı keçmiş tarix ola bilməz.");

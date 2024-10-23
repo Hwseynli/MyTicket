@@ -1,5 +1,6 @@
 ﻿using MyTicket.Domain.Common;
 using MyTicket.Domain.Entities.Enums;
+using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Infrastructure.Utils;
 
@@ -15,7 +16,8 @@ public class User : BaseEntity
     public string PhoneNumber { get; private set; }
     public DateTime? Birthday { get; set; }
     public string PasswordHash { get; private set; }
-    public List<Rating> Ratings { get; set; }
+    public List<Rating> Ratings { get; private set; }
+    public List<Ticket> Tickets { get; private set; }
     public DateTime LastPasswordChangeDateTime { get; private set; }
     public string? RefreshToken { get; private set; }
     public string? ConfirmToken { get; private set; }

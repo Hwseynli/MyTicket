@@ -6,6 +6,7 @@ namespace MyTicket.Application.Features.Commands.Admin.Event.Create;
 public class CreateEventCommand:IRequest<bool>
 {
     public string Title { get; set; }
+    public decimal MinPrice { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     public string Description { get; set; }

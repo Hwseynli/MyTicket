@@ -9,6 +9,7 @@ namespace MyTicket.Domain.Entities.Events;
 public class Event : Editable<User>
 {
     public string Title { get; private set; }
+    public decimal MinPrice { get; private set; }
     public DateTime StartTime { get; private set; }
     public DateTime EndTime { get; private set; }
     public string Description { get; private set; }
@@ -21,9 +22,10 @@ public class Event : Editable<User>
     public PlaceHall PlaceHall { get; private set; }
     public bool IsDeleted { get; private set; } // Soft deletion
     public List<Rating> Ratings { get; private set; }
+    public List<Ticket> Tickets { get; private set; }
     public double AverageRating { get; set; } // Ortalama reytinq
 
-    public void SetDetails(string name, DateTime startTime, DateTime endTime, string description, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge)
+    public void SetDetails(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge, int userId)
     {
         if (startTime >= endTime)
             throw new DomainException("Başlanğıc vaxtı son vaxtdan əvvəl olmalıdır.");
@@ -38,8 +40,11 @@ public class Event : Editable<User>
         Description = description;
         EventMedias = new List<EventMedia>();
         Ratings = new List<Rating>();
+        Tickets = new List<Ticket>();
         PlaceHallId = placeHallId;
         IsDeleted = false;
+        MinPrice = minPrice;
+        SetAuditDetails(userId);
     }
 
     public void SetRatingsInEvent(Rating rating)

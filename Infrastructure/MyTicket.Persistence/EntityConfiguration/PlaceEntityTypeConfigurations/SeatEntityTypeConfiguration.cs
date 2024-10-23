@@ -35,6 +35,11 @@ public class SeatEntityTypeConfiguration : IEntityTypeConfiguration<Seat>
         builder.Property(s => s.PlaceHallId)
                .HasColumnName("place_hall_id");
 
+        builder.HasMany(e => e.Tickets)
+   .WithOne(uer => uer.Seat)
+   .HasForeignKey(uer => uer.SeatId)
+   .OnDelete(DeleteBehavior.Cascade);
+
         builder.Property(x => x.CreatedById)
            .HasColumnName("created_by_id");
 

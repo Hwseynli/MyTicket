@@ -13,4 +13,9 @@ public static class Generator
     {
         return Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
     }
+
+    public static string GenerateUniqueCode()
+    {
+        return Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10).ToUpper();
+    }
 }

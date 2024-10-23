@@ -20,6 +20,6 @@ public class EventsController : ControllerBase
     public async Task<IActionResult> CreateEvent([FromForm]CreateEventCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok() : BadRequest();
+        return result ? Ok("Succesfully") : BadRequest();
     }
 }

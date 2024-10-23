@@ -24,6 +24,7 @@ public class AppDbContext : DbContext
     public DbSet<EventMedia> EventMedias { get; set; }
     public DbSet<Rating> EventRatings { get; set; }
     public DbSet<Setting> Settings { get; set; }
+    public DbSet<Ticket> Tickets { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
