@@ -74,6 +74,12 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
        .HasForeignKey(uer => uer.EventId)
        .OnDelete(DeleteBehavior.Cascade);
 
+        // Relation between WishListEvent and Event
+        builder.HasMany(we => we.WishListEvents)
+               .WithOne(e => e.Event)
+               .HasForeignKey(we => we.EventId)
+               .OnDelete(DeleteBehavior.Cascade);
+
         // Audit Fields
         builder.Property(x => x.CreatedById)
             .HasColumnName("created_by_id");

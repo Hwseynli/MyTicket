@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyTicket.Domain.Entities.Categories;
 using MyTicket.Domain.Entities.Events;
+using MyTicket.Domain.Entities.Favourites;
 using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Domain.Entities.Settings;
@@ -25,6 +26,7 @@ public class AppDbContext : DbContext
     public DbSet<Rating> EventRatings { get; set; }
     public DbSet<Setting> Settings { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<WishList> WishLists { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

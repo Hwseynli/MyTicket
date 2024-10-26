@@ -18,6 +18,7 @@
     <None Remove="Entities\Medias\" />
     <None Remove="Entities\Ratings\" />
     <None Remove="Entities\Settings\" />
+    <None Remove="Entities\Favourites\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -31,6 +32,7 @@
     <Folder Include="Entities\Medias\" />
     <Folder Include="Entities\Ratings\" />
     <Folder Include="Entities\Settings\" />
+    <Folder Include="Entities\Favourites\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\MyTicket.Infrastructure\MyTicket.Infrastructure.csproj" />

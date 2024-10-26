@@ -84,5 +84,11 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
               .WithOne(uer => uer.User)
               .HasForeignKey(uer => uer.UserId)
               .OnDelete(DeleteBehavior.Cascade);
+
+        // Relation between WishList and User
+        builder.HasMany(w => w.WishLists)
+               .WithOne(u => u.User)
+               .HasForeignKey(w => w.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

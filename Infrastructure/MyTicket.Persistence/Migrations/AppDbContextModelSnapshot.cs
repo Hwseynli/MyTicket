@@ -290,6 +290,52 @@ namespace MyTicket.Persistence.Migrations
                     b.ToTable("tickets", (string)null);
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Favourites.WishList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("wish_lists", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Favourites.WishListEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer")
+                        .HasColumnName("event_id");
+
+                    b.Property<int>("WishListId")
+                        .HasColumnType("integer")
+                        .HasColumnName("wish_list_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("WishListId");
+
+                    b.ToTable("wish_list_events", (string)null);
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Medias.Media", b =>
                 {
                     b.Property<int>("Id")
@@ -770,6 +816,36 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Favourites.WishList", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Users.User", "User")
+                        .WithMany("WishLists")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Favourites.WishListEvent", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Events.Event", "Event")
+                        .WithMany("WishListEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyTicket.Domain.Entities.Favourites.WishList", "WishList")
+                        .WithMany("WishListEvents")
+                        .HasForeignKey("WishListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("WishList");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Medias.Media", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Events.EventMedia", "EventMedia")
@@ -850,11 +926,18 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Ratings");
 
                     b.Navigation("Tickets");
+
+                    b.Navigation("WishListEvents");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Events.EventMedia", b =>
                 {
                     b.Navigation("Medias");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Favourites.WishList", b =>
+                {
+                    b.Navigation("WishListEvents");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
@@ -884,6 +967,8 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Ratings");
 
                     b.Navigation("Tickets");
+
+                    b.Navigation("WishLists");
                 });
 #pragma warning restore 612, 618
         }

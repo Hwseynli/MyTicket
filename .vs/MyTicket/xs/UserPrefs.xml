@@ -1,14 +1,31 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Core/MyTicket.Application/Features/Commands/WishList/Add/AddWishListCommand.cs">
+    <Files>
+      <File FileName="Core/MyTicket.Application/Features/Commands/WishList/Add/AddWishListCommand.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MyTicket" expanded="True">
             <Node name="Core" expanded="True">
+              <Node name="MyTicket.Application">
+                <Node name="Features" expanded="True">
+                  <Node name="Commands" expanded="True">
+                    <Node name="WishList" expanded="True">
+                      <Node name="Add" expanded="True">
+                        <Node name="AddWishListCommand.cs" selected="True" />
+                      </Node>
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
               <Node name="MyTicket.Domain" expanded="True">
-                <Node name="Entities" expanded="True" />
+                <Node name="Entities" expanded="True">
+                  <Node name="Favourites" expanded="True" />
+                </Node>
               </Node>
             </Node>
             <Node name="Infrastructure" expanded="True" />
@@ -17,12 +34,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" relfile="Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" line="16" column="1" />
+      <Breakpoint file="/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" relfile="Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" line="16" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
 </Properties>

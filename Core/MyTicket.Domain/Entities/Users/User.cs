@@ -1,6 +1,7 @@
 ﻿using MyTicket.Domain.Common;
 using MyTicket.Domain.Entities.Enums;
 using MyTicket.Domain.Entities.Events;
+using MyTicket.Domain.Entities.Favourites;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Infrastructure.Utils;
 
@@ -18,6 +19,7 @@ public class User : BaseEntity
     public string PasswordHash { get; private set; }
     public List<Rating> Ratings { get; private set; }
     public List<Ticket> Tickets { get; private set; }
+    public List<WishList> WishLists { get; private set; }
     public DateTime LastPasswordChangeDateTime { get; private set; }
     public string? RefreshToken { get; private set; }
     public string? ConfirmToken { get; private set; }
@@ -40,6 +42,7 @@ public class User : BaseEntity
         RoleId = 2;
         Gender = Enums.Gender.Other;
         Ratings = new List<Rating>();
+        WishLists = new List<WishList>();
     }
     public void SetForLogin(bool isActivated)
     {

@@ -1,5 +1,6 @@
 ﻿using MyTicket.Domain.Entities.Categories;
 using MyTicket.Domain.Entities.Enums;
+using MyTicket.Domain.Entities.Favourites;
 using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Domain.Entities.Users;
@@ -21,6 +22,7 @@ public class Event : Editable<User>
     public int PlaceHallId { get; private set; }
     public PlaceHall PlaceHall { get; private set; }
     public bool IsDeleted { get; private set; } // Soft deletion
+    public List<WishListEvent> WishListEvents { get; private set; }
     public List<Rating> Ratings { get; private set; }
     public List<Ticket> Tickets { get; private set; }
     public double AverageRating { get; set; } // Ortalama reytinq
@@ -41,6 +43,7 @@ public class Event : Editable<User>
         EventMedias = new List<EventMedia>();
         Ratings = new List<Rating>();
         Tickets = new List<Ticket>();
+        WishListEvents = new List<WishListEvent>();
         PlaceHallId = placeHallId;
         IsDeleted = false;
         MinPrice = minPrice;

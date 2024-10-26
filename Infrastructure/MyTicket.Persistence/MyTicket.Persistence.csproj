@@ -25,6 +25,7 @@
     <None Remove="Repositories\Events\" />
     <None Remove="EntityConfiguration\SettingEntityTypeConfigurations\" />
     <None Remove="Repositories\Settings\" />
+    <None Remove="EntityConfiguration\WishListEntityTypeConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -45,6 +46,7 @@
     <Folder Include="Repositories\Events\" />
     <Folder Include="EntityConfiguration\SettingEntityTypeConfigurations\" />
     <Folder Include="Repositories\Settings\" />
+    <Folder Include="EntityConfiguration\WishListEntityTypeConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
