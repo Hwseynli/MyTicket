@@ -41,5 +41,6 @@ public static class ServiceRegistration
         services.AddTransient<ISmsManager, SmsManager>();
 
         services.AddHostedService<HardDeleteBacgroundJob>();
+        services.AddHostedService<BasketCleanupBackgroundJob>();
     }
 }
