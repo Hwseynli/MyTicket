@@ -27,8 +27,15 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
         var user = await _userRepository.GetAsync(x => x.Id == userId);
         if (user == null)
             throw new UnAuthorizedException();
+        
+        var ticket = await _ticketRepository.GetAsync(x => x.Id == request.TicketId&&x.IsSold==false);
+        if (ticket == null)
+            throw new NotFoundException("Ticket not found.");
 
-        var basket = await _basketRepository.GetAsync(x => x.UserId == userId, nameof(Domain.Entities.Baskets.Basket.TicketsWithTime));
+        if (ticket.IsReserved&&ticket.UserId!=userId)
+            throw new BadRequestException("Ticket is reserved");
+
+       var basket = await _basketRepository.GetAsync(x => x.UserId == userId, nameof(Domain.Entities.Baskets.Basket.TicketsWithTime));
         if (basket == null)
         {
             basket = new Domain.Entities.Baskets.Basket();
@@ -36,10 +43,6 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
             await _basketRepository.AddAsync(basket);
             await _basketRepository.Commit(cancellationToken);
         }
-
-        var ticket = await _ticketRepository.GetAsync(x => x.Id == request.TicketId);
-        if (ticket == null)
-            throw new NotFoundException("Ticket not found.");
 
         if (basket.TicketsWithTime.Any(x => x.TicketId == ticket.Id))
             throw new BadRequestException("Ticket is existed.");
