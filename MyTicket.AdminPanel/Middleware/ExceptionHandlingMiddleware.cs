@@ -60,6 +60,11 @@ public class ExceptionHandlingMiddleware
                 problemDetails.Detail = ex.Message;
                 problemDetails.Title = "Unauthorized";
                 break;
+            case BadRequestException:
+                response.StatusCode = (int)HttpStatusCode.NotFound;
+                problemDetails.Detail = ex.Message;
+                problemDetails.Title = "Bad Request";
+                break;
 
             default:
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;

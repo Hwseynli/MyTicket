@@ -1,4 +1,5 @@
 ﻿using MyTicket.Domain.Common;
+using MyTicket.Domain.Entities.Baskets;
 using MyTicket.Domain.Entities.Enums;
 using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Favourites;
@@ -29,6 +30,9 @@ public class User : BaseEntity
     //ForgotPassword üçün :
     public string? OtpCode { get; private set; }
     public DateTime? OtpGeneratedTime { get; private set; }
+
+    public int? BasketId { get; private set; }
+    public Basket? Basket { get; private set; }
 
     public void SetDetailsForRegister(string firstName, string lastName, string phoneNumber, string email, string password)
     {

@@ -7,6 +7,7 @@ using MyTicket.Application.Features.Queries.User;
 using MyTicket.Application.Features.Queries.Admin;
 using MyTicket.Application.Features.Queries.Location;
 using MyTicket.Application.Features.Queries.Event;
+using MyTicket.Application.Features.Queries.Basket;
 
 namespace MyTicket.Application;
 public static class ServiceRegistration
@@ -21,6 +22,6 @@ public static class ServiceRegistration
         services.AddScoped<IAdminQueries, AdminQueries>();
         services.AddScoped<ILocationQueries, LocationQueries>();
         services.AddScoped<IEventQueries, EventQueries>();
-
+        services.AddScoped<ITicketQueries, TicketQueries>();
     }
 }

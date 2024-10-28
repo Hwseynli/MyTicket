@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MyTicket.Domain.Entities.Baskets;
 using MyTicket.Domain.Entities.Users;
 
 namespace MyTicket.Persistence.EntityConfiguration.UserTypeEntityConfigurations;
@@ -75,6 +76,9 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.LastPasswordChangeDateTime)
              .HasColumnName("last_password_change_date");
 
+        builder.Property(x => x.BasketId)
+               .HasColumnName("basket_id");
+
         builder.HasMany(u => u.Ratings)
               .WithOne(uer => uer.User)
               .HasForeignKey(uer => uer.UserId)
@@ -89,6 +93,12 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany(w => w.WishLists)
                .WithOne(u => u.User)
                .HasForeignKey(w => w.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+        // Define the one-to-one relationship with User
+        builder.HasOne(b => b.Basket)
+               .WithOne(u => u.User)
+               .HasForeignKey<Basket>(x => x.UserId)
                .OnDelete(DeleteBehavior.Cascade);
     }
 }

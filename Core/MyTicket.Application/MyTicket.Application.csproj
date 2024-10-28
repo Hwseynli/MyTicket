@@ -63,6 +63,12 @@
     <None Remove="Features\Commands\WishList\" />
     <None Remove="Features\Commands\WishList\Add\" />
     <None Remove="Features\Commands\WishList\Remove\" />
+    <None Remove="Features\Queries\Ticket\" />
+    <None Remove="Features\Queries\Ticket\ViewModels\" />
+    <None Remove="Interfaces\IRepositories\Baskets\" />
+    <None Remove="Features\Commands\Basket\" />
+    <None Remove="Features\Commands\Basket\AddTicket\" />
+    <None Remove="Features\Commands\Basket\RemoveTicket\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -116,6 +122,12 @@
     <Folder Include="Features\Commands\WishList\" />
     <Folder Include="Features\Commands\WishList\Add\" />
     <Folder Include="Features\Commands\WishList\Remove\" />
+    <Folder Include="Features\Queries\Ticket\" />
+    <Folder Include="Features\Queries\Ticket\ViewModels\" />
+    <Folder Include="Interfaces\IRepositories\Baskets\" />
+    <Folder Include="Features\Commands\Basket\" />
+    <Folder Include="Features\Commands\Basket\AddTicket\" />
+    <Folder Include="Features\Commands\Basket\RemoveTicket\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

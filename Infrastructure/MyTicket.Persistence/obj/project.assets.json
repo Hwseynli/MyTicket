@@ -9592,11 +9592,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Persistence/MyTicket.Persistence.csproj",
+      "projectUniqueName": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/MyTicket.Persistence.csproj",
       "projectName": "MyTicket.Persistence",
-      "projectPath": "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Persistence/MyTicket.Persistence.csproj",
+      "projectPath": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/MyTicket.Persistence.csproj",
       "packagesPath": "/Users/zeyneb/.nuget/packages/",
-      "outputPath": "/Users/zeyneb/Downloads/MyTicket/Infrastructure/MyTicket.Persistence/obj/",
+      "outputPath": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/zeyneb/.nuget/NuGet/NuGet.Config"
@@ -9612,8 +9612,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Application/MyTicket.Application.csproj": {
-              "projectPath": "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Application/MyTicket.Application.csproj"
+            "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/MyTicket.Application.csproj": {
+              "projectPath": "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/MyTicket.Application.csproj"
             }
           }
         }

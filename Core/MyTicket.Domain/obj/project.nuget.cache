@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e/dRcofP/a+w4dUBhi2stPjpuZMcwsFAzkHJinW0rZkIpvdQ8/udfGQJOSbWmfvGut/hU3DJw/8XYGeKMXieiw==",
+  "dgSpecHash": "09Bq+ZR8pjlWTviSUre6ywSjbuKvixTQNSekij/N9h7WKdSnGqTvjtyawW1RL2b9M4Z2+AzMYfsQWnIrTDqLfg==",
   "success": true,
-  "projectFilePath": "/Users/zeyneb/Downloads/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj",
+  "projectFilePath": "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj",
   "expectedPackageFiles": [
     "/Users/zeyneb/.nuget/packages/microsoft.aspnetcore.http/2.2.2/microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.2.0/microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

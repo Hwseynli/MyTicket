@@ -22,6 +22,53 @@ namespace MyTicket.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Baskets.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("baskets", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Baskets.TicketWithTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AddedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("BasketId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("TicketWithTime");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Categories.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -670,6 +717,10 @@ namespace MyTicket.Persistence.Migrations
                         .HasDefaultValue(true)
                         .HasColumnName("is_activated");
 
+                    b.Property<int?>("BasketId")
+                        .HasColumnType("integer")
+                        .HasColumnName("basket_id");
+
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("birthday");
@@ -747,6 +798,36 @@ namespace MyTicket.Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("users", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Baskets.Basket", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Users.User", "User")
+                        .WithOne("Basket")
+                        .HasForeignKey("MyTicket.Domain.Entities.Baskets.Basket", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Baskets.TicketWithTime", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Baskets.Basket", "Basket")
+                        .WithMany("TicketsWithTime")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyTicket.Domain.Entities.Events.Ticket", "Ticket")
+                        .WithMany()
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Categories.SubCategory", b =>
@@ -909,6 +990,11 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Baskets.Basket", b =>
+                {
+                    b.Navigation("TicketsWithTime");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Categories.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -964,6 +1050,8 @@ namespace MyTicket.Persistence.Migrations
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.User", b =>
                 {
+                    b.Navigation("Basket");
+
                     b.Navigation("Ratings");
 
                     b.Navigation("Tickets");

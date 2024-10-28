@@ -27,12 +27,12 @@ public class Ticket : Editable<User>
         SetAuditDetails(userId);
     }
 
-    public void ReserveTicket(int userId)
+    public void ReserveTicket(int? userId, bool isReserved=true)
     {
         if (IsSold)
             throw new DomainException("Bu bilet artıq satılıb.");
 
-        IsReserved = true;
+        IsReserved = isReserved;
         UserId = userId;
     }
 
