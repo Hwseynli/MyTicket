@@ -21,6 +21,7 @@
     <None Remove="Entities\Favourites\" />
     <None Remove="Entities\Baskets\" />
     <None Remove="Entities\Orders\" />
+    <None Remove="Entities\PromoCodes\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -37,6 +38,7 @@
     <Folder Include="Entities\Favourites\" />
     <Folder Include="Entities\Baskets\" />
     <Folder Include="Entities\Orders\" />
+    <Folder Include="Entities\PromoCodes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\MyTicket.Infrastructure\MyTicket.Infrastructure.csproj" />

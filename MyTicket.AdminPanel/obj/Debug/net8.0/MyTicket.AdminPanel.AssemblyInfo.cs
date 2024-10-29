@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyTicket.AdminPanel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba8bfc0045218f551723130d8ac3e8cd645412fa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6386a4975d4643765a2a7da7147d6c15165a63e8")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyTicket.AdminPanel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyTicket.AdminPanel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
