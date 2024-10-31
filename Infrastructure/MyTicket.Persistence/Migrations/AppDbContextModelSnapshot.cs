@@ -301,6 +301,10 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("last_update_date_time");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("integer")
+                        .HasColumnName("order_id");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
                         .HasColumnName("price");
@@ -329,6 +333,8 @@ namespace MyTicket.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("SeatId");
 
@@ -431,6 +437,51 @@ namespace MyTicket.Persistence.Migrations
                     b.HasIndex("EventMediaId");
 
                     b.ToTable("medias", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.Orders.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsPaid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_paid");
+
+                    b.Property<string>("OrderCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("order_code");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("order_date");
+
+                    b.Property<int?>("PromoCodeId")
+                        .HasColumnType("integer")
+                        .HasColumnName("promo_code_id");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("total_amount");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromoCodeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("orders", (string)null);
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
@@ -577,6 +628,90 @@ namespace MyTicket.Persistence.Migrations
                     b.HasIndex("PlaceHallId");
 
                     b.ToTable("seats", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.PromoCodes.PromoCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("discount_amount");
+
+                    b.Property<int>("DiscountType")
+                        .HasColumnType("integer")
+                        .HasColumnName("discount_type");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expiration_date");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("is_active");
+
+                    b.Property<DateTime?>("LastUpdateDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("RecordDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UniqueCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("unique_code");
+
+                    b.Property<int?>("UpdateById")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsageLimit")
+                        .HasColumnType("integer")
+                        .HasColumnName("usage_limit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("promocodes", (string)null);
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.PromoCodes.UserPromoCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PromoCodeId")
+                        .HasColumnType("integer")
+                        .HasColumnName("promo_code_id");
+
+                    b.Property<DateTime>("UsedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("used_date");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromoCodeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("user_promo_codes", (string)null);
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Ratings.Rating", b =>
@@ -879,6 +1014,11 @@ namespace MyTicket.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyTicket.Domain.Entities.Orders.Order", "Order")
+                        .WithMany("Tickets")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("MyTicket.Domain.Entities.Places.Seat", "Seat")
                         .WithMany("Tickets")
                         .HasForeignKey("SeatId")
@@ -891,6 +1031,8 @@ namespace MyTicket.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Event");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Seat");
 
@@ -938,6 +1080,24 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("EventMedia");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Orders.Order", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.PromoCodes.PromoCode", "PromoCode")
+                        .WithMany("Orders")
+                        .HasForeignKey("PromoCodeId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("MyTicket.Domain.Entities.Users.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PromoCode");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.PlaceHall", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Places.Place", "Place")
@@ -958,6 +1118,25 @@ namespace MyTicket.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("PlaceHall");
+                });
+
+            modelBuilder.Entity("MyTicket.Domain.Entities.PromoCodes.UserPromoCode", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.PromoCodes.PromoCode", "PromoCode")
+                        .WithMany("UserPromoCodes")
+                        .HasForeignKey("PromoCodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyTicket.Domain.Entities.Users.User", "User")
+                        .WithMany("UserPromoCodes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PromoCode");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Ratings.Rating", b =>
@@ -1026,6 +1205,11 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("WishListEvents");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.Orders.Order", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Places.Place", b =>
                 {
                     b.Navigation("PlaceHalls");
@@ -1043,6 +1227,13 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Tickets");
                 });
 
+            modelBuilder.Entity("MyTicket.Domain.Entities.PromoCodes.PromoCode", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("UserPromoCodes");
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Users.Role", b =>
                 {
                     b.Navigation("Users");
@@ -1052,9 +1243,13 @@ namespace MyTicket.Persistence.Migrations
                 {
                     b.Navigation("Basket");
 
+                    b.Navigation("Orders");
+
                     b.Navigation("Ratings");
 
                     b.Navigation("Tickets");
+
+                    b.Navigation("UserPromoCodes");
 
                     b.Navigation("WishLists");
                 });

@@ -3,6 +3,8 @@ using MyTicket.Domain.Entities.Baskets;
 using MyTicket.Domain.Entities.Enums;
 using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Favourites;
+using MyTicket.Domain.Entities.Orders;
+using MyTicket.Domain.Entities.PromoCodes;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Infrastructure.Utils;
 
@@ -27,6 +29,8 @@ public class User : BaseEntity
     public bool IsDeleted { get; private set; }
     public DateTime? DeletedTime { get; private set; }
     public bool Activated { get; private set; }
+    public List<Order> Orders { get; private set; }
+    public List<UserPromoCode> UserPromoCodes { get; private set; }
     //ForgotPassword üçün :
     public string? OtpCode { get; private set; }
     public DateTime? OtpGeneratedTime { get; private set; }
@@ -47,6 +51,8 @@ public class User : BaseEntity
         Gender = Enums.Gender.Other;
         Ratings = new List<Rating>();
         WishLists = new List<WishList>();
+        Orders = new List<Order>();
+        UserPromoCodes = new List<UserPromoCode>();
     }
     public void SetForLogin(bool isActivated)
     {

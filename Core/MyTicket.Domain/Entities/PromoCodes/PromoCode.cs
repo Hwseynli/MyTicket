@@ -1,4 +1,5 @@
 ﻿using MyTicket.Domain.Entities.Enums;
+using MyTicket.Domain.Entities.Orders;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
 
@@ -11,6 +12,7 @@ public class PromoCode : Editable<User>
     public DateTime ExpirationDate { get; private set; } // Promokodun bitmə tarixi
     public int UsageLimit { get; private set; } // Ümumi istifadə limiti
     public bool IsActive { get; private set; }
+    public List<Order> Orders { get; private set; }
     public List<UserPromoCode> UserPromoCodes { get; private set; } // İstifadəçi ilə əlaqəsi
 
     public void SetDetails(string uniqueCodde, decimal discountAmount, DiscountType discountType, DateTime expireTime, int usageLimit, bool isActive, int userId)
@@ -24,6 +26,7 @@ public class PromoCode : Editable<User>
         UsageLimit = usageLimit;
         IsActive = isActive;
         UserPromoCodes = new List<UserPromoCode>();
+        Orders = new List<Order>();
         SetAuditDetails(userId);
     }
 

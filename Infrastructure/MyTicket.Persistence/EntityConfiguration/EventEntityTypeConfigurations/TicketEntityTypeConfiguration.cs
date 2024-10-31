@@ -31,6 +31,9 @@ public class TicketEntityTypeConfiguration : IEntityTypeConfiguration<Ticket>
         builder.Property(x => x.UserId)
             .HasColumnName("user_id");
 
+        builder.Property(x => x.OrderId)
+           .HasColumnName("order_id");
+
         builder.Property(x => x.Price)
          .IsRequired()
          .HasColumnName("price");

@@ -28,6 +28,8 @@
     <None Remove="EntityConfiguration\WishListEntityTypeConfigurations\" />
     <None Remove="EntityConfiguration\BasketEntityTypeConfigurations\" />
     <None Remove="Repositories\Baskets\" />
+    <None Remove="EntityConfiguration\OrderEntityTypeConfigurations\" />
+    <None Remove="EntityConfiguration\PromoCodeEntityTypeConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -51,6 +53,8 @@
     <Folder Include="EntityConfiguration\WishListEntityTypeConfigurations\" />
     <Folder Include="EntityConfiguration\BasketEntityTypeConfigurations\" />
     <Folder Include="Repositories\Baskets\" />
+    <Folder Include="EntityConfiguration\OrderEntityTypeConfigurations\" />
+    <Folder Include="EntityConfiguration\PromoCodeEntityTypeConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />

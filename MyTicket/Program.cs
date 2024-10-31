@@ -19,9 +19,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
+;
 builder.Services.AddPersistenceRegistration(builder.Configuration);
-builder.Services.AddApplicationRegistration();
+builder.Services.AddApplicationRegistration(builder.Configuration);
 
 var environment = builder.Environment;
 IConfiguration configuration = new ConfigurationBuilder()
@@ -123,6 +126,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.Configure<FileSettings>(configuration.GetSection(nameof(FileSettings)));
+builder.Services.Configure<StripeSettings>(configuration.GetSection(nameof(StripeSettings)));
 builder.Services.AddScoped<AppSeedDbContext>();
 
 var app = builder.Build();

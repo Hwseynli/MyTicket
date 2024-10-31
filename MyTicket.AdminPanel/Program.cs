@@ -18,7 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddPersistenceRegistration(builder.Configuration);
-builder.Services.AddApplicationRegistration();
+builder.Services.AddApplicationRegistration(builder.Configuration);
 
 var environment = builder.Environment;
 IConfiguration configuration = new ConfigurationBuilder()

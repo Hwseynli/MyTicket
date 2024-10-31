@@ -17,13 +17,13 @@ public class Order : BaseEntity
     public int? PromoCodeId { get; private set; }
     public PromoCode? PromoCode { get; private set; }
 
-    public void SetDetails(string orderCode, int userId, List<Ticket> tickets, int? promoCodeId)
+    public void SetDetails(string orderCode, List<Ticket> tickets, int userId, int? promoCodeId)
     {
         OrderCode = orderCode;
         UserId = userId;
         OrderDate = DateTime.UtcNow;
         IsPaid = false;
-        Tickets = new List<Ticket>();
+        Tickets = tickets;
         PromoCodeId = promoCodeId;
         CalculateTotalAmount();
     }
@@ -39,7 +39,6 @@ public class Order : BaseEntity
         var discountAmount = TotalAmount * (promoCode.DiscountAmount / 100m);
         TotalAmount -= discountAmount;
     }
-
 
     public void AddTicket(Ticket ticket)
     {

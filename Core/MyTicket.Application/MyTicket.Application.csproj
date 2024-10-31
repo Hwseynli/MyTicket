@@ -69,6 +69,9 @@
     <None Remove="Features\Commands\Basket\" />
     <None Remove="Features\Commands\Basket\AddTicket\" />
     <None Remove="Features\Commands\Basket\RemoveTicket\" />
+    <None Remove="Features\Commands\Order\" />
+    <None Remove="Features\Commands\Order\Create\" />
+    <None Remove="Interfaces\IRepositories\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -128,6 +131,9 @@
     <Folder Include="Features\Commands\Basket\" />
     <Folder Include="Features\Commands\Basket\AddTicket\" />
     <Folder Include="Features\Commands\Basket\RemoveTicket\" />
+    <Folder Include="Features\Commands\Order\" />
+    <Folder Include="Features\Commands\Order\Create\" />
+    <Folder Include="Interfaces\IRepositories\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />
@@ -138,5 +144,6 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.0" />
+    <PackageReference Include="Stripe.net" Version="47.0.0" />
   </ItemGroup>
 </Project>

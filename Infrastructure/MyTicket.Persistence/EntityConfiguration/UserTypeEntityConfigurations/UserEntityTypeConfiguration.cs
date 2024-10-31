@@ -100,5 +100,15 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
                .WithOne(u => u.User)
                .HasForeignKey<Basket>(x => x.UserId)
                .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(o => o.Orders)
+            .WithOne(u => u.User)
+            .HasForeignKey(o => o.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(upc => upc.UserPromoCodes)
+            .WithOne(u => u.User)
+            .HasForeignKey(upc => upc.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

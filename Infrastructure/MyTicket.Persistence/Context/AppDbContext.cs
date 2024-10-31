@@ -3,7 +3,9 @@ using MyTicket.Domain.Entities.Baskets;
 using MyTicket.Domain.Entities.Categories;
 using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Favourites;
+using MyTicket.Domain.Entities.Orders;
 using MyTicket.Domain.Entities.Places;
+using MyTicket.Domain.Entities.PromoCodes;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Domain.Entities.Settings;
 using MyTicket.Domain.Entities.Users;
@@ -29,6 +31,8 @@ public class AppDbContext : DbContext
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<WishList> WishLists { get; set; }
     public DbSet<Basket> Baskets { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<PromoCode> PromoCodes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

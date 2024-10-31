@@ -1,4 +1,5 @@
-﻿using MyTicket.Domain.Entities.Places;
+﻿using MyTicket.Domain.Entities.Orders;
+using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
 
@@ -15,6 +16,8 @@ public class Ticket : Editable<User>
     public bool IsSold { get; private set; }
     public int? UserId { get; private set; } // Bilet kimin adınadır.
     public User? User { get; private set; }
+    public int? OrderId { get; private set; }
+    public Order? Order { get; private set; }
 
     public void SetTicketDetails(string uniqueCode, int eventId, int seatId, decimal price, int userId)
     {
@@ -24,6 +27,8 @@ public class Ticket : Editable<User>
         Price = price;
         IsReserved = false;
         IsSold = false;
+        UserId = null;
+        OrderId = null;
         SetAuditDetails(userId);
     }
 
@@ -38,10 +43,11 @@ public class Ticket : Editable<User>
 
     public void SellTicket(int userId)
     {
-        if (IsReserved == false)
-            throw new DomainException("Bilet əvvəlcədən rezerv edilməlidir.");
+        //if (IsReserved == false)
+        //    throw new DomainException("Bilet əvvəlcədən rezerv edilməlidir.");
 
         IsSold = true;
         UserId = userId;
+        IsReserved = false;
     }
 }

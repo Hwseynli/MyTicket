@@ -51,7 +51,7 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
         _basketRepository.Update(basket);
         await _basketRepository.Commit(cancellationToken);
 
-        ticket.ReserveTicket(userId);
+        ticket.ReserveTicket(userId,true);
         _ticketRepository.Update(ticket);
         await _ticketRepository.Commit(cancellationToken);
         return true;
