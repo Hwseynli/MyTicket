@@ -51,7 +51,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Dom
             throw new DomainException("Heç bir bilet tapılmadı.");
 
         // Promo kod tətbiqi
-        PromoCode? promoCode = null;
+        Domain.Entities.PromoCodes.PromoCode? promoCode = null;
         if (request.PromoCodeId.HasValue)
         {
             promoCode = await _orderRepository.GetPromoCodeByIdAsync(request.PromoCodeId.Value);

@@ -18,6 +18,9 @@ public class PlaceEntityTypeConfiguration : IEntityTypeConfiguration<Place>
                .HasMaxLength(100)
                .HasColumnName("name");
 
+        builder.HasIndex(p => p.Name)
+               .IsUnique();
+
         builder.Property(p => p.Address)
                .IsRequired()
                .HasMaxLength(250)
@@ -28,16 +31,16 @@ public class PlaceEntityTypeConfiguration : IEntityTypeConfiguration<Place>
                .HasForeignKey(ph => ph.PlaceId)
                .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Property(x => x.CreatedById)
+        builder.Property(p => p.CreatedById)
             .HasColumnName("created_by_id");
 
-        builder.Property(x => x.LastUpdateDateTime)
+        builder.Property(p => p.LastUpdateDateTime)
             .HasColumnName("last_update_date_time");
 
-        builder.Property(x => x.UpdateById)
+        builder.Property(p => p.UpdateById)
            .HasColumnName("update_by_id");
 
-        builder.Property(x => x.RecordDateTime)
+        builder.Property(p => p.RecordDateTime)
            .HasColumnName("record_date_time");
     }
 }

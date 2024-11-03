@@ -10,87 +10,90 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
         builder.ToTable("events");
 
         // Primary Key
-        builder.HasKey(t => t.Id);
+        builder.HasKey(e => e.Id);
 
         // Properties
-        builder.Property(x => x.Id)
+        builder.Property(e => e.Id)
                .HasColumnName("id");
 
-        builder.Property(x => x.Title)
+        builder.Property(e => e.Title)
             .IsRequired()
             .HasColumnName("title");
 
-        builder.Property(x => x.MinPrice)
+        builder.HasIndex(e => e.Title)
+            .IsUnique();
+
+        builder.Property(e => e.MinPrice)
            .IsRequired()
            .HasColumnName("min_price");
 
-        builder.Property(x => x.Description)
+        builder.Property(e => e.Description)
             .HasColumnName("description");
 
-        builder.Property(x => x.StartTime)
+        builder.Property(e => e.StartTime)
             .IsRequired()
             .HasColumnName("start_date_time");
 
-        builder.Property(x => x.EndTime)
+        builder.Property(e => e.EndTime)
            .HasColumnName("end_date_time");
 
-        builder.Property(x => x.Language)
+        builder.Property(e => e.Language)
                .IsRequired()
                .HasColumnName("language")
                .HasConversion<string>(); // Enum dəyərinin string kimi saxlanılması
 
-        builder.Property(x => x.MinAge)
+        builder.Property(e => e.MinAge)
                .IsRequired()
                .HasColumnName("min_age");
 
-        builder.Property(x => x.IsDeleted)
+        builder.Property(e => e.IsDeleted)
            .HasColumnName("is_deleted");
 
-        builder.Property(x => x.PlaceHallId)
+        builder.Property(e => e.PlaceHallId)
             .IsRequired()
             .HasColumnName("place_hall_id");
 
-        builder.Property(x => x.SubCategoryId)
+        builder.Property(e => e.SubCategoryId)
            .IsRequired()
            .HasColumnName("sub_category_id");
 
-        builder.Property(x => x.AverageRating)
+        builder.Property(e => e.AverageRating)
            .IsRequired()
            .HasColumnName("average_rating");
 
-        builder.HasMany(ph => ph.EventMedias)
-            .WithOne(s => s.Event)
-            .HasForeignKey(s => s.EventId)
+        builder.HasMany(e => e.EventMedias)
+            .WithOne(em => em.Event)
+            .HasForeignKey(em => em.EventId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(e => e.Ratings)
-         .WithOne(uer => uer.Event)
-         .HasForeignKey(uer => uer.EventId)
+         .WithOne(r => r.Event)
+         .HasForeignKey(r => r.EventId)
          .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(e => e.Tickets)
-       .WithOne(uer => uer.Event)
-       .HasForeignKey(uer => uer.EventId)
+       .WithOne(t => t.Event)
+       .HasForeignKey(t => t.EventId)
        .OnDelete(DeleteBehavior.Cascade);
 
         // Relation between WishListEvent and Event
-        builder.HasMany(we => we.WishListEvents)
-               .WithOne(e => e.Event)
+        builder.HasMany(e => e.WishListEvents)
+               .WithOne(we => we.Event)
                .HasForeignKey(we => we.EventId)
                .OnDelete(DeleteBehavior.Cascade);
 
         // Audit Fields
-        builder.Property(x => x.CreatedById)
+        builder.Property(e => e.CreatedById)
             .HasColumnName("created_by_id");
 
-        builder.Property(x => x.LastUpdateDateTime)
+        builder.Property(e => e.LastUpdateDateTime)
             .HasColumnName("last_update_date_time");
 
-        builder.Property(x => x.UpdateById)
+        builder.Property(e => e.UpdateById)
             .HasColumnName("update_by_id");
 
-        builder.Property(x => x.RecordDateTime)
+        builder.Property(e => e.RecordDateTime)
             .HasColumnName("record_date_time");
     }
 }

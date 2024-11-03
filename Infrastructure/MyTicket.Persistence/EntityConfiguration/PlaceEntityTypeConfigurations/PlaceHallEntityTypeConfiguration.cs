@@ -18,6 +18,9 @@ public class PlaceHallEntityTypeConfiguration : IEntityTypeConfiguration<PlaceHa
                .HasMaxLength(100)
                .HasColumnName("name");
 
+        builder.HasIndex(ph => ph.Name)
+                .IsUnique();
+
         builder.Property(ph => ph.PlaceId)
                 .IsRequired()
                .HasColumnName("place_id");
@@ -40,16 +43,16 @@ public class PlaceHallEntityTypeConfiguration : IEntityTypeConfiguration<PlaceHa
             .HasForeignKey(e => e.PlaceHallId)
             .IsRequired();
 
-        builder.Property(x => x.CreatedById)
+        builder.Property(ph => ph.CreatedById)
             .HasColumnName("created_by_id");
 
-        builder.Property(x => x.LastUpdateDateTime)
+        builder.Property(ph => ph.LastUpdateDateTime)
             .HasColumnName("last_update_date_time");
 
-        builder.Property(x => x.UpdateById)
+        builder.Property(ph => ph.UpdateById)
            .HasColumnName("update_by_id");
 
-        builder.Property(x => x.RecordDateTime)
+        builder.Property(ph => ph.RecordDateTime)
            .HasColumnName("record_date_time");
     }
 }

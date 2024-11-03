@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MyTicket.Domain.Entities.Orders;
 
@@ -17,6 +16,9 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.OrderCode)
                .IsRequired()
                .HasColumnName("order_code");
+
+        builder.HasIndex(o => o.OrderCode)
+                .IsUnique();
 
         builder.Property(o => o.UserId)
                .IsRequired()

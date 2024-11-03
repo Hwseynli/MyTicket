@@ -17,28 +17,28 @@ public class PromoCode : Editable<User>
     public List<Order> Orders { get; private set; }
     public List<UserPromoCode> UserPromoCodes { get; private set; } // İstifadəçi ilə əlaqəsi
 
-    public void SetDetails(string uniqueCodde, decimal discountAmount, DiscountType discountType, DateTime expireTime, int usageLimit, bool isActive, int userId)
+    public void SetDetails(string uniqueCodde, decimal discountAmount, DiscountType discountType, byte expirationAfterDays, int usageLimit, bool isActive, int userId)
     {
         if ((discountAmount <= 0 || discountAmount > 100) && discountType == 0)
             throw new DomainException("Endirim faizi 0 və ya 100-dən böyük ola bilməz.");
         UniqueCode = uniqueCodde;
         DiscountType = discountType;
         DiscountAmount = discountAmount;
-        ExpirationDate = expireTime;
+        ExpirationDate = DateTime.UtcNow.AddDays(expirationAfterDays);
         UsageLimit = usageLimit;
         IsActive = isActive;
         IsDeleted = false;
         DeletedDate = null;
-        UserPromoCodes = new List<UserPromoCode>();
         Orders = new List<Order>();
+        UserPromoCodes = new List<UserPromoCode>();
         SetAuditDetails(userId);
     }
 
-    public void UpdateDetails(string code, decimal discountAmount, DateTime expiryDate, int usageLimit, int updatedById)
+    public void UpdateDetails(string code, decimal discountAmount, int usageLimit, int updatedById, DateTime expirationDate, byte expirationAfterDays = 0)
     {
         UniqueCode = code;
         DiscountAmount = discountAmount;
-        ExpirationDate = expiryDate;
+        ExpirationDate = expirationAfterDays > 0 ? DateTime.UtcNow.AddDays(expirationAfterDays) : expirationDate;
         UsageLimit = usageLimit;
         SetEditFields(updatedById);
     }
@@ -53,6 +53,14 @@ public class PromoCode : Editable<User>
         IsActive = false;
     }
 
+    public void SoftDelete(int userId)
+    {
+        Deactivate();
+        IsDeleted = true;
+        DeletedDate = DateTime.UtcNow.AddHours(4);
+        SetEditFields(userId);
+    }
+
     public decimal ApplyDiscount(decimal totalAmount, DiscountType? discountType = 0)
     {
         if (discountType == DiscountType.Percent)
@@ -61,3 +69,4 @@ public class PromoCode : Editable<User>
             return DiscountAmount;
     }
 }
+

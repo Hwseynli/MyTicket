@@ -13,50 +13,50 @@ public class TicketEntityTypeConfiguration : IEntityTypeConfiguration<Ticket>
         builder.HasKey(t => t.Id);
 
         // Properties
-        builder.Property(x => x.Id)
+        builder.Property(t => t.Id)
                .HasColumnName("id");
 
-        builder.Property(x => x.UniqueCode)
+        builder.Property(t => t.UniqueCode)
          .IsRequired()
          .HasColumnName("unique_code");
 
-        builder.Property(x => x.EventId)
+        builder.Property(t => t.EventId)
           .IsRequired()
           .HasColumnName("event_id");
 
-        builder.Property(x => x.SeatId)
+        builder.Property(t => t.SeatId)
             .IsRequired()
             .HasColumnName("seat_id");
 
-        builder.Property(x => x.UserId)
+        builder.Property(t => t.UserId)
             .HasColumnName("user_id");
 
-        builder.Property(x => x.OrderId)
+        builder.Property(t => t.OrderId)
            .HasColumnName("order_id");
 
-        builder.Property(x => x.Price)
+        builder.Property(t => t.Price)
          .IsRequired()
          .HasColumnName("price");
 
-        builder.Property(x => x.IsSold)
+        builder.Property(t => t.IsSold)
          .HasDefaultValue(false)
          .HasColumnName("is_sold");
 
-        builder.Property(x => x.IsReserved)
+        builder.Property(t => t.IsReserved)
         .HasDefaultValue(false)
         .HasColumnName("is_reserved");
 
         // Audit Fields
-        builder.Property(x => x.CreatedById)
+        builder.Property(t => t.CreatedById)
             .HasColumnName("created_by_id");
 
-        builder.Property(x => x.RecordDateTime)
+        builder.Property(t => t.RecordDateTime)
     .HasColumnName("record_date_time");
 
-        builder.Property(x => x.UpdateById)
+        builder.Property(t => t.UpdateById)
             .HasColumnName("update_by_id");
 
-        builder.Property(x => x.LastUpdateDateTime)
+        builder.Property(t => t.LastUpdateDateTime)
     .HasColumnName("last_update_date_time");
     }
 }

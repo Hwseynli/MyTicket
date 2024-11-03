@@ -10,32 +10,32 @@ public class EventMediaEntityTypeConfiguration : IEntityTypeConfiguration<EventM
         builder.ToTable("event_medias");
 
         // Primary Key
-        builder.HasKey(t => t.Id);
+        builder.HasKey(em => em.Id);
 
         // Properties
-        builder.Property(x => x.Id)
+        builder.Property(em => em.Id)
                .HasColumnName("id");
 
-        builder.Property(x => x.EventId)
+        builder.Property(em => em.EventId)
          .IsRequired()
          .HasColumnName("event_id");
 
         // Audit Fields
-        builder.Property(x => x.CreatedById)
+        builder.Property(em => em.CreatedById)
             .HasColumnName("created_by_id");
 
-        builder.Property(x => x.LastUpdateDateTime)
+        builder.Property(em => em.LastUpdateDateTime)
             .HasColumnName("last_update_date_time");
 
-        builder.Property(x => x.UpdateById)
+        builder.Property(em => em.UpdateById)
             .HasColumnName("update_by_id");
 
-        builder.Property(x => x.RecordDateTime)
+        builder.Property(em => em.RecordDateTime)
             .HasColumnName("record_date_time");
 
-        builder.HasMany(x => x.Medias)
-               .WithOne(x => x.EventMedia)
-               .HasForeignKey(x => x.EventMediaId)
+        builder.HasMany(em => em.Medias)
+               .WithOne(em => em.EventMedia)
+               .HasForeignKey(em => em.EventMediaId)
                .IsRequired();
     }
 }

@@ -15,9 +15,11 @@ public class PromoCodeEntityTypeConfiguration : IEntityTypeConfiguration<PromoCo
 
         builder.Property(p => p.UniqueCode)
             .IsRequired()
-            .IsUnicode()
             .HasColumnName("unique_code")
             .HasMaxLength(50);
+
+        builder.HasIndex(p => p.UniqueCode)
+            .IsUnique();
 
         builder.Property(p => p.DiscountAmount)
             .IsRequired()
@@ -36,27 +38,27 @@ public class PromoCodeEntityTypeConfiguration : IEntityTypeConfiguration<PromoCo
             .HasColumnName("deleted_date");
 
         builder.Property(p => p.IsDeleted)
-          .HasColumnName("is_deleted")
-          .HasDefaultValue(true);
+            .HasDefaultValue(false)
+            .HasColumnName("is_deleted");
 
         builder.Property(p => p.UsageLimit)
             .IsRequired()
             .HasColumnName("usage_limit");
 
         builder.Property(p => p.IsActive)
+            .HasDefaultValue(true)
             .IsRequired()
-            .HasColumnName("is_active")
-            .HasDefaultValue(true);
+            .HasColumnName("is_active");
 
         builder.HasMany(p => p.UserPromoCodes)
             .WithOne(upc => upc.PromoCode)
             .HasForeignKey(upc => upc.PromoCodeId)
             .OnDelete(DeleteBehavior.Cascade);
 
-
         builder.HasMany(o => o.Orders)
-               .WithOne(o => o.PromoCode)
-               .HasForeignKey(o => o.PromoCodeId)
-               .OnDelete(DeleteBehavior.SetNull);
+        .WithOne(o => o.PromoCode)
+        .HasForeignKey(o => o.PromoCodeId)
+        .OnDelete(DeleteBehavior.SetNull);
+
     }
 }

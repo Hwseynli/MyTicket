@@ -9,7 +9,7 @@ public class RoleEntityTypeConfiguration : IEntityTypeConfiguration<Role>
     {
         builder.ToTable("roles");
 
-        builder.HasKey(t => t.Id);
+        builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
                .HasColumnName("id");
@@ -22,5 +22,8 @@ public class RoleEntityTypeConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(x => x.Name)
             .IsRequired()
             .HasColumnName("role_name");
+
+        builder.HasIndex(x => x.Name)
+            .IsUnique();
     }
 }

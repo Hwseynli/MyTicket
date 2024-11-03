@@ -18,6 +18,9 @@ public class SettingEntityTypeConfiguration : IEntityTypeConfiguration<Setting>
                .HasMaxLength(150)
                .HasColumnName("key");
 
+        builder.HasIndex(p => p.Key)
+            .IsUnique();
+
         builder.Property(p => p.Value)
                 .IsRequired()
                 .HasMaxLength(250)

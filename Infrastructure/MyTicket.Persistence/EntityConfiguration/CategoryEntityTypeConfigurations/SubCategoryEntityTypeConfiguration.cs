@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MyTicket.Domain.Entities.Categories;
 
@@ -19,6 +18,9 @@ public class SubCategoryEntityTypeConfiguration : IEntityTypeConfiguration<SubCa
                .IsRequired()
                .HasMaxLength(100)
                .HasColumnName("name");
+
+        builder.HasIndex(sc => sc.Name)
+                .IsUnique();
 
         builder.Property(sc => sc.CategoryId)
                .HasColumnName("category_id");

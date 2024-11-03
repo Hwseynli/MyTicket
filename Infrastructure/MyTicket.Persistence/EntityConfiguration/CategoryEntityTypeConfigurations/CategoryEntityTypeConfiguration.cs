@@ -19,6 +19,9 @@ public class CategoryEntityTypeConfiguration : IEntityTypeConfiguration<Category
                .HasMaxLength(100)
                .HasColumnName("name");
 
+        builder.HasIndex(c => c.Name)
+                .IsUnique();
+
         builder.Property(c => c.CreatedById)
                .HasColumnName("created_by_id");
 

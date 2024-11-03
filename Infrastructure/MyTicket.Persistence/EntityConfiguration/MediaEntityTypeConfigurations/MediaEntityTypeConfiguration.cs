@@ -9,44 +9,45 @@ public class MediaEntityTypeConfiguration : IEntityTypeConfiguration<Media>
     {
         builder.ToTable("medias");
 
-        builder.HasKey(t => t.Id);
+        builder.HasKey(m => m.Id);
 
-        builder.Property(x => x.Id)
+        builder.Property(m => m.Id)
                .HasColumnName("id");
 
-        builder.Property(x => x.Name)
+        builder.Property(m => m.Name)
               .IsRequired()
               .HasColumnName("name");
 
-        builder.Property(x => x.Path)
+        builder.Property(m => m.Path)
              .IsRequired()
              .HasColumnName("path");
 
-        builder.Property(x => x.Others)
+        builder.Property(m => m.Others)
             .HasColumnName("others");
 
-        builder.Property(x => x.IsMain)
+        builder.Property(m => m.IsMain)
             .IsRequired()
+            .HasDefaultValue(false)
             .HasColumnName("is_main");
 
-        builder.Property(x => x.MediaType)
+        builder.Property(m => m.MediaType)
             .IsRequired()
             .HasColumnName("media_type");
 
-        builder.Property(x => x.EventMediaId)
+        builder.Property(m => m.EventMediaId)
             .IsRequired()
             .HasColumnName("event_media_id");
 
-        builder.Property(x => x.CreatedById)
+        builder.Property(m => m.CreatedById)
              .HasColumnName("created_by_id");
 
-        builder.Property(x => x.LastUpdateDateTime)
+        builder.Property(m => m.LastUpdateDateTime)
             .HasColumnName("last_update_date_time");
 
-        builder.Property(x => x.UpdateById)
+        builder.Property(m => m.UpdateById)
            .HasColumnName("update_by_id");
 
-        builder.Property(x => x.RecordDateTime)
+        builder.Property(m => m.RecordDateTime)
            .HasColumnName("record_date_time");
     }
 }

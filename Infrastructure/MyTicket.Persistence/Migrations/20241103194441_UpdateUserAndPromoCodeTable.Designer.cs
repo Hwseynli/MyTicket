@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyTicket.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241103175348_UpdateUserAndPromoCodeTable")]
+    [Migration("20241103194441_UpdateUserAndPromoCodeTable")]
     partial class UpdateUserAndPromoCodeTable
     {
         /// <inheritdoc />
@@ -105,6 +105,9 @@ namespace MyTicket.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("categories", (string)null);
                 });
 
@@ -146,6 +149,9 @@ namespace MyTicket.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("sub_categories", (string)null);
                 });
@@ -227,6 +233,9 @@ namespace MyTicket.Persistence.Migrations
                     b.HasIndex("PlaceHallId");
 
                     b.HasIndex("SubCategoryId");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("events", (string)null);
                 });
@@ -406,7 +415,9 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnName("event_media_id");
 
                     b.Property<bool>("IsMain")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
+                        .HasDefaultValue(false)
                         .HasColumnName("is_main");
 
                     b.Property<DateTime?>("LastUpdateDateTime")
@@ -484,6 +495,9 @@ namespace MyTicket.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderCode")
+                        .IsUnique();
+
                     b.HasIndex("PromoCodeId");
 
                     b.HasIndex("UserId");
@@ -529,6 +543,9 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnName("update_by_id");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("places", (string)null);
                 });
@@ -577,6 +594,9 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnName("update_by_id");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("PlaceId");
 
@@ -674,7 +694,7 @@ namespace MyTicket.Persistence.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
-                        .HasDefaultValue(true)
+                        .HasDefaultValue(false)
                         .HasColumnName("is_deleted");
 
                     b.Property<DateTime?>("LastUpdateDateTime")
@@ -686,7 +706,6 @@ namespace MyTicket.Persistence.Migrations
                     b.Property<string>("UniqueCode")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .IsUnicode(true)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("unique_code");
 
@@ -698,6 +717,9 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnName("usage_limit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UniqueCode")
+                        .IsUnique();
 
                     b.ToTable("promocodes", (string)null);
                 });
@@ -803,6 +825,9 @@ namespace MyTicket.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Key")
+                        .IsUnique();
+
                     b.ToTable("settings", (string)null);
                 });
 
@@ -821,6 +846,9 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnName("role_name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("roles", (string)null);
                 });
