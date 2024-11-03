@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
+using MyTicket.Application.Interfaces.IRepositories.Users;
 using MyTicket.Domain.Entities.Users;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -11,11 +13,13 @@ public class UserManager : IUserManager
 {
     private readonly IClaimManager _claimManager;
     private readonly IConfiguration _configuration;
+    private readonly IUserRepository _userRepository;
 
-    public UserManager(IClaimManager claimManager, IConfiguration configuration)
+    public UserManager(IClaimManager claimManager, IConfiguration configuration, IUserRepository userRepository)
     {
         _claimManager = claimManager;
         _configuration = configuration;
+        _userRepository = userRepository;
     }
 
     public (string token, DateTime expireAt) GenerateTJwtToken(User user)
@@ -40,8 +44,19 @@ public class UserManager : IUserManager
         return (tokenHandler.WriteToken(token), expireAt);
     }
 
-    public int GetCurrentUserId()
+    public async Task<User> GetCurrentUser(params string[]? includes)
     {
-        return _claimManager.GetCurrentUserId();
+        int userId = _claimManager.GetCurrentUserId();
+        if (userId <= 0)
+            throw new BadRequestException();
+        var user = await _userRepository.GetAsync(x => x.Id == userId, includes);
+        if (user == null)
+            throw new UnAuthorizedException();
+        return user;
+    }
+
+    public async Task<int> GetCurrentUserId()
+    {
+        return (await GetCurrentUser()).Id;
     }
 }

@@ -1,4 +1,5 @@
-﻿using MyTicket.Domain.Entities.Orders;
+﻿using MyTicket.Domain.Entities.Enums;
+using MyTicket.Domain.Entities.Orders;
 using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
@@ -19,12 +20,11 @@ public class Ticket : Editable<User>
     public int? OrderId { get; private set; }
     public Order? Order { get; private set; }
 
-    public void SetTicketDetails(string uniqueCode, int eventId, int seatId, decimal price, int userId)
+    public void SetTicketDetails(string uniqueCode, int eventId, int seatId, int userId)
     {
         UniqueCode = uniqueCode;
         EventId = eventId;
         SeatId = seatId;
-        Price = price;
         IsReserved = false;
         IsSold = false;
         UserId = null;
@@ -32,7 +32,13 @@ public class Ticket : Editable<User>
         SetAuditDetails(userId);
     }
 
-    public void ReserveTicket(int? userId, bool isReserved=true)
+    public void CreateCalculatePrice(decimal eventPrice, decimal seatPrice)
+    {
+        decimal result = eventPrice * seatPrice;
+        Price = (result / 100) + (result % 100);
+    }
+
+    public void ReserveTicket(int? userId, bool isReserved = true)
     {
         if (IsSold)
             throw new DomainException("Bu bilet artıq satılıb.");

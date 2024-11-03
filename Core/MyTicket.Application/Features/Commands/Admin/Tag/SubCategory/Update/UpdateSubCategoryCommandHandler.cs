@@ -17,12 +17,13 @@ public class UpdateSubCategoryCommandHandler : IRequestHandler<UpdateSubCategory
 
     public async Task<bool> Handle(UpdateSubCategoryCommand request, CancellationToken cancellationToken)
     {
+        int userId = await _userManager.GetCurrentUserId();
         var subCategory = await _subCategoryRepository.GetAsync(s=>s.Id==request.Id);
 
         if (subCategory == null)
             throw new NotFoundException("SubCategory not found.");
 
-        subCategory.SetDetailsForUpdate(request.Name, request.CategoryId, _userManager.GetCurrentUserId());
+        subCategory.SetDetailsForUpdate(request.Name, request.CategoryId, userId);
 
         _subCategoryRepository.Update(subCategory);
         await _subCategoryRepository.Commit(cancellationToken);

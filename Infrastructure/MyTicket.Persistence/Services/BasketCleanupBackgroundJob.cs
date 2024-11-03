@@ -47,7 +47,7 @@ public class BasketCleanupBackgroundJob : BackgroundService
                         var isTicket = await ticketRepository.GetAsync(x => x.Id== ticketWithTime.Id);
                         if (isTicket != null)
                         {
-                            basket.RemoveTicket(ticketWithTime);
+                            basket.RemoveTicket(ticketWithTime.TicketId);
                             isTicket.ReserveTicket(null, false);
                             ticketRepository.Update(isTicket);
                             await ticketRepository.Commit(CancellationToken.None);

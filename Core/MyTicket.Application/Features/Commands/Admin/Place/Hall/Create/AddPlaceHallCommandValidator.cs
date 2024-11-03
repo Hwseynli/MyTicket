@@ -1,14 +1,18 @@
 ﻿using FluentValidation;
+using MyTicket.Application.Interfaces.IRepositories.Places;
 
 namespace MyTicket.Application.Features.Commands.Place.Hall.Create;
 public class AddPlaceHallCommandValidator : AbstractValidator<AddPlaceHallCommand>
 {
-    public AddPlaceHallCommandValidator()
+    private readonly IPlaceHallRepository _placeHallRepository;
+    public AddPlaceHallCommandValidator(IPlaceHallRepository placeHallRepository)
     {
-        RuleFor(ph => ph.Name)
-            .NotEmpty()
-            .MinimumLength(3)
-            .MaximumLength(50);
+        _placeHallRepository = placeHallRepository;
+
+        RuleFor(ph => ph.Name).NotEmpty().MinimumLength(3).MaximumLength(100)
+            .WithMessage("min 3 max 100 simvoldan ibarət olmalıdır.")
+            .MustAsync(async (name, cancellationToken) => await _placeHallRepository.IsPropertyUniqueAsync(x => x.Name.ToLower(), name.Trim().ToLower()))
+            .WithMessage("Bu başlıqda placeHall yaradılıb istəyirsinizsə update edin ya da başqa ad ilə yaradın"); ;
 
         RuleFor(ph => ph.SeatCount)
             .GreaterThan(0)

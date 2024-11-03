@@ -16,8 +16,9 @@ public class CreateSubCategoryCommandHandler : IRequestHandler<CreateSubCategory
 
     public async Task<bool> Handle(CreateSubCategoryCommand request, CancellationToken cancellationToken)
     {
+        int userId = await _userManager.GetCurrentUserId();
         var subCategory = new Domain.Entities.Categories.SubCategory();
-        subCategory.SetDetails(request.Name, request.CategoryId,_userManager.GetCurrentUserId());
+        subCategory.SetDetails(request.Name, request.CategoryId, userId);
 
         await _subCategoryRepository.AddAsync(subCategory);
         await _subCategoryRepository.Commit(cancellationToken);

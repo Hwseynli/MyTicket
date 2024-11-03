@@ -1,6 +1,4 @@
-﻿using System;//nizamlay;c; yol ayr;c;
-using MyTicket.Application.Exceptions;
-using MyTicket.Application.Features.Queries.Ticket.ViewModels;
+﻿using MyTicket.Application.Features.Queries.Ticket.ViewModels;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Baskets;
 using MyTicket.Application.Interfaces.IRepositories.Events;
@@ -21,9 +19,7 @@ public class TicketQueries : ITicketQueries
 
     public async Task<List<TicketDto>> GetTicketsInBasket()
     {
-        int userId = _userManager.GetCurrentUserId();
-        if (userId <= 0)
-            throw new UnAuthorizedException();
+        int userId = await _userManager.GetCurrentUserId();
 
         var basket = await _basketRepository.GetAsync(x => x.UserId == userId, nameof(Domain.Entities.Baskets.Basket.TicketsWithTime));
         if (basket == null)

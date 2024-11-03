@@ -1,5 +1,6 @@
 ﻿using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Domain.Entities.Categories;
 public class Category : Editable<User>
@@ -9,7 +10,7 @@ public class Category : Editable<User>
 
     public void SetDetails(string name, int createdById)
     {
-        Name = name;
+        Name = name.Capitalize();
         CreatedById = createdById;
         RecordDateTime = DateTime.UtcNow.AddHours(4);
         SubCategories = new List<SubCategory>();
@@ -18,7 +19,7 @@ public class Category : Editable<User>
 
     public void SetDetailsForUpdate(string name, int updatedById)
     {
-        Name = name;
+        Name = name.Capitalize();
         SetEditFields(updatedById);
     }
 

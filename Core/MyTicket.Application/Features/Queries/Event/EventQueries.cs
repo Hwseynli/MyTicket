@@ -33,7 +33,7 @@ public class EventQueries : IEventQueries
     public async Task<List<WishListEventDto>> GetWishList()
     {
         // İstifadəçi ID-sini əldə edirik
-        int userId = _userManager.GetCurrentUserId();
+        int userId = await _userManager.GetCurrentUserId();
         if (userId <= 0)
             throw new UnAuthorizedException();
 

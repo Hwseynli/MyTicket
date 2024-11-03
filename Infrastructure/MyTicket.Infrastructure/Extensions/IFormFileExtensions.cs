@@ -24,4 +24,15 @@ public static class IFormFileExtensions
         string fileExtension = Path.GetExtension(file.FileName).ToLower();
         return allowedExtensions.Contains(fileExtension);
     }
+
+    public static bool IsVideo(this IFormFile? file)
+    {
+        if (file is null)
+            return false;
+
+        string[] allowedExtensions = { ".mp4", ".avi", ".mov", ".wmv", ".mkv" };
+        string fileExtension = Path.GetExtension(file.FileName).ToLower();
+        return allowedExtensions.Contains(fileExtension);
+    }
+
 }

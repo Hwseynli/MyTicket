@@ -17,9 +17,7 @@ public class UpdateSettingCommandHandler : IRequestHandler<UpdateSettingCommand,
 
     public async Task<bool> Handle(UpdateSettingCommand request, CancellationToken cancellationToken)
     {
-        int userId = _userManager.GetCurrentUserId();
-        if (userId <= 0 || userId == null)
-            throw new UnAuthorizedException();
+        int userId = await _userManager.GetCurrentUserId();
         var setting = await _settingRepository.GetAsync(x=>x.Id==request.Id);
         if (setting == null)
             throw new NotFoundException();

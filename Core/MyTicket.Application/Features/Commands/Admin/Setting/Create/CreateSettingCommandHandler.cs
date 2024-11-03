@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Settings;
 
@@ -17,10 +16,7 @@ public class CreateSettingCommandHandler : IRequestHandler<CreateSettingCommand,
 
     public async Task<bool> Handle(CreateSettingCommand request, CancellationToken cancellationToken)
     {
-        int userId = _userManager.GetCurrentUserId();
-
-        if (userId <= 0 || userId == null)
-            throw new UnAuthorizedException();
+        int userId = await _userManager.GetCurrentUserId();
 
         var newSetting = new Domain.Entities.Settings.Setting();
         newSetting.SetDetails(request.Key, request.Value, userId);

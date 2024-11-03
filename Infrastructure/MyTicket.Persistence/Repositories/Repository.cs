@@ -66,7 +66,7 @@ public class Repository<T> : IRepository<T> where T : class
         _context.Set<T>().Update(entity);
     }
 
-    async Task<bool> IRepository<T>.IsPropertyUniqueAsync<TProperty>(Expression<Func<T, TProperty>> propertySelector, TProperty value, int id)
+    public async Task<bool> IsPropertyUniqueAsync<TProperty>(Expression<Func<T, TProperty>> propertySelector, TProperty value, int id = 0)
     {
         var dbSet = _context.Set<T>();
 

@@ -15,6 +15,7 @@ public class PromoCodeEntityTypeConfiguration : IEntityTypeConfiguration<PromoCo
 
         builder.Property(p => p.UniqueCode)
             .IsRequired()
+            .IsUnicode()
             .HasColumnName("unique_code")
             .HasMaxLength(50);
 
@@ -30,6 +31,13 @@ public class PromoCodeEntityTypeConfiguration : IEntityTypeConfiguration<PromoCo
         builder.Property(p => p.ExpirationDate)
             .IsRequired()
             .HasColumnName("expiration_date");
+
+        builder.Property(p => p.DeletedDate)
+            .HasColumnName("deleted_date");
+
+        builder.Property(p => p.IsDeleted)
+          .HasColumnName("is_deleted")
+          .HasDefaultValue(true);
 
         builder.Property(p => p.UsageLimit)
             .IsRequired()

@@ -14,13 +14,14 @@ public class Seat : Editable<User>
     public PlaceHall? PlaceHall { get; private set; }
     public List<Ticket> Tickets { get; private set; }
 
-    public void SetDetail(int rowNumber, int seatNumber, SeatType seatType, decimal price, int userId)
+    public void SetDetail(int rowNumber, int seatNumber, SeatType seatType, decimal price,int placeHallId, int userId)
     {
         if (rowNumber <= 0 || seatNumber <= 0)
             throw new DomainException("Sətir və oturacaq nömrələri sıfır və ya mənfi ola bilməz.");
         if (price <= 0)
             throw new DomainException("Qiymət sıfır və ya mənfi ola bilməz.");
 
+        PlaceHallId = placeHallId;
         RowNumber = rowNumber;
         SeatNumber = seatNumber;
         SeatType = seatType;
@@ -44,24 +45,35 @@ public class Seat : Editable<User>
 
     public SeatType DetermineSeatType(int row, int totalRows)
     {
+        int front = totalRows / 3;
+        int middle = front * 2;
         // Burada hər sıranın tipini təyin edirik
-        if (row <= totalRows / 3)
+        if (row <= front)
             return SeatType.FrontRow;
-        else if (row > totalRows / 3 && row <= 2 * totalRows / 3)
+        else if (row > front && row <= middle)
             return SeatType.MiddleRow;
         else
             return SeatType.BackRow;
     }
 
-    public decimal CalculateSeatPrice(SeatType seatType)
+    public decimal CalculateSeatPrice(SeatType seatType, decimal price=100)
     {
         // Burada sıraya əsasən qiymət hesablanır
-        if (seatType == SeatType.FrontRow)
-            return 100m; // FrontRow qiyməti
-        else if (seatType==SeatType.BackRow)
-            return 50m; // BackRow qiyməti
-        else
-            return 75m; // MiddleRow qiyməti
+        decimal finelPrice = price;
+        switch (seatType)
+        {
+            case SeatType.FrontRow:
+                finelPrice = price * 2;
+                return finelPrice;
+            case SeatType.MiddleRow:
+                finelPrice = price + (price * 3 / 4);
+                return finelPrice;
+            case SeatType.BackRow:
+                finelPrice = price;
+                return finelPrice;
+            default:
+                throw new DomainException("Seat type düzgün deyil");
+        }
     }
 }
 

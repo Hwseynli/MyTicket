@@ -30,6 +30,7 @@
     <None Remove="Repositories\Baskets\" />
     <None Remove="EntityConfiguration\OrderEntityTypeConfigurations\" />
     <None Remove="EntityConfiguration\PromoCodeEntityTypeConfigurations\" />
+    <None Remove="Repositories\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -55,9 +56,9 @@
     <Folder Include="Repositories\Baskets\" />
     <Folder Include="EntityConfiguration\OrderEntityTypeConfigurations\" />
     <Folder Include="EntityConfiguration\PromoCodeEntityTypeConfigurations\" />
+    <Folder Include="Repositories\Orders\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -71,6 +72,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
     <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="8.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\MyTicket.Application\MyTicket.Application.csproj" />

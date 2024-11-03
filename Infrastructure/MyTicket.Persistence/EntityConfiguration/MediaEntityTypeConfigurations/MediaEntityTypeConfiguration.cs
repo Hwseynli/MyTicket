@@ -22,9 +22,16 @@ public class MediaEntityTypeConfiguration : IEntityTypeConfiguration<Media>
              .IsRequired()
              .HasColumnName("path");
 
+        builder.Property(x => x.Others)
+            .HasColumnName("others");
+
         builder.Property(x => x.IsMain)
             .IsRequired()
             .HasColumnName("is_main");
+
+        builder.Property(x => x.MediaType)
+            .IsRequired()
+            .HasColumnName("media_type");
 
         builder.Property(x => x.EventMediaId)
             .IsRequired()

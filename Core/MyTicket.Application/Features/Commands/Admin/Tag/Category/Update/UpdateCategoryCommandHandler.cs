@@ -17,6 +17,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 
     public async Task<bool> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
+        int userId = await _userManager.GetCurrentUserId();
         var category = await _categoryRepository.GetAsync(c=>c.Id==request.Id);
 
         if (category == null)
@@ -25,7 +26,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
         if (!await _categoryRepository.IsPropertyUniqueAsync(c=>c.Name,request.Name,category.Id))
             throw new ValidationException();
 
-        category.SetDetailsForUpdate(request.Name, _userManager.GetCurrentUserId());
+        category.SetDetailsForUpdate(request.Name, userId);
 
         _categoryRepository.Update(category);
         await _categoryRepository.Commit(cancellationToken);

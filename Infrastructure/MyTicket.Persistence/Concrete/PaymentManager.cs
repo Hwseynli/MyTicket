@@ -1,10 +1,9 @@
 ﻿using System.Text;
 using System.Text.Json;
-using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Domain.Entities.Orders;
 
 namespace MyTicket.Persistence.Concrete;
-public class PaymentManager : IPaymentManager
+public class PaymentManager //: IPaymentManager
 {
     private readonly HttpClient _httpClient;
     private const string PaymentUrl = "https://api.birbank.business/payment"; // Dəyişdirmək lazımdır

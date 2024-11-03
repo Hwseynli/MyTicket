@@ -17,15 +17,16 @@ public class UpdatePlaceCommandHandler : IRequestHandler<UpdatePlaceCommand, boo
 
     public async Task<bool> Handle(UpdatePlaceCommand request, CancellationToken cancellationToken)
     {
-        var place = await _placeRepository.GetAsync(p => p.Id == request.Id);
+        int userId = await _userManager.GetCurrentUserId();
 
+        var place = await _placeRepository.GetAsync(p => p.Id == request.Id);
         if (place == null)
             throw new NotFoundException("Place not found.");
 
-        request.Name = request.Name ?? place.Name;
-        request.Address = request.Address ?? place.Address;
+        if (!await _placeRepository.IsPropertyUniqueAsync(x => x.Name, request.Name, place.Id))
+            throw new BadRequestException("Place Name is already exsist");
 
-        place.SetDetailsForUpdate(request.Name, request.Address, _userManager.GetCurrentUserId());
+        place.SetDetailsForUpdate(request.Name, request.Address, userId);
         _placeRepository.Update(place);
         await _placeRepository.Commit(cancellationToken);
 

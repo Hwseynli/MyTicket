@@ -16,10 +16,6 @@ public class EventMediaEntityTypeConfiguration : IEntityTypeConfiguration<EventM
         builder.Property(x => x.Id)
                .HasColumnName("id");
 
-        builder.Property(x => x.MediaType)
-            .IsRequired()
-            .HasColumnName("media_type");
-
         builder.Property(x => x.EventId)
          .IsRequired()
          .HasColumnName("event_id");

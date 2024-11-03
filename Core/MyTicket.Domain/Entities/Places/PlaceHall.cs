@@ -1,5 +1,6 @@
 ﻿using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Users;
+using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Domain.Entities.Places;
 public class PlaceHall : Editable<User>
@@ -14,7 +15,7 @@ public class PlaceHall : Editable<User>
 
     public void SetDetails(string name, int placeId, int seatCount, int rowCount, int createdById)
     {
-        Name = name;
+        Name = name.Capitalize();
         PlaceId = placeId;
         SeatCount = seatCount;
         RowCount = rowCount;
@@ -24,7 +25,7 @@ public class PlaceHall : Editable<User>
     }
     public void SetDetailsForUpdate(string name, int placeId, int seatCount, int rowCount, int modifiedById)
     {
-        Name = name;
+        Name = name.Capitalize();
         PlaceId = placeId;
         SeatCount = seatCount;
         RowCount = rowCount;

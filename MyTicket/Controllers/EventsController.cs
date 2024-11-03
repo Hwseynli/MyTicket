@@ -7,7 +7,7 @@ using MyTicket.Application.Features.Commands.WishList.Remove;
 using MyTicket.Application.Features.Queries.Event;
 
 namespace MyTicket.Controllers;
-[Route("api/[controller]")]
+[Route("api/events")]
 [ApiController]
 [Authorize]
 public class EventsController : ControllerBase

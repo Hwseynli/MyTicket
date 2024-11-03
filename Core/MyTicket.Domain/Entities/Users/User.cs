@@ -25,7 +25,6 @@ public class User : BaseEntity
     public List<WishList> WishLists { get; private set; }
     public DateTime LastPasswordChangeDateTime { get; private set; }
     public string? RefreshToken { get; private set; }
-    public string? ConfirmToken { get; private set; }
     public bool IsDeleted { get; private set; }
     public DateTime? DeletedTime { get; private set; }
     public bool Activated { get; private set; }
@@ -40,8 +39,8 @@ public class User : BaseEntity
 
     public void SetDetailsForRegister(string firstName, string lastName, string phoneNumber, string email, string password)
     {
-        FirstName = firstName;
-        LastName = lastName;
+        FirstName = firstName.Capitalize();
+        LastName = lastName.Capitalize();
         PhoneNumber = phoneNumber;
         Email = email;
         Activated = false;
@@ -60,22 +59,18 @@ public class User : BaseEntity
         IsDeleted = false;
         DeletedTime = null;
     }
-    public void SetConfirmToken(string token)
-    {
-        ConfirmToken = token;
-    }
+
     public void SetForSoftDelete()
     {
         Activated = false;
         IsDeleted = true;
         DeletedTime = DateTime.UtcNow;
         UpdateRefreshToken(null);
-        ConfirmToken = null;
     }
     public void SetDetailsForUpdate(string firstName, string lastName, string phoneNumber, string email, Gender gender, DateTime? dateTime)
     {
-        FirstName = firstName;
-        LastName = lastName;
+        FirstName = firstName.Capitalize();
+        LastName = lastName.Capitalize();
         Gender = gender;
         Birthday = dateTime;
         PhoneNumber = phoneNumber;

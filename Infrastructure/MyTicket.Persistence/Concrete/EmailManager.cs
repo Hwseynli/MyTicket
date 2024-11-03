@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MyTicket.Application.Interfaces.IManagers;
+using MyTicket.Domain.Entities.Users;
 using System.Net;
 using System.Net.Mail;
 
@@ -61,4 +62,18 @@ public class EmailManager : IEmailManager
         await smtpClient.SendMailAsync(mailMessage);
     }
 
+    public async Task SendEmailForSubscribers(IEnumerable<Subscriber> subscribers, string subject, string title, string description)
+    {
+        if (subscribers != null && subscribers.Count() > 0)
+        {
+            foreach (var item in subscribers)
+            {
+                await SendEmailAsync(
+                    item.EmailOrPhoneNumber,
+                    $"{subject}",
+                    $"<html><body><h1>{title}</h1><p>{description}</p></body></html>"
+                );
+            }
+        }
+    }
 }

@@ -2122,6 +2122,7 @@
           "FluentValidation.DependencyInjectionExtensions": "11.10.0",
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.EntityFrameworkCore": "8.0.10",
           "MyTicket.Domain": "1.0.0",
           "Stripe.net": "47.0.0"
         },
@@ -2131,6 +2132,7 @@
       },
       "MyTicket.Domain/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.10",
           "MyTicket.Infrastructure": "1.0.0"
         },
         "runtime": {

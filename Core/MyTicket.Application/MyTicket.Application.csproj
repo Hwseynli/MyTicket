@@ -35,7 +35,6 @@
     <None Remove="Interfaces\IRepositories\Users\" />
     <None Remove="Features\Commands\Admin\User\AssignRoles\" />
     <None Remove="Features\Commands\User\Delete\" />
-    <None Remove="Features\Commands\User\Delete\SoftDeleteConfirm\" />
     <None Remove="Features\Commands\User\Delete\SoftDeleteRequest\" />
     <None Remove="Features\Commands\User\Subscriber\" />
     <None Remove="Features\Commands\Place\Create\" />
@@ -102,7 +101,6 @@
     <Folder Include="Interfaces\IRepositories\Users\" />
     <Folder Include="Features\Commands\Admin\User\AssignRoles\" />
     <Folder Include="Features\Commands\User\Delete\" />
-    <Folder Include="Features\Commands\User\Delete\SoftDeleteConfirm\" />
     <Folder Include="Features\Commands\User\Delete\SoftDeleteRequest\" />
     <Folder Include="Features\Commands\User\Subscriber\" />
     <Folder Include="Interfaces\IRepositories\Places\" />
@@ -145,5 +143,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.0" />
     <PackageReference Include="Stripe.net" Version="47.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
   </ItemGroup>
 </Project>

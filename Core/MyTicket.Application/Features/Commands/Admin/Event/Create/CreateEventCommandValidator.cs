@@ -7,13 +7,14 @@ namespace MyTicket.Application.Features.Commands.Admin.Event.Create;
 public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
 {
     private readonly IEventRepository _eventRepository;
+
     public CreateEventCommandValidator(IEventRepository eventRepository)
     {
         _eventRepository = eventRepository;
 
         RuleFor(x => x.Title)
               .NotEmpty().WithMessage("Tədbirin adı boş ola bilməz.")
-              .MustAsync(async (title, cancellationToken) => await _eventRepository.IsPropertyUniqueAsync(x=>x.Title,title))
+              .MustAsync(async (title, cancellationToken) => await _eventRepository.IsPropertyUniqueAsync(x => x.Title, title))
                 .WithMessage("Bu başlıqda tədbir yaradılıb istəyirsinizsə update edin ya da başqa ad ilə yaradın")
               .MaximumLength(100).WithMessage("Tədbirin adı maksimum 100 simvol ola bilər.");
 
@@ -41,11 +42,8 @@ public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
         RuleFor(x => x.SubCategoryId)
             .GreaterThan(0).WithMessage("Alt kateqoriya ID-si düzgün olmalıdır.");
 
-        RuleFor(x => x.InitialRatingValue)
-            .GreaterThanOrEqualTo(0).When(x => x.InitialRatingValue.HasValue)
-            .WithMessage("İlkin reytinq dəyəri mənfi ola bilməz.");
-
         RuleForEach(x => x.EventMediaModels)
+            .NotNull().WithMessage("Media boş ola bilməz")
             .SetValidator(new EventMediaModelValidator());
     }
 }
@@ -54,13 +52,8 @@ public class EventMediaModelValidator : AbstractValidator<EventMediaModel>
 {
     public EventMediaModelValidator()
     {
-        RuleFor(x => x.MediaTypeId)
-            .GreaterThan(-1).WithMessage("Media növü düzgün olmalıdır.");
-
         RuleFor(x => x.MainImage)
-            .NotNull().WithMessage("Əsas şəkil boş ola bilməz.")
-            .Must((mainImage) => mainImage.IsImage()).WithMessage("Main image mütləq şəkil olmalıdır")
-            .When(x => x.Medias == null || !x.Medias.Any())
-                .WithMessage("Əgər başqa media faylları əlavə edilməyibsə, əsas şəkil olmalıdır.");
+          .NotNull().WithMessage("Əsas şəkil boş ola bilməz.")
+          .Must((mainImage) => mainImage.IsImage()).WithMessage("Main image mütləq şəkil olmalıdır");
     }
 }

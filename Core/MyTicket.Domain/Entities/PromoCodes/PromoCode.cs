@@ -12,6 +12,8 @@ public class PromoCode : Editable<User>
     public DateTime ExpirationDate { get; private set; } // Promokodun bitmə tarixi
     public int UsageLimit { get; private set; } // Ümumi istifadə limiti
     public bool IsActive { get; private set; }
+    public bool? IsDeleted { get; private set; }
+    public DateTime? DeletedDate { get; private set; }
     public List<Order> Orders { get; private set; }
     public List<UserPromoCode> UserPromoCodes { get; private set; } // İstifadəçi ilə əlaqəsi
 
@@ -25,6 +27,8 @@ public class PromoCode : Editable<User>
         ExpirationDate = expireTime;
         UsageLimit = usageLimit;
         IsActive = isActive;
+        IsDeleted = false;
+        DeletedDate = null;
         UserPromoCodes = new List<UserPromoCode>();
         Orders = new List<Order>();
         SetAuditDetails(userId);

@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyTicket.Application.Features.Commands.User.Delete.SoftDeleteConfirm;
 using MyTicket.Application.Features.Commands.User.Delete.SoftDeleteRequest;
 using MyTicket.Application.Features.Commands.User.ForgotPassword.ResetPassword;
 using MyTicket.Application.Features.Commands.User.ForgotPassword.SendOtp;
@@ -69,23 +68,13 @@ public class UsersController : ControllerBase
     {
         return Ok(await _mediator.Send(command));
     }
-    #region SoftDelete
     // SoftDelete üçün email təsdiq linki göndərir
-    [HttpPost("softdelete-request")]
-    public async Task<IActionResult> SoftDeleteRequest([FromBody] SoftDeleteRequestCommand command)
+    [HttpPost("soft-delete")]
+    public async Task<IActionResult> SoftDelete([FromBody] SoftDeleteRequestCommand command)
     {
         var result = await _mediator.Send(command);
         return result ? Ok("Confirmation link sent to your email.") : BadRequest("User not found or already deleted.");
     }
-
-    // Təsdiq tokeni əsasında soft delete edir
-    [HttpGet("softdelete-confirm")]
-    public async Task<IActionResult> SoftDeleteConfirm([FromQuery] SoftDeleteConfirmCommand command)
-    {
-        var result = await _mediator.Send(command);
-        return result ? Ok("Your account has been soft deleted.") : BadRequest("Invalid or expired token.");
-    }
-    #endregion
 
     #region ForgotPassword
 

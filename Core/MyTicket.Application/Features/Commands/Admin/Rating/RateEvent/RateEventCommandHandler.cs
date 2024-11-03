@@ -17,7 +17,7 @@ public class RateEventCommandHandler : IRequestHandler<RateEventCommand, bool>
 
     public async Task<bool> Handle(RateEventCommand request, CancellationToken cancellationToken)
     {
-        var userId = _userManager.GetCurrentUserId();
+        var userId = await _userManager.GetCurrentUserId();
         var eventEntity = await _eventRepository.GetAsync(x => x.Id == request.EventId,"Ratings");
 
         if (eventEntity == null)

@@ -19,9 +19,8 @@ public class AddWishListCommandHandler:IRequestHandler<AddWishListCommand,bool>
 
     public async Task<bool> Handle(AddWishListCommand request, CancellationToken cancellationToken)
     {
-        int userId = _userManager.GetCurrentUserId();
-        if (userId <= 0)
-            throw new UnAuthorizedException();
+        int userId = await _userManager.GetCurrentUserId();
+
         // İstifadəçinin mövcud WishListini tapırıq
         var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents");
 

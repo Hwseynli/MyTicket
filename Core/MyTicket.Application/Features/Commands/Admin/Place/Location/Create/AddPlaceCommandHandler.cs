@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Places;
 
@@ -17,10 +16,10 @@ public class AddPlaceCommandHandler : IRequestHandler<AddPlaceCommand, bool>
 
     public async Task<bool> Handle(AddPlaceCommand request, CancellationToken cancellationToken)
     {
-        if (_userManager.GetCurrentUserId() == null)
-            throw new BadRequestException("Must be current user!!!");
+        int userId = await _userManager.GetCurrentUserId();
+
         var place = new Domain.Entities.Places.Place();
-        place.SetDetails(request.Name, request.Address,_userManager.GetCurrentUserId());
+        place.SetDetails(request.Name, request.Address, userId);
 
         await _placeRepository.AddAsync(place);
         await _placeRepository.Commit(cancellationToken);

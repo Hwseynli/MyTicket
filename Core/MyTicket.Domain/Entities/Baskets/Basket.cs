@@ -1,5 +1,6 @@
 ﻿using MyTicket.Domain.Common;
 using MyTicket.Domain.Entities.Users;
+using MyTicket.Domain.Exceptions;
 
 namespace MyTicket.Domain.Entities.Baskets;
 public class Basket:BaseEntity
@@ -20,8 +21,12 @@ public class Basket:BaseEntity
         TicketsWithTime.Add(new TicketWithTime(ticketId,Id,DateTime.UtcNow.AddHours(4)));
     }
 
-    public void RemoveTicket(TicketWithTime ticket)
+    public void RemoveTicket(int ticketId)
     {
+        TicketWithTime? ticket = TicketsWithTime.FirstOrDefault(x=>x.TicketId==ticketId);
+        if (ticket == null)
+            throw new DomainException();
+
         TicketsWithTime.Remove(ticket);
     }
 

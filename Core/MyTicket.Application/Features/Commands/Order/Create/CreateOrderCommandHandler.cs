@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Configuration;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Baskets;
 using MyTicket.Application.Interfaces.IRepositories.Events;
 using MyTicket.Application.Interfaces.IRepositories.Orders;
-using MyTicket.Application.Interfaces.IRepositories.Users;
 using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.PromoCodes;
 using MyTicket.Domain.Exceptions;
@@ -15,33 +13,23 @@ namespace MyTicket.Application.Features.Commands.Order.Create;
 public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Domain.Entities.Orders.Order>
 {
     private readonly IUserManager _userManager;
-    private readonly IUserRepository _userRepository;
     private readonly IOrderRepository _orderRepository;
     private readonly ITicketRepository _ticketRepository;
     private readonly IBasketRepository _basketRepository;
-    private readonly IConfiguration _configuration;
 
-    public CreateOrderCommandHandler(IUserManager userManager, IUserRepository userRepository, IOrderRepository orderRepository, ITicketRepository ticketRepository, IBasketRepository basketRepository, IConfiguration configuration)
+    public CreateOrderCommandHandler(IUserManager userManager, IOrderRepository orderRepository, ITicketRepository ticketRepository, IBasketRepository basketRepository)
     {
         _userManager = userManager;
-        _userRepository = userRepository;
         _orderRepository = orderRepository;
         _ticketRepository = ticketRepository;
         _basketRepository = basketRepository;
-        _configuration = configuration;
     }
 
     public async Task<Domain.Entities.Orders.Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        int userId = _userManager.GetCurrentUserId();
-        if (userId <= 0)
-            throw new UnAuthorizedException("userId sıfırdan böyük olmalıdır");
+        var user = await _userManager.GetCurrentUser();
 
-        var user = await _userRepository.GetAsync(x=>x.Id==userId);
-        if (user == null)
-            throw new UnAuthorizedException("User not found");
-
-        var basket = await _basketRepository.GetAsync(x=>x.UserId==userId, "TicketsWithTime");
+        var basket = await _basketRepository.GetAsync(x=>x.UserId==user.Id, "TicketsWithTime");
         if (basket == null)
             throw new BadRequestException($"Basket not found for {user.FirstName} {user.LastName}");
 
@@ -63,7 +51,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Dom
             throw new DomainException("Heç bir bilet tapılmadı.");
 
         // Promo kod tətbiqi
-        PromoCode promoCode = null;
+        PromoCode? promoCode = null;
         if (request.PromoCodeId.HasValue)
         {
             promoCode = await _orderRepository.GetPromoCodeByIdAsync(request.PromoCodeId.Value);
@@ -73,7 +61,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Dom
 
         // Sifariş yaratmaq
         var order = new Domain.Entities.Orders.Order();
-        order.SetDetails(Guid.NewGuid().ToString(), tickets, userId, request.PromoCodeId);
+        order.SetDetails(Guid.NewGuid().ToString(), tickets, user.Id, request.PromoCodeId);
 
         var optionCust = new CustomerCreateOptions
         {
@@ -102,7 +90,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Dom
 
         foreach (var item in tickets)
         {
-            item.SellTicket(userId);
+            item.SellTicket(user.Id);
             _ticketRepository.Update(item);
             await _ticketRepository.Commit(cancellationToken);
         }
@@ -111,6 +99,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Dom
         order.MarkAsPaid();
         await _orderRepository.AddAsync(order);
         await _orderRepository.Commit(cancellationToken);
+        //Send Email olmalidir
         return order;
     }
 }

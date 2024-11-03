@@ -1,12 +1,9 @@
-﻿using System;
-namespace MyTicket.Domain.Entities.Enums
+﻿namespace MyTicket.Domain.Entities.Enums;
+public enum LanguageType
 {
-    public enum LanguageType
-    {
-        Azərbaycan,
-        Rus,
-        İngilis,
-        Alman
-    }
+    Azərbaycan,
+    Rus,
+    İngilis,
+    Alman
 }
 

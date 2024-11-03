@@ -1,15 +1,15 @@
-﻿<Properties StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https" GitUserInfo="UsingGIT">
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" relfile="Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" line="16" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Core/MyTicket.Application/Features/Commands/Order/Create/CreateOrderCommandHandler.cs">
-    <Files>
-      <File FileName="Core/MyTicket.Application/Features/Commands/Order/Create/CreateOrderCommandHandler.cs" Line="24" Column="200" />
-      <File FileName="MyTicket/Controllers/OrdersController.cs" Line="22" Column="1" />
-      <File FileName="MyTicket.AdminPanel/Middleware/ExceptionHandlingMiddleware.cs" Line="22" Column="1" />
-      <File FileName="Infrastructure/MyTicket.Persistence/Repositories/Repository.cs" Line="52" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
@@ -19,56 +19,56 @@
                 <Node name="Dependencies" expanded="True">
                   <Node name="PackageDependencies" expanded="True" />
                 </Node>
-                <Node name="Common" expanded="True">
-                  <Node name="Behaviour" expanded="True" />
-                </Node>
-                <Node name="Features" expanded="True">
-                  <Node name="Commands" expanded="True">
-                    <Node name="Order" expanded="True">
-                      <Node name="Create" expanded="True">
-                        <Node name="CreateOrderCommandHandler.cs" selected="True" />
+                <Node name="Features">
+                  <Node name="Commands">
+                    <Node name="Admin">
+                      <Node name="Event" expanded="True">
+                        <Node name="Create" expanded="True" />
                       </Node>
+                      <Node name="Setting" expanded="True">
+                        <Node name="Create" expanded="True" />
+                        <Node name="Update" expanded="True" />
+                      </Node>
+                    </Node>
+                    <Node name="Basket" expanded="True">
+                      <Node name="AddTicket" expanded="True" />
+                      <Node name="RemoveTicket" expanded="True" />
+                    </Node>
+                    <Node name="User">
+                      <Node name="RefreshToken" expanded="True" />
+                      <Node name="Register" expanded="True" />
+                    </Node>
+                  </Node>
+                  <Node name="Queries">
+                    <Node name="Admin" expanded="True">
+                      <Node name="ViewModels" expanded="True" />
+                    </Node>
+                    <Node name="Location" expanded="True">
+                      <Node name="ViewModels" expanded="True">
+                        <Node name="SeatDto.cs" selected="True" />
+                      </Node>
+                    </Node>
+                    <Node name="User">
+                      <Node name="ViewModels" expanded="True" />
                     </Node>
                   </Node>
                 </Node>
                 <Node name="Interfaces" expanded="True">
-                  <Node name="IRepositories" expanded="True">
-                    <Node name="Orders" expanded="True" />
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="MyTicket.Domain">
-                <Node name="Entities" expanded="True">
-                  <Node name="Baskets" expanded="True" />
-                  <Node name="Orders" expanded="True" />
+                  <Node name="IManagers" expanded="True" />
                 </Node>
               </Node>
             </Node>
             <Node name="Infrastructure" expanded="True">
-              <Node name="MyTicket.Infrastructure" expanded="True">
-                <Node name="Settings" expanded="True" />
-              </Node>
               <Node name="MyTicket.Persistence">
-                <Node name="Repositories" expanded="True" />
+                <Node name="Dependencies" expanded="True">
+                  <Node name="PackageDependencies" expanded="True" />
+                </Node>
               </Node>
             </Node>
-            <Node name="MyTicket">
-              <Node name="Controllers" expanded="True" />
-              <Node name="appsettings.json" expanded="True" />
-            </Node>
-            <Node name="MyTicket.AdminPanel" expanded="True">
-              <Node name="Middleware" expanded="True" />
-            </Node>
+            <Node name="MyTicket.AdminPanel" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" relfile="Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" line="16" column="1" />
-      <Breakpoint file="/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/Features/Commands/Order/Create/CreateOrderCommandHandler.cs" relfile="Core/MyTicket.Application/Features/Commands/Order/Create/CreateOrderCommandHandler.cs" line="34" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

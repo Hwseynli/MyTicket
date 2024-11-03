@@ -5,6 +5,7 @@ using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Domain.Entities.Events;
 public class Event : Editable<User>
@@ -35,7 +36,7 @@ public class Event : Editable<User>
         Language = language;
         MinAge = minAge;
         AverageRating = averageRating;
-        Title = name;
+        Title = name.Capitalize();
         SubCategoryId = categoryId;
         StartTime = startTime;
         EndTime = endTime;
@@ -63,7 +64,7 @@ public class Event : Editable<User>
         if (startTime >= endTime)
             throw new DomainException("Başlanğıc vaxtı son vaxtdan əvvəl olmalıdır.");
 
-        Title = name;
+        Title = name.Capitalize();
         StartTime = startTime;
         EndTime = endTime;
         Description = description;

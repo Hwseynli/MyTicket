@@ -31,14 +31,14 @@ public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
             .NotEmpty().WithMessage("Email is required.")
             .EmailAddress().WithMessage("Invalid email format.")
             .MustAsync(async (email, cancellation) =>
-                await _userRepository.IsPropertyUniqueAsync(u => u.Email, email, _userManager.GetCurrentUserId()))
+                await _userRepository.IsPropertyUniqueAsync(u => u.Email, email, await _userManager.GetCurrentUserId()))
             .WithMessage("Email already exists.");
 
         RuleFor(command => command.PhoneNumber)
             .NotEmpty().WithMessage("Phone number is required.")
             .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("Invalid phone number format.")
             .MustAsync(async (phoneNumber, cancellation) =>
-                await _userRepository.IsPropertyUniqueAsync(u => u.PhoneNumber, phoneNumber, _userManager.GetCurrentUserId()))
+                await _userRepository.IsPropertyUniqueAsync(u => u.PhoneNumber, phoneNumber, await _userManager.GetCurrentUserId()))
                 .WithMessage("Phone number already exists.");
 
         RuleFor(command => command.Password)

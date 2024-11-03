@@ -14,7 +14,6 @@ public class CreateEventCommand:IRequest<bool>
     public byte MinAge { get; set; }
     public int PlaceHallId { get; set; }
     public int SubCategoryId { get; set; }
-    public double? InitialRatingValue { get; set; } // Reytinqin ilkin qiyməti isteğe bağlıdır
 
     public List<EventMediaModel> EventMediaModels { get; set; }
 }

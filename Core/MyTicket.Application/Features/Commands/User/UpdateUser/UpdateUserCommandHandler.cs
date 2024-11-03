@@ -19,10 +19,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, bool>
     public async Task<bool> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         // Mövcud istifadəçinin tapılması
-        var user = await _userRepository.GetAsync(x=>x.Id== _userManager.GetCurrentUserId());
-
-        if (user == null)
-            throw new NotFoundException("User not found.");
+        var user = await _userManager.GetCurrentUser();
 
         // Mövcud parolu yoxla
         if (user.PasswordHash != PasswordHasher.HashPassword(request.Password))

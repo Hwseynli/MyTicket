@@ -1,4 +1,5 @@
 ﻿using MyTicket.Domain.Entities.Users;
+using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Domain.Entities.Places;
 public class Place:Editable<User>
@@ -9,7 +10,7 @@ public class Place:Editable<User>
 
     public void SetDetails(string name, string address,int createdById)
     {
-        Name = name;
+        Name = name.Capitalize();
         Address = address;
         PlaceHalls = new List<PlaceHall>();
         SetAuditDetails(createdById);
@@ -22,7 +23,7 @@ public class Place:Editable<User>
 
     public void SetDetailsForUpdate(string name,string address,int updateById)
     {
-        Name = name;
+        Name = name.Capitalize();
         Address = address;
         SetEditFields(updateById);
     }
