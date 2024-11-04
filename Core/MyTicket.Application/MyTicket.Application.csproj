@@ -75,6 +75,8 @@
     <None Remove="Features\Commands\PromoCode\Create\" />
     <None Remove="Features\Commands\PromoCode\Update\" />
     <None Remove="Features\Commands\PromoCode\Delete\" />
+    <None Remove="Features\Queries\OrderHistory\" />
+    <None Remove="Features\Queries\OrderHistory\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -140,6 +142,8 @@
     <Folder Include="Features\Commands\PromoCode\Create\" />
     <Folder Include="Features\Commands\PromoCode\Update\" />
     <Folder Include="Features\Commands\PromoCode\Delete\" />
+    <Folder Include="Features\Queries\OrderHistory\" />
+    <Folder Include="Features\Queries\OrderHistory\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />
