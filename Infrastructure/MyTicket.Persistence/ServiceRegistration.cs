@@ -46,5 +46,6 @@ public static class ServiceRegistration
 
         services.AddHostedService<HardDeleteBacgroundJob>();
         services.AddHostedService<BasketCleanupBackgroundJob>();
+        services.AddHostedService<TicketEventCleanupBackgroundJob>();
     }
 }
