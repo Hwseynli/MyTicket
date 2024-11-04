@@ -32,7 +32,7 @@ public class SoftDeleteRequestCommandHandler : IRequestHandler<SoftDeleteRequest
         await _emailManager.SendEmailAsync(user.Email, "Account Deleted",
             "Your account has been soft deleted. It will be permanently deleted after 30 days unless you log in during this period.");
 
-        _userRepository.Update(user);
+        await _userRepository.Update(user);
         await _userRepository.Commit(cancellationToken);
         return true;
     }

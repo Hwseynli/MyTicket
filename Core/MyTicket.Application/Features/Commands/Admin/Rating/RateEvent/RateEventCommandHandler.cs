@@ -42,7 +42,7 @@ public class RateEventCommandHandler : IRequestHandler<RateEventCommand, bool>
         // Recalculate average rating
         eventEntity.AverageRating = eventEntity.Ratings.Average(r => (int)r.RatingValue);
 
-        _eventRepository.Update(eventEntity);
+        await _eventRepository.Update(eventEntity);
         await _eventRepository.Commit(cancellationToken);
 
         return true;

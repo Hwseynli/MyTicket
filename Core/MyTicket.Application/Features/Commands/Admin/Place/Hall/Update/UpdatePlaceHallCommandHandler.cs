@@ -37,12 +37,12 @@ public class UpdatePlaceHallCommandHandler : IRequestHandler<UpdatePlaceHallComm
         placeHall.SetDetailsForUpdate(request.Name, request.PlaceId, request.SeatCount, request.RowCount, userId);
 
         // Yenilənmiş Hall obyektini saxlayırıq
-        _placeHallRepository.Update(placeHall);
+        await _placeHallRepository.Update(placeHall);
         await _placeHallRepository.Commit(cancellationToken);
 
         if (request.SeatCount != placeHall.SeatCount || request.RowCount != placeHall.RowCount)
         {
-            _seatRepository.RemoveRange(placeHall.Seats);
+            await _seatRepository.RemoveRange(placeHall.Seats);
             await _seatRepository.Commit(cancellationToken);
             // Hər bir sətir və oturacaq üçün yenilənmiş məlumatlar
             await _seatRepository.CreatSeatsAsync(request.SeatCount, request.RowCount, placeHall.Id, userId, cancellationToken);

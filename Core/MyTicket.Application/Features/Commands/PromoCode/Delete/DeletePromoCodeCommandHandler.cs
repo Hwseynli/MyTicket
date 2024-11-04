@@ -25,7 +25,7 @@ public class DeletePromoCodeCommandHandler : IRequestHandler<DeletePromoCodeComm
             throw new NotFoundException("Promo code not found.");
 
         promoCode.SoftDelete(userId);
-        _promoCodeRepository.Update(promoCode);
+        await _promoCodeRepository.Update(promoCode);
         await _promoCodeRepository.Commit(cancellationToken);
         return true;
     }

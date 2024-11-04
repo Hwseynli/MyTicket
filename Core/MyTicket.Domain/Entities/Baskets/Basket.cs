@@ -8,7 +8,7 @@ public class Basket:BaseEntity
     public int UserId { get; private set; }
     public User User { get; private set; }
 
-    public List<TicketWithTime> TicketsWithTime { get; private set; }
+    public List<TicketWithTime>? TicketsWithTime { get; private set; }
 
     public void SetDetails(int userId)
     {
@@ -19,6 +19,11 @@ public class Basket:BaseEntity
     public void AddTicket(int ticketId)
     {
         TicketsWithTime.Add(new TicketWithTime(ticketId,Id,DateTime.UtcNow.AddHours(4)));
+    }
+
+    public void ClearTickets()
+    {
+        TicketsWithTime?.Clear();
     }
 
     public void RemoveTicket(int ticketId)

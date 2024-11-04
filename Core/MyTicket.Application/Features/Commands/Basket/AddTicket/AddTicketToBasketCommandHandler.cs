@@ -20,20 +20,20 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
 
     public async Task<bool> Handle(AddTicketToBasketCommand request, CancellationToken cancellationToken)
     {
-        var user = _userManager.GetCurrentUser();
-        
-        var ticket = await _ticketRepository.GetAsync(x => x.Id == request.TicketId&&x.IsSold==false);
+        var userId = await _userManager.GetCurrentUserId();
+
+        var ticket = await _ticketRepository.GetAsync(x => x.Id == request.TicketId && x.IsSold == false);
         if (ticket == null)
             throw new NotFoundException("Ticket not found.");
 
-        if (ticket.IsReserved&&ticket.UserId!=user.Id)
+        if (ticket.IsReserved && ticket.UserId != userId)
             throw new BadRequestException("Ticket is reserved");
 
-       var basket = await _basketRepository.GetAsync(x => x.UserId == user.Id, nameof(Domain.Entities.Baskets.Basket.TicketsWithTime));
+        var basket = await _basketRepository.GetAsync(x => x.UserId == userId, nameof(Domain.Entities.Baskets.Basket.TicketsWithTime));
         if (basket == null)
         {
             basket = new Domain.Entities.Baskets.Basket();
-            basket.SetDetails(user.Id);
+            basket.SetDetails(userId);
             await _basketRepository.AddAsync(basket);
             await _basketRepository.Commit(cancellationToken);
         }
@@ -42,12 +42,13 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
             throw new BadRequestException("Ticket is existed.");
 
         basket.AddTicket(ticket.Id);
-        _basketRepository.Update(basket);
+        await _basketRepository.Update(basket);
         await _basketRepository.Commit(cancellationToken);
 
-        ticket.ReserveTicket(user.Id,true);
-        _ticketRepository.Update(ticket);
+        ticket.ReserveTicket(userId, true);
+        await _ticketRepository.Update(ticket);
         await _ticketRepository.Commit(cancellationToken);
+
         return true;
     }
 }

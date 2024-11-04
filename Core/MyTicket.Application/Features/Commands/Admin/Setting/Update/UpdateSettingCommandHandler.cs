@@ -24,7 +24,7 @@ public class UpdateSettingCommandHandler : IRequestHandler<UpdateSettingCommand,
         if (!(await _settingRepository.IsPropertyUniqueAsync(x => x.Key, request.Key, request.Id)))
             throw new ValidationException();
         setting.SetDetailsForUpdate(request.Key,request.Value,userId);
-        _settingRepository.Update(setting);
+        await _settingRepository.Update(setting);
         await _settingRepository.Commit(cancellationToken);
         return true;
     }

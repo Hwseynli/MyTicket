@@ -21,7 +21,7 @@ public class Repository<T> : IRepository<T> where T : class
 
     public async Task Commit(CancellationToken cancellationToken)
     {
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, params string[]? includes)
@@ -51,17 +51,17 @@ public class Repository<T> : IRepository<T> where T : class
         return await (filter == null ? query.FirstOrDefaultAsync() : query.FirstOrDefaultAsync(filter));
     }
 
-    public void HardDelete(T entity)
+    public async Task HardDelete(T entity)
     {
-        _context.Set<T>().Remove(entity);
+       _context.Set<T>().Remove(entity);
     }
 
-    public void RemoveRange(IEnumerable<T> entities)
+    public async Task RemoveRange(IEnumerable<T> entities)
     {
         _context.Set<T>().RemoveRange(entities);
     }
 
-    public void Update(T entity)
+    public async Task Update(T entity)
     {
         _context.Set<T>().Update(entity);
     }

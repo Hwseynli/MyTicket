@@ -27,7 +27,7 @@ public class UpdatePlaceCommandHandler : IRequestHandler<UpdatePlaceCommand, boo
             throw new BadRequestException("Place Name is already exsist");
 
         place.SetDetailsForUpdate(request.Name, request.Address, userId);
-        _placeRepository.Update(place);
+        await _placeRepository.Update(place);
         await _placeRepository.Commit(cancellationToken);
 
         return true;

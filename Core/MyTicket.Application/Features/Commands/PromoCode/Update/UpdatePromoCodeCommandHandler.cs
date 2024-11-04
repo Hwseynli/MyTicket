@@ -32,7 +32,7 @@ public class UpdatePromoCodeCommandHandler : IRequestHandler<UpdatePromoCodeComm
             promoCode.ExpirationDate,
             request.ExpirationAfterDays);
 
-        _promoCodeRepository.Update(promoCode);
+        await _promoCodeRepository.Update(promoCode);
         await _promoCodeRepository.Commit(cancellationToken);
         return true;
     }

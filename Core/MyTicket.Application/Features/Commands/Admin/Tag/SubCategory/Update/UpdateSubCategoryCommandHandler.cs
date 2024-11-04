@@ -25,7 +25,7 @@ public class UpdateSubCategoryCommandHandler : IRequestHandler<UpdateSubCategory
 
         subCategory.SetDetailsForUpdate(request.Name, request.CategoryId, userId);
 
-        _subCategoryRepository.Update(subCategory);
+        await _subCategoryRepository.Update(subCategory);
         await _subCategoryRepository.Commit(cancellationToken);
 
         return true;

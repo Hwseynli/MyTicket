@@ -35,7 +35,7 @@ public class Ticket : Editable<User>
     public void CreateCalculatePrice(decimal eventPrice, decimal seatPrice)
     {
         decimal result = eventPrice * seatPrice;
-        Price = (result / 100) + (result % 100);
+        Price = result / 100;
     }
 
     public void ReserveTicket(int? userId, bool isReserved = true)

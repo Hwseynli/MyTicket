@@ -32,12 +32,17 @@ public class Order : BaseEntity
     {
         if (promoCode == null || !promoCode.IsValid())
             throw new DomainException("Promo kod keçərli deyil.");
-
         PromoCode = promoCode;
         PromoCodeId = promoCode.Id;
-
-        var discountAmount = TotalAmount * (promoCode.DiscountAmount / 100m);
-        TotalAmount -= discountAmount;
+        if (promoCode.DiscountType==Enums.DiscountType.Percent)
+        {
+            var discountAmount = TotalAmount * (promoCode.DiscountAmount / 100m);
+            TotalAmount -= discountAmount;
+        }
+        else
+        {
+            TotalAmount -= promoCode.DiscountAmount;
+        }
     }
 
     public void AddTicket(Ticket ticket)
@@ -52,7 +57,7 @@ public class Order : BaseEntity
         TotalAmount = Tickets.Sum(t => t.Price);
         if (PromoCode != null && PromoCode.IsValid())
         {
-            TotalAmount -= PromoCode.ApplyDiscount(TotalAmount, PromoCode.DiscountType);
+            TotalAmount -= PromoCode.CalculateDiscount(TotalAmount, PromoCode.DiscountType);
         }
     }
 

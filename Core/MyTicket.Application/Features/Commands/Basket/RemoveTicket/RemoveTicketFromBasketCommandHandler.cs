@@ -34,11 +34,11 @@ public class RemoveTicketFromBasketCommandHandler : IRequestHandler<RemoveTicket
             throw new NotFoundException("Ticket not found in Basket");
 
         basket.RemoveTicket(ticket.Id);
-        _basketRepository.Update(basket);
+        await _basketRepository.Update(basket);
         await _basketRepository.Commit(cancellationToken);
 
         ticket.ReserveTicket(null, false);
-        _ticketRepository.Update(ticket);
+        await _ticketRepository.Update(ticket);
 
         await _ticketRepository.Commit(cancellationToken);
 

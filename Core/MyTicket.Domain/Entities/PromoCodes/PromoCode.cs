@@ -34,6 +34,13 @@ public class PromoCode : Editable<User>
         SetAuditDetails(userId);
     }
 
+    public void AddUserForPromoCode(int userId)
+    {
+        UserPromoCode user = new UserPromoCode();
+        user.SetDetails(userId, Id);
+        UserPromoCodes.Add(user);
+    }
+
     public void UpdateDetails(string code, decimal discountAmount, int usageLimit, int updatedById, DateTime expirationDate, byte expirationAfterDays = 0)
     {
         UniqueCode = code;
@@ -61,7 +68,7 @@ public class PromoCode : Editable<User>
         SetEditFields(userId);
     }
 
-    public decimal ApplyDiscount(decimal totalAmount, DiscountType? discountType = 0)
+    public decimal CalculateDiscount(decimal totalAmount, DiscountType? discountType = 0)
     {
         if (discountType == DiscountType.Percent)
             return totalAmount * (DiscountAmount / 100);

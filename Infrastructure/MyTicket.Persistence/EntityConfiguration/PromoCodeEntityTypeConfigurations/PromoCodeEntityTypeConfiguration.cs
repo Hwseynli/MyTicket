@@ -7,7 +7,7 @@ public class PromoCodeEntityTypeConfiguration : IEntityTypeConfiguration<PromoCo
 {
     public void Configure(EntityTypeBuilder<PromoCode> builder)
     {
-        builder.ToTable("promocodes");
+        builder.ToTable("promo_codes");
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Id)

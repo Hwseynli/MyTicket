@@ -718,7 +718,7 @@ namespace MyTicket.Persistence.Migrations
                     b.HasIndex("UniqueCode")
                         .IsUnique();
 
-                    b.ToTable("promocodes", (string)null);
+                    b.ToTable("promo_codes", (string)null);
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.PromoCodes.UserPromoCode", b =>
