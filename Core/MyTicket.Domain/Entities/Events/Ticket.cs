@@ -1,5 +1,4 @@
-﻿using MyTicket.Domain.Entities.Enums;
-using MyTicket.Domain.Entities.Orders;
+﻿using MyTicket.Domain.Entities.Orders;
 using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;

@@ -1,62 +1,66 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MyTicket.Application.Features.Commands.Admin.Rating.RateEvent;
-using MyTicket.Application.Features.Commands.WishList.Add;
-using MyTicket.Application.Features.Commands.WishList.Remove;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyTicket.Application.Features.Queries.Event;
 
 namespace MyTicket.Controllers;
 [Route("api/events")]
 [ApiController]
-[Authorize]
 public class EventsController : ControllerBase
 {
-    private readonly IMediator _mediator;
-    private readonly IEventQueries _queries;
+    private readonly IEventQueries _eventQueries;
 
-    public EventsController(IMediator mediator, IEventQueries queries)
+    public EventsController(IEventQueries queries)
     {
-        _mediator = mediator;
-        _queries = queries;
+        _eventQueries = queries;
     }
-
     // GET: api/values
     [HttpGet("get-events_rating")]
     public async Task<IActionResult> GetRating(int eventId)
     {
-        var result = await _queries.GetRating(eventId);
+        var result = await _eventQueries.GetRating(eventId);
         return Ok(result);
     }
 
-    // POST api/values
-    [HttpPost("rate-events")]
-    public async Task<IActionResult> RateEvent([FromBody] RateEventCommand command)
+    // Bütün tədbirləri gətir
+    [HttpGet]
+    public async Task<IActionResult> GetAllEvents()
     {
-        var result = await _mediator.Send(command);
-        return result ? Ok() : BadRequest();
+        var events = await _eventQueries.GetAllEventsAsync();
+        return Ok(events);
     }
 
-    // GET: api/values
-    [HttpGet("get-wishList")]
-    public async Task<IActionResult> GetWishList()
+    // Tədbiri ID-yə görə gətir
+    [HttpGet("{eventId}")]
+    public async Task<IActionResult> GetEventById(int eventId)
     {
-        var result = await _queries.GetWishList();
-        return Ok(result);
+        var eventItem = await _eventQueries.GetEventByIdAsync(eventId);
+        if (eventItem == null)
+        {
+            return NotFound("Tədbir tapılmadı.");
+        }
+        return Ok(eventItem);
     }
 
-    // POST api/values
-    [HttpPost("add - wishLsit")]
-    public async Task<IActionResult> AddWishLists([FromBody] AddWishListCommand command)
+    // Başlıq üzrə axtarış
+    [HttpGet("search-by-title")]
+    public async Task<IActionResult> GetEventsByTitle(string title)
     {
-        var result=await _mediator.Send(command);
-        return Ok(result);
+        var events = await _eventQueries.GetEventsByTitleAsync(title);
+        return Ok(events);
     }
 
-    [HttpDelete("remove - wishList")]
-    public async Task<IActionResult> RemoveFromWishList([FromBody] RemoveFromWishListCommand command)
+    // Məkan üzrə axtarış
+    [HttpGet("search-by-place")]
+    public async Task<IActionResult> GetEventsByPlace(int placeHallId)
     {
-        var result = await _mediator.Send(command);
-        return Ok(result);
+        var events = await _eventQueries.GetEventsByPlaceAsync(placeHallId);
+        return Ok(events);
+    }
+
+    // Qiymət aralığı üzrə axtarış
+    [HttpGet("search-by-price")]
+    public async Task<IActionResult> GetEventsByPriceRange(decimal? minPrice, decimal? maxPrice)
+    {
+        var events = await _eventQueries.GetEventsByPriceRangeAsync(minPrice, maxPrice);
+        return Ok(events);
     }
 }

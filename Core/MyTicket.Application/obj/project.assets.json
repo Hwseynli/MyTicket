@@ -8929,7 +8929,8 @@
       "Microsoft.AspNetCore.Mvc >= 2.2.0",
       "Microsoft.EntityFrameworkCore >= 8.0.10",
       "MyTicket.Domain >= 1.0.0",
-      "Stripe.net >= 47.0.0"
+      "Stripe.net >= 47.0.0",
+      "System.Linq >= 4.3.0"
     ]
   },
   "packageFolders": {
@@ -9001,6 +9002,10 @@
           "Stripe.net": {
             "target": "Package",
             "version": "[47.0.0, )"
+          },
+          "System.Linq": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           }
         },
         "imports": [

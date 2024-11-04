@@ -4291,7 +4291,8 @@
           "Microsoft.AspNetCore.Mvc": "2.2.0",
           "Microsoft.EntityFrameworkCore": "8.0.10",
           "MyTicket.Domain": "1.0.0",
-          "Stripe.net": "47.0.0"
+          "Stripe.net": "47.0.0",
+          "System.Linq": "4.3.0"
         },
         "compile": {
           "bin/placeholder/MyTicket.Application.dll": {}
