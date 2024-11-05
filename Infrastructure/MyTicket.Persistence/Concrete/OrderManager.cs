@@ -66,56 +66,77 @@ public class OrderManager : IOrderManager
         using var ms = new MemoryStream();
         using (var doc = new PdfDocument())
         {
-            var fontTitle = new XFont("Verdana", 14, XFontStyle.Bold);
+            // Define fonts and colors
+            var fontTitle = new XFont("Verdana", 16, XFontStyle.Bold);
             var fontRegular = new XFont("Verdana", 12, XFontStyle.Regular);
             var fontSmall = new XFont("Verdana", 10, XFontStyle.Regular);
 
-            // İlk səhifə - Order məlumatları
+            var colorGray = XBrushes.Gray;
+            var colorBlue = XBrushes.Blue;
+            var colorGreen = XBrushes.Green;
+            var colorRed = XBrushes.Red;
+
+            // First Page - Order Information
             var firstPage = doc.AddPage();
             var graphics = XGraphics.FromPdfPage(firstPage);
 
-            graphics.DrawString($"Order ID: {order.Id}", fontTitle, XBrushes.Black, new XPoint(30, 50));
-            graphics.DrawString($"Total Amount: ${order.TotalAmount + discountAmount}", fontRegular, XBrushes.Black, new XPoint(30, 80));
+            graphics.DrawString("Order Receipt", fontTitle, colorBlue, new XPoint(30, 40));
 
+            // Draw a separating line
+            graphics.DrawLine(XPens.Gray, 30, 60, 540, 60);
+
+            graphics.DrawString($"Order ID: {order.Id}", fontRegular, colorGray, new XPoint(30, 80));
+            graphics.DrawString($"Total Amount: ${order.TotalAmount + discountAmount}", fontRegular, colorGray, new XPoint(30, 100));
+
+            // Display Promo Code and Discount Info
             if (order.PromoCode != null)
             {
-                decimal discountedAmount = discountAmount; // Endirim hesablanır
-                graphics.DrawString($"Promo Code: {order.PromoCode.UniqueCode}", fontRegular, XBrushes.Black, new XPoint(30, 110));
-                graphics.DrawString($"Discounted Amount: ${discountedAmount}", fontRegular, XBrushes.Red, new XPoint(30, 140));
+                decimal discountedAmount = discountAmount;
+                graphics.DrawString($"Promo Code: {order.PromoCode.UniqueCode}", fontRegular, colorGreen, new XPoint(30, 130));
+                graphics.DrawString($"Discounted Amount: ${discountedAmount}", fontRegular, colorRed, new XPoint(30, 150));
+            }
+            else
+            {
+                graphics.DrawString("Promo Code: Not Applied", fontRegular, colorGray, new XPoint(30, 130));
+                graphics.DrawString($"Discounted Amount: ${discountAmount}", fontRegular, colorRed, new XPoint(30, 150));
             }
 
-            // Final Price calculation
-            decimal finalPrice = order.TotalAmount; // Assuming TotalAmount already has discount applied
-            graphics.DrawString($"Final Price: ${finalPrice}", fontRegular, XBrushes.Green, new XPoint(30, 170));
+            // Final Price
+            decimal finalPrice = order.TotalAmount;
+            graphics.DrawString($"Final Price: ${finalPrice}", fontTitle, colorBlue, new XPoint(30, 180));
 
-
-            // Hər bilet üçün ayrıca səhifə əlavə edilir
+            // Add pages for each ticket
             foreach (var ticket in order.Tickets)
             {
                 var ticketPage = doc.AddPage();
                 var ticketGraphics = XGraphics.FromPdfPage(ticketPage);
 
-                // Bilet məlumatları
-                ticketGraphics.DrawString("Ticket", fontTitle, XBrushes.Black, new XPoint(30, 30));
-                ticketGraphics.DrawString($"Name: {ticket.User.FirstName} {ticket.User.LastName}", fontRegular, XBrushes.Black, new XPoint(30, 70));
-                ticketGraphics.DrawString($"Event: {ticket.Event.Title}", fontRegular, XBrushes.Black, new XPoint(30, 100));
-                ticketGraphics.DrawString($"Date: {ticket.Event.StartTime:MMM dd, yyyy HH:mm}", fontRegular, XBrushes.Black, new XPoint(30, 130));
-                ticketGraphics.DrawString($"Seat: {ticket.Seat}", fontRegular, XBrushes.Black, new XPoint(30, 160));
-                ticketGraphics.DrawString($"Price: ${ticket.Price}", fontRegular, XBrushes.Black, new XPoint(30, 190));
+                // Header for ticket
+                ticketGraphics.DrawString("Ticket Information", fontTitle, colorBlue, new XPoint(30, 40));
+                ticketGraphics.DrawLine(XPens.Gray, 30, 60, 540, 60);
 
-                // Barkod yaradılması (SkiaSharp və ZXing ilə)
+                // Ticket details
+                ticketGraphics.DrawString($"Name: {ticket.User.FirstName} {ticket.User.LastName}", fontRegular, colorGray, new XPoint(30, 80));
+                ticketGraphics.DrawString($"Event: {ticket.Event.Title}", fontRegular, colorGray, new XPoint(30, 110));
+                ticketGraphics.DrawString($"Date: {ticket.Event.StartTime:MMM dd, yyyy HH:mm}", fontRegular, colorGray, new XPoint(30, 140));
+                ticketGraphics.DrawString($"Seat: {ticket.Seat.SeatNumber}", fontRegular, colorGray, new XPoint(30, 170));
+                ticketGraphics.DrawString($"Row: {ticket.Seat.RowNumber}", fontRegular, colorGray, new XPoint(30, 200));
+                ticketGraphics.DrawString($"Place Hall: {ticket.Seat.PlaceHall.Name}", fontRegular, colorGray, new XPoint(30, 230));
+                ticketGraphics.DrawString($"Location: {ticket.Seat.PlaceHall.Place.Name}", fontRegular, colorGray, new XPoint(30, 260));
+                ticketGraphics.DrawString($"Price: ${ticket.Price}", fontRegular, colorBlue, new XPoint(30, 290));
+
+                // Generate barcode for ticket
                 var barcodeWriter = new BarcodeWriter
                 {
                     Format = BarcodeFormat.CODE_128,
                     Options = new EncodingOptions
                     {
                         Height = 50,
-                        Width = 200,
+                        Width = 220,
                         Margin = 1
                     }
                 };
 
-                // Barkodu SKBitmap-ə çevir
                 var barcodeBitmap = barcodeWriter.Write(ticket.UniqueCode);
                 using (var image = SKImage.FromBitmap(barcodeBitmap))
                 using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
@@ -124,12 +145,11 @@ public class OrderManager : IOrderManager
                     data.SaveTo(barcodeStream);
                     barcodeStream.Position = 0;
 
-                    // PDF-də barkod olaraq göstər
                     var barcodeImage = XImage.FromStream(() => new MemoryStream(barcodeStream.ToArray()));
-                    ticketGraphics.DrawImage(barcodeImage, 30, 220, 200, 50);
+                    ticketGraphics.DrawImage(barcodeImage, 30, 320, 200, 50);
                 }
 
-                ticketGraphics.DrawString($"Code: {ticket.UniqueCode}", fontSmall, XBrushes.Black, new XPoint(30, 340));
+                ticketGraphics.DrawString($"Code: {ticket.UniqueCode}", fontSmall, colorGray, new XPoint(30, 380));
             }
 
             doc.Save(ms);

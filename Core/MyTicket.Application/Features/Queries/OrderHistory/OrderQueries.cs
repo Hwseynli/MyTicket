@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Queries.OrderHistory.ViewModels;
 using MyTicket.Application.Interfaces.IManagers;
@@ -10,11 +9,13 @@ namespace MyTicket.Application.Features.Queries.OrderHistory;
 public class OrderQueries : IOrderQueries
 {
     private readonly IOrderRepository _orderRepository;
+    private readonly IOrderManager _orderManager;
     private readonly IUserManager _userManager;
-    public OrderQueries(IOrderRepository orderRepository, IUserManager userManager)
+    public OrderQueries(IOrderRepository orderRepository, IUserManager userManager, IOrderManager orderManager)
     {
         _orderRepository = orderRepository;
         _userManager = userManager;
+        _orderManager = orderManager;
     }
 
     // Bütün sifarişləri qaytarır
@@ -94,6 +95,27 @@ public class OrderQueries : IOrderQueries
 
         // Hər bir sifariş üçün detalları qaytarır
         return sortedOrders.Select(order => OrderViewModel.SetDetails(order));
+    }
+
+    public async Task<byte[]> GetOrderReceiptAsync(int orderId)
+    {
+        // İstifadəçi ID-sini əldə edirik
+        var userId = await _userManager.GetCurrentUserId();
+        if (userId <= 0)
+            throw new UnAuthorizedException();
+
+        // Sifarişi tapırıq
+        var order = await _orderRepository.GetAsync(o => o.Id == orderId && o.UserId == userId,
+            "Tickets", "Tickets.User", "Tickets.Event", "Tickets.Seat.PlaceHall.Place", "PromoCode");
+
+        if (order == null)
+            throw new NotFoundException("Sifariş tapılmadı.");
+
+        // PDF Qəbzi yaradırıq
+        decimal discountAmount = order.PromoCode != null ? order.PromoCode.DiscountAmount : 0;
+        var pdfReceipt = _orderManager.GenerateReceipt(order, discountAmount);
+
+        return pdfReceipt;
     }
 }
 

@@ -60,4 +60,11 @@ public class OrderController : ControllerBase
         var orders = await _orderQueries.GetOrdersByUpcomingEventAsync();
         return Ok(orders);
     }
+
+    [HttpGet("order/{orderId}/download-receipt")]
+    public async Task<IActionResult> DownloadReceipt(int orderId)
+    {
+        var pdfBytes = await _orderQueries.GetOrderReceiptAsync(orderId);
+        return File(pdfBytes, "application/pdf", "OrderReceipt.pdf");
+    }
 }

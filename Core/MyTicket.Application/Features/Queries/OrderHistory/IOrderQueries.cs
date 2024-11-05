@@ -8,5 +8,6 @@ public interface IOrderQueries
     Task<IEnumerable<OrderViewModel>> GetOrdersByTicketAsync(int ticketId);
     Task<OrderViewModel> GetLatestOrderAsync();
     Task<IEnumerable<OrderViewModel>> GetOrdersByUpcomingEventAsync();
+    Task<byte[]> GetOrderReceiptAsync(int orderId);
 }
 
