@@ -1,4 +1,6 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{C69AF17F-4EB4-4317-8204-282DC563DEAA}|https">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" relfile="Core/MyTicket.Application/Features/Commands/Admin/Rating/GetQuery/GetEventRatingQueryHandler.cs" line="16" column="1" />
@@ -6,66 +8,16 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.MyTicket PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MyTicket" expanded="True">
             <Node name="Core" expanded="True">
-              <Node name="MyTicket.Application">
-                <Node name="Dependencies" expanded="True">
-                  <Node name="PackageDependencies" expanded="True" />
-                </Node>
-                <Node name="Features">
-                  <Node name="Commands">
-                    <Node name="Admin">
-                      <Node name="Event" expanded="True">
-                        <Node name="Create" expanded="True" />
-                      </Node>
-                      <Node name="Setting" expanded="True">
-                        <Node name="Create" expanded="True" />
-                        <Node name="Update" expanded="True" />
-                      </Node>
-                    </Node>
-                    <Node name="Basket" expanded="True">
-                      <Node name="AddTicket" expanded="True" />
-                      <Node name="RemoveTicket" expanded="True" />
-                    </Node>
-                    <Node name="User">
-                      <Node name="RefreshToken" expanded="True" />
-                      <Node name="Register" expanded="True" />
-                    </Node>
-                  </Node>
-                  <Node name="Queries">
-                    <Node name="Admin" expanded="True">
-                      <Node name="ViewModels" expanded="True" />
-                    </Node>
-                    <Node name="Location" expanded="True">
-                      <Node name="ViewModels" expanded="True">
-                        <Node name="SeatDto.cs" selected="True" />
-                      </Node>
-                    </Node>
-                    <Node name="User">
-                      <Node name="ViewModels" expanded="True" />
-                    </Node>
-                  </Node>
-                </Node>
-                <Node name="Interfaces" expanded="True">
-                  <Node name="IManagers" expanded="True" />
-                </Node>
-              </Node>
+              <Node name="MyTicket.Domain" expanded="True" />
             </Node>
-            <Node name="Infrastructure" expanded="True">
-              <Node name="MyTicket.Persistence">
-                <Node name="Dependencies" expanded="True">
-                  <Node name="PackageDependencies" expanded="True" />
-                </Node>
-              </Node>
-            </Node>
-            <Node name="MyTicket.AdminPanel" expanded="True" />
+            <Node name="Infrastructure" expanded="True" />
           </Node>
         </State>
       </Pad>

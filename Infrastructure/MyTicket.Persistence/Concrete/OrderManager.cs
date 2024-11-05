@@ -1,4 +1,7 @@
-﻿using MyTicket.Application.Exceptions;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System.Text;
+using System.Text.Json;
+using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Orders;
 using MyTicket.Domain.Entities.PromoCodes;
@@ -10,15 +13,18 @@ using Stripe;
 using ZXing;
 using ZXing.Common;
 using ZXing.SkiaSharp;
+using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Persistence.Concrete;
 public class OrderManager : IOrderManager
 {
     private readonly IPromoCodeRepository _promoCodeRepository;
+    private readonly BankClient _client;
 
-    public OrderManager(IPromoCodeRepository promoCodeRepository)
+    public OrderManager(IPromoCodeRepository promoCodeRepository, BankClient client)
     {
         _promoCodeRepository = promoCodeRepository;
+        _client = client;
     }
 
     public async Task<PromoCode> GetPromoCodeByIdAsync(int promoCodeId, int userId)
@@ -32,8 +38,29 @@ public class OrderManager : IOrderManager
             throw new BadRequestException("Eyni promocodu 2 ci defe itifadə edə bilmərsiniz)");
         return promoCode;
     }
+    public StringContent PaymentForKapital(decimal totalAmount, string orderCode)
+    {
+        var order = new
+        {
+            order = new
+            {
+                typeRid = "Order_SMS",
+                amount = totalAmount.ToString("F2"),
+                currency = "AZN",
+                language = "az",
+                description = orderCode,
+                hppRedirectUrl = $"https://luxride.themepanthers.com/lux/",
+                hppCofCapturePurposes = new[] { "Cit" }
+            }
+        };
 
-    public async Task Payment(string token_visa, string email, string firstName, string lastName, string phoneNumber, decimal orderTotalAmount)
+        var json = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        return content;
+    }
+
+    public async Task PaymentForStripe(string token_visa, string email, string firstName, string lastName, string phoneNumber, decimal orderTotalAmount)
     {
         var optionCust = new CustomerCreateOptions
         {

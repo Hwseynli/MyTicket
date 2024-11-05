@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Security.Claims;
 using MyTicket.Persistence.Context;
 using MyTicket.Infrastructure.Settings;
-
+using MyTicket.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,6 +24,7 @@ builder.Services.AddControllers()
     x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
 ;
 builder.Services.AddPersistenceRegistration(builder.Configuration);
+builder.Services.AddInfrastructureRegistration();
 builder.Services.AddApplicationRegistration(builder.Configuration);
 
 var environment = builder.Environment;
