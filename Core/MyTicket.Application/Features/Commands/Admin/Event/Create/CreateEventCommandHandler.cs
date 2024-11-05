@@ -17,20 +17,20 @@ namespace MyTicket.Application.Features.Commands.Admin.Event.Create;
 public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, bool>
 {
     private readonly IEventRepository _eventRepository;
-    private readonly ITicketRepository _ticketRepository;
+    private readonly ITicketManager _ticketManager;
     private readonly IPlaceHallRepository _placeHallRepository;
     private readonly IUserManager _userManager;
     private readonly IOptions<FileSettings> _fileSettings;
     private readonly ISubscriberRepository _subscriberRepository;
     private readonly IEmailManager _emailManager;
 
-    public CreateEventCommandHandler(IEventRepository eventRepository, IUserManager userManager, IOptions<FileSettings> fileSettings, IPlaceHallRepository placeHallRepository, ITicketRepository ticketRepository, ISubscriberRepository subscriberRepository, IEmailManager emailManager)
+    public CreateEventCommandHandler(IEventRepository eventRepository, ITicketManager ticketManager, IPlaceHallRepository placeHallRepository, IUserManager userManager, IOptions<FileSettings> fileSettings, ISubscriberRepository subscriberRepository, IEmailManager emailManager)
     {
         _eventRepository = eventRepository;
+        _ticketManager = ticketManager;
+        _placeHallRepository = placeHallRepository;
         _userManager = userManager;
         _fileSettings = fileSettings;
-        _placeHallRepository = placeHallRepository;
-        _ticketRepository = ticketRepository;
         _subscriberRepository = subscriberRepository;
         _emailManager = emailManager;
     }
@@ -118,7 +118,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
         if (placeHall.Seats.Capacity <= 0)
             throw new ValidationException();
 
-        await _ticketRepository.CreateTickets(placeHall.Seats, newEvent.MinPrice, newEvent.Id, userId, cancellationToken);
+        await _ticketManager.CreateTickets(placeHall.Seats, newEvent.MinPrice, newEvent.Id, userId, cancellationToken);
 
         IEnumerable<Subscriber> subscribers = await _subscriberRepository.GetAllAsync(x => x.StringType == StringType.Email);
         await _emailManager.SendEmailForSubscribers(subscribers, "New Event", newEvent.Title, newEvent.Description);

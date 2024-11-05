@@ -77,6 +77,7 @@
     <None Remove="Features\Commands\PromoCode\Delete\" />
     <None Remove="Features\Queries\OrderHistory\" />
     <None Remove="Features\Queries\OrderHistory\ViewModels\" />
+    <None Remove="Features\Commands\Admin\Event\Update\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -144,6 +145,7 @@
     <Folder Include="Features\Commands\PromoCode\Delete\" />
     <Folder Include="Features\Queries\OrderHistory\" />
     <Folder Include="Features\Queries\OrderHistory\ViewModels\" />
+    <Folder Include="Features\Commands\Admin\Event\Update\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

@@ -57,7 +57,7 @@ public class Event : Editable<User>
         AverageRating = (AverageRating * (Ratings.Count - 1) + (int)rating.RatingValue) / Ratings.Count;
     }
 
-    public void SetDetailsForUpdate(string name, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int categoryId, int updatedById)
+    public void SetDetailsForUpdate(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge, int updatedById)
     {
         if (string.IsNullOrEmpty(name) || !eventMedias.Any(x => x.Medias.Any(c => c.IsMain)))
             throw new DomainException("Tədbirin adı və əsas şəkli boş ola bilməz.");
@@ -65,11 +65,16 @@ public class Event : Editable<User>
             throw new DomainException("Başlanğıc vaxtı son vaxtdan əvvəl olmalıdır.");
 
         Title = name.Capitalize();
+        MinPrice = minPrice;
         StartTime = startTime;
         EndTime = endTime;
         Description = description;
         EventMedias = eventMedias ?? new List<EventMedia>();
         SubCategoryId = categoryId;
+        PlaceHallId = placeHallId;
+        AverageRating = averageRating;
+        Language = language;
+        MinAge = minAge;
         SetEditFields(updatedById);
     }
 

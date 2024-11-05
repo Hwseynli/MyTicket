@@ -38,8 +38,7 @@ public static class ServiceRegistration
         services.AddScoped<IClaimManager, ClaimManager>();
         services.AddScoped<IUserManager, UserManager>();
         services.AddScoped<IOrderManager, OrderManager>();
-
-        //services.AddScoped<IPaymentManager, PaymentManager>();
+        services.AddScoped<ITicketManager, TicketManager>();
 
         services.AddTransient<IEmailManager, EmailManager>();
         services.AddTransient<ISmsManager, SmsManager>();
