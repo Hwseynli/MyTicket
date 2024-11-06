@@ -13,7 +13,7 @@ public class EventsController : ControllerBase
         _eventQueries = queries;
     }
     // GET: api/values
-    [HttpGet("get-events_rating")]
+    [HttpGet("get-rating-by-{eventId}")]
     public async Task<IActionResult> GetRating(int eventId)
     {
         var result = await _eventQueries.GetRating(eventId);
@@ -29,7 +29,7 @@ public class EventsController : ControllerBase
     }
 
     // Tədbiri ID-yə görə gətir
-    [HttpGet("{eventId}")]
+    [HttpGet("get-event-by-{eventId}")]
     public async Task<IActionResult> GetEventById(int eventId)
     {
         var eventItem = await _eventQueries.GetEventByIdAsync(eventId);

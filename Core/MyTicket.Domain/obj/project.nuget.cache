@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tQ8QqgCMaq9yqEOBhTAqD2AD0uOhI2wr4hKdparl0D+SZ9Hk9jYpDNR2+N/eXFAi1xhF1Qnqc3XkQAzBYgdKOQ==",
+  "dgSpecHash": "J4GOt2mkSS3Z+BR7KUcQOLk5Qvrm2BZu2vfUQp8pHGbVGVUNIMqB2vrTsYAK+pB1gYr5Kl5ZHwgL3e5UnJBoMA==",
   "success": true,
   "projectFilePath": "/Users/zeyneb/Projects/MyTicket/Core/MyTicket.Domain/MyTicket.Domain.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,9 @@
     "/Users/zeyneb/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.10/microsoft.entityframeworkcore.analyzers.8.0.10.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.caching.memory/8.0.1/microsoft.extensions.caching.memory.8.0.1.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/microsoft.extensions.caching.stackexchangeredis/8.0.10/microsoft.extensions.caching.stackexchangeredis.8.0.10.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.1/microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.logging/8.0.1/microsoft.extensions.logging.8.0.1.nupkg.sha512",
@@ -22,10 +25,13 @@
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/pdfsharpcore/1.3.65/pdfsharpcore.1.3.65.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/pipelines.sockets.unofficial/2.2.8/pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/sharpziplib/1.4.2/sharpziplib.1.4.2.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/sixlabors.fonts/1.0.0-beta17/sixlabors.fonts.1.0.0-beta17.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/sixlabors.imagesharp/1.0.4/sixlabors.imagesharp.1.0.4.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/stackexchange.redis/2.8.16/stackexchange.redis.2.8.16.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/system.io.pipelines/5.0.1/system.io.pipelines.5.0.1.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512"
   ],
   "logs": []

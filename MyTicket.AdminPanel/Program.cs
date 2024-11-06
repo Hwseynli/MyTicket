@@ -12,12 +12,14 @@ using Serilog.Events;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Security.Claims;
 using MyTicket.Infrastructure.Settings;
+using MyTicket.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddPersistenceRegistration(builder.Configuration);
+builder.Services.AddInfrastructureRegistration(builder.Configuration);
 builder.Services.AddApplicationRegistration(builder.Configuration);
 
 var environment = builder.Environment;
@@ -119,6 +121,11 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<FileSettings>(configuration.GetSection(nameof(FileSettings)));
+builder.Services.Configure<RedisSettings>(configuration.GetSection(nameof(RedisSettings)));
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = configuration.GetSection("RedisSettings:ConnectionString").Value;
+});
 var app = builder.Build();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 // Configure the HTTP request pipeline.

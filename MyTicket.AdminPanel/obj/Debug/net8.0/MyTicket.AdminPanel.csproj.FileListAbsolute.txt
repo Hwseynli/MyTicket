@@ -693,3 +693,6 @@
 /Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/obj/Debug/net8.0/MyTicket.AdminPanel.pdb
 /Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/obj/Debug/net8.0/MyTicket.AdminPanel.genruntimeconfig.cache
 /Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/obj/Debug/net8.0/ref/MyTicket.AdminPanel.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/bin/Debug/net8.0/Pipelines.Sockets.Unofficial.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/bin/Debug/net8.0/StackExchange.Redis.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket.AdminPanel/bin/Debug/net8.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll

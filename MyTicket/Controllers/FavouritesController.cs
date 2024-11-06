@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyTicket.Application.Features.Commands.Admin.Rating.RateEvent;
 using MyTicket.Application.Features.Commands.WishList.Add;
 using MyTicket.Application.Features.Commands.WishList.Remove;
-using MyTicket.Application.Features.Queries.Event;
+using MyTicket.Application.Features.Queries.Favourites;
 
 namespace MyTicket.Controllers;
 [Route("api/favourites")]
@@ -13,15 +13,14 @@ namespace MyTicket.Controllers;
 public class FavouritesController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IEventQueries _queries;
+    private readonly IFavouriteQueries _queries;
 
-    public FavouritesController(IMediator mediator, IEventQueries queries)
+    public FavouritesController(IMediator mediator, IFavouriteQueries queries)
     {
         _mediator = mediator;
         _queries = queries;
     }
 
-    // POST api/values
     [HttpPost("rate-events")]
     public async Task<IActionResult> RateEvent([FromBody] RateEventCommand command)
     {
@@ -38,18 +37,18 @@ public class FavouritesController : ControllerBase
     }
 
     // POST api/values
-    [HttpPost("add - wishLsit")]
+    [HttpPost("add-wishlist-event")]
     public async Task<IActionResult> AddWishLists([FromBody] AddWishListCommand command)
     {
         var result = await _mediator.Send(command);
         return Ok(result);
     }
 
-    [HttpDelete("remove - wishList")]
+    [HttpDelete("remove-wishlist-event")]
     public async Task<IActionResult> RemoveFromWishList([FromBody] RemoveFromWishListCommand command)
     {
         var result = await _mediator.Send(command);
-        return Ok(result);
+        return result ? Ok() : BadRequest();
     }
 }
 

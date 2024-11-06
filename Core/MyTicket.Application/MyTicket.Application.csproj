@@ -78,6 +78,8 @@
     <None Remove="Features\Queries\OrderHistory\" />
     <None Remove="Features\Queries\OrderHistory\ViewModels\" />
     <None Remove="Features\Commands\Admin\Event\Update\" />
+    <None Remove="Features\Queries\Favourites\" />
+    <None Remove="Features\Queries\Favourites\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -146,6 +148,8 @@
     <Folder Include="Features\Queries\OrderHistory\" />
     <Folder Include="Features\Queries\OrderHistory\ViewModels\" />
     <Folder Include="Features\Commands\Admin\Event\Update\" />
+    <Folder Include="Features\Queries\Favourites\" />
+    <Folder Include="Features\Queries\Favourites\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />
@@ -157,7 +161,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.0" />
     <PackageReference Include="Stripe.net" Version="47.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 </Project>

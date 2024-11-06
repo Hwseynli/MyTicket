@@ -21,10 +21,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers()
     .AddJsonOptions(x =>
-    x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
-;
+    {
+        x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
+
 builder.Services.AddPersistenceRegistration(builder.Configuration);
-builder.Services.AddInfrastructureRegistration();
+builder.Services.AddInfrastructureRegistration(builder.Configuration);
 builder.Services.AddApplicationRegistration(builder.Configuration);
 
 var environment = builder.Environment;
@@ -128,6 +130,12 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.Configure<FileSettings>(configuration.GetSection(nameof(FileSettings)));
 builder.Services.Configure<StripeSettings>(configuration.GetSection(nameof(StripeSettings)));
+builder.Services.Configure<RedisSettings>(configuration.GetSection(nameof(RedisSettings)));
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = configuration.GetSection("RedisSettings:ConnectionString").Value;
+});
+
 builder.Services.AddScoped<AppSeedDbContext>();
 
 var app = builder.Build();

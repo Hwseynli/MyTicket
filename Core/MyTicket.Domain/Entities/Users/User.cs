@@ -13,9 +13,9 @@ public class User : BaseEntity
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
-    public Gender? Gender { get; set; }
-    public int RoleId { get; set; }
-    public Role Role { get; set; }
+    public Gender? Gender { get; private set; }
+    public int RoleId { get; private set; }
+    public Role Role { get; private set; }
     public string Email { get; private set; }
     public string PhoneNumber { get; private set; }
     public DateTime? Birthday { get; set; }
@@ -103,5 +103,10 @@ public class User : BaseEntity
         LastPasswordChangeDateTime = DateTime.UtcNow.AddHours(4);
         OtpGeneratedTime = null;
         OtpCode = null;
+    }
+
+    public void UpdateRole(int roleId)
+    {
+        RoleId = roleId;
     }
 }

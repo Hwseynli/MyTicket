@@ -1,42 +1,49 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Domain.Exceptions;
 
 namespace MyTicket.Application.Features.Commands.WishList.Remove;
 public class RemoveFromWishListCommandHandler : IRequestHandler<RemoveFromWishListCommand, bool>
 {
-    private readonly IEventRepository _eventRepository;
     private readonly IWishListRepository _wishListRepository;
     private readonly IUserManager _userManager;
+    private readonly IDistributedCache _cache;
 
-    public RemoveFromWishListCommandHandler(IEventRepository eventRepository, IWishListRepository wishListRepository, IUserManager userManager)
+    public RemoveFromWishListCommandHandler(IWishListRepository wishListRepository, IUserManager userManager, IDistributedCache cache)
     {
-        _eventRepository = eventRepository;
         _wishListRepository = wishListRepository;
         _userManager = userManager;
+        _cache = cache;
     }
 
     public async Task<bool> Handle(RemoveFromWishListCommand request, CancellationToken cancellationToken)
     {
         int userId = await _userManager.GetCurrentUserId();
+        string cacheKey = $"wishlist_{userId}";
 
-        // İstifadəçinin mövcud WishListini tapırıq
-        var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents");
+        // Retrieve the user's wishlist
+        var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents.Event");
 
         if (wishList == null)
-            throw new NotFoundException("İstifadəçinin WishListi tapılmadı.");
+            throw new NotFoundException("User's wishlist not found.");
 
-        // Tədbirin mövcudluğunu yoxlayırıq
-        var @event = await _eventRepository.GetAsync(e => e.Id == request.EventId && !e.IsDeleted);
-        if (@event == null)
-            throw new NotFoundException("Tədbir tapılmadı.");
+        // Check if the event exists in the wishlist
+        var wishListEvent = wishList.WishListEvents.FirstOrDefault(x => x.EventId == request.EventId);
+        if (wishListEvent == null)
+            throw new DomainException("Event not found in wishlist.");
 
-        // Tədbiri WishList-dən çıxarırıq
-        wishList.RemoveEventFromWishList(request.EventId);
+        // Remove the event from the wishlist
+        wishList.RemoveEventFromWishList(wishListEvent);
 
-        // Dəyişiklikləri yadda saxlamaq üçün
+        // Update the wishlist in the repository
+        await _wishListRepository.Update(wishList);
         await _wishListRepository.Commit(cancellationToken);
+
+        // Invalidate the cache
+        await _cache.RemoveAsync(cacheKey);
 
         return true;
     }

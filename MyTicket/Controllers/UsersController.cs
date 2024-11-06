@@ -48,7 +48,7 @@ public class UsersController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet("profile")]
+    [HttpGet("get-profile")]
     public async Task<IActionResult> GetProfile()
     {
         var profile = await _userQueries.GetUserProfileAsync();

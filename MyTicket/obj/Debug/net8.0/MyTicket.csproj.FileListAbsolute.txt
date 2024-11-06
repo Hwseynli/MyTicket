@@ -717,3 +717,6 @@
 /Users/zeyneb/Projects/MyTicket/MyTicket/obj/Debug/net8.0/MyTicket.pdb
 /Users/zeyneb/Projects/MyTicket/MyTicket/obj/Debug/net8.0/MyTicket.genruntimeconfig.cache
 /Users/zeyneb/Projects/MyTicket/MyTicket/obj/Debug/net8.0/ref/MyTicket.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Pipelines.Sockets.Unofficial.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/StackExchange.Redis.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll

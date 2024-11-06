@@ -25,8 +25,6 @@ public class AdminController : ControllerBase
     public async Task<IActionResult> GetAllUsersAsync()
     {
         var users = await _adminQueries.GetUsersAsync();
-        if (users.Capacity <= 0)
-            throw new NotFoundException();
         return Ok(users);
     }
 
@@ -34,8 +32,6 @@ public class AdminController : ControllerBase
     public async Task<IActionResult> GetAllSubscriberssAsync()
     {
         var subscribers = await _adminQueries.GetSubscribersAsync();
-        if (subscribers.Capacity <= 0)
-            throw new NotFoundException();
         return Ok(subscribers);
     }
 
@@ -43,6 +39,6 @@ public class AdminController : ControllerBase
     public async Task<IActionResult> AssignUsersRole(AssignRolesCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(new { message = "Role assigned successfully" }) : BadRequest(new { message = "Failed to assign role" });
+        return result ? Ok(new { message = "Role assigned successfully"}) : BadRequest(new { message = "Failed to assign role" });
     }
 }

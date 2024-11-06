@@ -21,14 +21,14 @@ public class BasketsController : ControllerBase
     }
 
     // GET: api/values
-    [HttpGet("Tickets")]
-    public async Task<IActionResult> GetTickets()
+    [HttpGet("get-basket")]
+    public async Task<IActionResult> GetBasket()
     {
         return Ok(await _ticketQueries.GetTicketsInBasket());
     }
 
     // POST api/Basket/AddTicket
-    [HttpPost("AddTicket")]
+    [HttpPost("add-ticket")]
     public async Task<IActionResult> AddTicketToBasket([FromBody] AddTicketToBasketCommand command)
     {
         // Tiketi əlavə et
@@ -41,7 +41,7 @@ public class BasketsController : ControllerBase
     }
 
     // DELETE api/Basket/RemoveTicket
-    [HttpDelete("RemoveTicket")]
+    [HttpDelete("remove-ticket")]
     public async Task<IActionResult> RemoveTicketFromBasket([FromBody] RemoveTicketFromBasketCommand command)
     {
         // Tiketi sil

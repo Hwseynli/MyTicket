@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "S2eFABOyWyHh7Z82pptrGAO7iRaXL7iIO9VewJ+kONHzxx4noQMGP6bO9xllDH44/xhRG0+aw+1V2/E7cV0f+w==",
+  "dgSpecHash": "hWXcm39rPfhKCtrM9Og8j+1Se4qIWmSDhI8o0Ka4s2ZnDSU+eif0vRo6XWrCZvdQMc5Rx7JycSf5ELRbagvzTw==",
   "success": true,
   "projectFilePath": "/Users/zeyneb/Projects/MyTicket/MyTicket/MyTicket.csproj",
   "expectedPackageFiles": [
@@ -72,6 +72,7 @@
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.caching.memory/8.0.1/microsoft.extensions.caching.memory.8.0.1.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/microsoft.extensions.caching.stackexchangeredis/8.0.10/microsoft.extensions.caching.stackexchangeredis.8.0.10.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.configuration.binder/8.0.0/microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512",
@@ -117,6 +118,7 @@
     "/Users/zeyneb/.nuget/packages/npgsql.entityframeworkcore.postgresql/8.0.8/npgsql.entityframeworkcore.postgresql.8.0.8.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/pdfsharp/6.1.1/pdfsharp.6.1.1.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/pdfsharpcore/1.3.65/pdfsharpcore.1.3.65.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/pipelines.sockets.unofficial/2.2.8/pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/polly/7.2.4/polly.7.2.4.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/polly.extensions.http/3.0.0/polly.extensions.http.3.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -156,6 +158,7 @@
     "/Users/zeyneb/.nuget/packages/skiasharp.extended/2.0.0/skiasharp.extended.2.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/skiasharp.nativeassets.macos/2.88.8/skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/skiasharp.nativeassets.win32/2.88.8/skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/stackexchange.redis/2.8.16/stackexchange.redis.2.8.16.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/stripe.net/47.0.0/stripe.net.47.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",

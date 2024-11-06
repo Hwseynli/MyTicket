@@ -43,9 +43,21 @@
               "target": "Package",
               "version": "[2.2.2, )"
             },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "PdfSharpCore": {
               "target": "Package",
               "version": "[1.3.65, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.16, )"
             }
           },
           "imports": [

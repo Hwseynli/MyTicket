@@ -11,6 +11,7 @@ using MyTicket.Application.Features.Queries.Basket;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 using MyTicket.Application.Features.Queries.OrderHistory;
+using MyTicket.Application.Features.Queries.Favourites;
 
 namespace MyTicket.Application;
 public static class ServiceRegistration
@@ -27,6 +28,7 @@ public static class ServiceRegistration
         services.AddScoped<IEventQueries, EventQueries>();
         services.AddScoped<ITicketQueries, TicketQueries>();
         services.AddScoped<IOrderQueries, OrderQueries>();
+        services.AddScoped<IFavouriteQueries, FavouriteQueries>();
 
         StripeConfiguration.ApiKey = configuration["StripeSettings:Secretkey"];
     }
