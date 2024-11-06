@@ -3,7 +3,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Events;
-using MyTicket.Domain.Exceptions;
 
 namespace MyTicket.Application.Features.Commands.WishList.Remove;
 public class RemoveFromWishListCommandHandler : IRequestHandler<RemoveFromWishListCommand, bool>
@@ -33,7 +32,7 @@ public class RemoveFromWishListCommandHandler : IRequestHandler<RemoveFromWishLi
         // Check if the event exists in the wishlist
         var wishListEvent = wishList.WishListEvents.FirstOrDefault(x => x.EventId == request.EventId);
         if (wishListEvent == null)
-            throw new DomainException("Event not found in wishlist.");
+            throw new BadRequestException("Event not found in wishlist.");
 
         // Remove the event from the wishlist
         wishList.RemoveEventFromWishList(wishListEvent);

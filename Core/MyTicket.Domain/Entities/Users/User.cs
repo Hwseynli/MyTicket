@@ -22,7 +22,8 @@ public class User : BaseEntity
     public string PasswordHash { get; private set; }
     public List<Rating> Ratings { get; private set; }
     public List<Ticket> Tickets { get; private set; }
-    public List<WishList> WishLists { get; private set; }
+    public int? WishListId { get; private set; }
+    public WishList? WishList { get; private set; }
     public DateTime LastPasswordChangeDateTime { get; private set; }
     public string? RefreshToken { get; private set; }
     public bool IsDeleted { get; private set; }
@@ -49,7 +50,7 @@ public class User : BaseEntity
         RoleId = 2;
         Gender = Enums.Gender.Other;
         Ratings = new List<Rating>();
-        WishLists = new List<WishList>();
+        WishList = new WishList();
         Orders = new List<Order>();
         UserPromoCodes = new List<UserPromoCode>();
     }

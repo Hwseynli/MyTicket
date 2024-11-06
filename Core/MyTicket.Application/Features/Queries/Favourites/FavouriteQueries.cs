@@ -21,8 +21,8 @@ public class FavouriteQueries : IFavouriteQueries
 
     public async Task<WishListDto> GetWishList()
     {
-        int userId = await _userManager.GetCurrentUserId();
-        string cacheKey = $"wishlist_{userId}";
+        var user = await _userManager.GetCurrentUser();
+        string cacheKey = $"wishlist_{user.Id}";
 
         var cachedWishList = await _cache.GetStringAsync(cacheKey);
 
@@ -32,27 +32,19 @@ public class FavouriteQueries : IFavouriteQueries
             {
                 return JsonSerializer.Deserialize<WishListDto>(cachedWishList);
             }
-            catch (JsonException)
+            catch(JsonException ex)
             {
-                // Log deserialization error and continue to fetch from the repository
+                throw new JsonException(ex.Message);
             }
         }
 
-        var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents.Event");
+        var wishList = await _wishListRepository.GetAsync(x => x.UserId == user.Id, "WishListEvents.Event.EventMedias.Medias", "WishListEvents.Event.PlaceHall.Place", "WishListEvents.Event.Tickets");
         if (wishList == null)
         {
             throw new NotFoundException("User's wishlist not found.");
         }
 
-        var wishListDto = new WishListDto
-        {
-            UserId = userId,
-            Events = wishList.WishListEvents.Select(x => new EventDto
-            {
-                Id = x.Event.Id,
-                EventName = x.Event.Title
-            }).ToList()
-        };
+        var wishListDto = WishListDto.MapToViewModel(wishList);
 
         var serializedWishList = JsonSerializer.Serialize(wishListDto);
         var options = new DistributedCacheEntryOptions
@@ -65,4 +57,3 @@ public class FavouriteQueries : IFavouriteQueries
         return wishListDto;
     }
 }
-

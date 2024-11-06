@@ -28,7 +28,8 @@ public class EventViewModel
             {
                 Name = m.Name,
                 Path = m.Path,
-                IsMain = m.IsMain
+                IsMain = m.IsMain,
+                Others=m.Others
             }).ToList()).FirstOrDefault() ?? new List<MediaViewModel>()
         };
     }

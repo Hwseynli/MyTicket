@@ -3,7 +3,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Events;
-using MyTicket.Domain.Exceptions;
 
 namespace MyTicket.Application.Features.Commands.WishList.Add;
 public class AddWishListCommandHandler:IRequestHandler<AddWishListCommand,bool>
@@ -27,7 +26,7 @@ public class AddWishListCommandHandler:IRequestHandler<AddWishListCommand,bool>
         string cacheKey = $"wishlist_{userId}";
 
         // İstifadəçinin mövcud WishListini tapırıq
-        var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents.Event");
+        var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents");
 
         if (wishList == null)
         {
@@ -37,14 +36,14 @@ public class AddWishListCommandHandler:IRequestHandler<AddWishListCommand,bool>
             await _wishListRepository.AddAsync(wishList);
         }
 
+        // Check if the event is already in the wishlist
+        if (wishList.WishListEvents.Any(x => x.EventId == request.EventId))
+            throw new BadRequestException("Event is already in the wishlist.");
+
         // Tədbirin mövcudluğunu yoxlayırıq
         var @event = await _eventRepository.GetAsync(e => e.Id == request.EventId && !e.IsDeleted);
         if (@event == null)
             throw new NotFoundException("Tədbir tapılmadı.");
-
-        // Check if the event is already in the wishlist
-        if (wishList.WishListEvents.Any(x => x.EventId == request.EventId))
-            throw new DomainException("Event is already in the wishlist.");
 
         // Tədbiri WishList-ə əlavə edirik
         wishList.AddEventToWishList(@event);

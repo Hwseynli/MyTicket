@@ -4,8 +4,6 @@ namespace MyTicket.Application.Features.Queries.Event;
 public interface IEventQueries
 {
     Task<string> GetRating(int eventId);
-    Task<List<WishListEventDto>> GetWishList();
-
     Task<IEnumerable<EventViewModel>> GetAllEventsAsync();
     Task<EventViewModel?> GetEventByIdAsync(int eventId);
     Task<IEnumerable<EventViewModel>> GetEventsByTitleAsync(string title);

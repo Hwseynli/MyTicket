@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyTicket.Application.Exceptions;
+using MyTicket.Domain.Exceptions;
 using System.Net;
 using System.Text.Json;
 
@@ -65,7 +66,11 @@ public class ExceptionHandlingMiddleware
                 problemDetails.Detail = ex.Message;
                 problemDetails.Title = "Bad Request";
                 break;
-
+            case DomainException:
+                response.StatusCode = (int)HttpStatusCode.NotFound;
+                problemDetails.Detail = ex.Message;
+                problemDetails.Title = "Domain Error";
+                break;
             default:
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 problemDetails.Detail = $"{ex.Message}";

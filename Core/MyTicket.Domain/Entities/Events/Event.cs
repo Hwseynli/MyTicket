@@ -84,5 +84,26 @@ public class Event : Editable<User>
         IsDeleted = true;
         SetEditFields(userId);
     }
+
+    public string GetRating(double averageRating)
+    {
+        switch (averageRating)
+        {
+            case 0:
+                return $"{RatingValue.NotRated}";
+            case 1:
+                return $"{RatingValue.OneStar}";
+            case 2:
+                return $"{RatingValue.TwoStars}";
+            case 3:
+                return $"{RatingValue.ThreeStars}";
+            case 4:
+                return $"{RatingValue.FourStars}";
+            case 5:
+                return $"{RatingValue.FiveStars}";
+            default:
+                throw new DomainException("Not Found");
+        }
+    }
 }
 
