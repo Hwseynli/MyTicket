@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyTicket.Application.Features.Commands.Admin.Event.Create;
 using MyTicket.Application.Features.Commands.Admin.Event.Update;
+using MyTicket.Application.Features.Queries.Basket;
 
 namespace MyTicket.AdminPanel.Controllers;
 [Route("api/events")]
@@ -11,10 +12,12 @@ namespace MyTicket.AdminPanel.Controllers;
 public class EventsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ITicketQueries _ticketQueries;
 
-    public EventsController(IMediator mediator)
+    public EventsController(IMediator mediator, ITicketQueries ticketQueries)
     {
         _mediator = mediator;
+        _ticketQueries = ticketQueries;
     }
 
     [HttpPost("create-events")]
@@ -29,5 +32,12 @@ public class EventsController : ControllerBase
     {
         var result = await _mediator.Send(command);
         return result ? Ok("Event updated successfully.") : BadRequest("Error updating the event.");
+    }
+
+    [HttpGet("get-reserved-tickets-for-{eventId}")]
+    public async Task<IActionResult> GetReservedTicketsForEvent(int eventId)
+    {
+        var result = await _ticketQueries.GetSoldTicketsForEvent(eventId);
+        return Ok(result);
     }
 }

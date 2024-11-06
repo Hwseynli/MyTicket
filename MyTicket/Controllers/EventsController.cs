@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyTicket.Application.Features.Queries.Basket;
 using MyTicket.Application.Features.Queries.Event;
 
 namespace MyTicket.Controllers;
@@ -7,11 +8,14 @@ namespace MyTicket.Controllers;
 public class EventsController : ControllerBase
 {
     private readonly IEventQueries _eventQueries;
+    private readonly ITicketQueries _ticketQueries;
 
-    public EventsController(IEventQueries queries)
+    public EventsController(IEventQueries eventQueries, ITicketQueries ticketQueries)
     {
-        _eventQueries = queries;
+        _eventQueries = eventQueries;
+        _ticketQueries = ticketQueries;
     }
+
     // GET: api/values
     [HttpGet("get-rating-by-{eventId}")]
     public async Task<IActionResult> GetRating(int eventId)
@@ -62,5 +66,19 @@ public class EventsController : ControllerBase
     {
         var events = await _eventQueries.GetEventsByPriceRangeAsync(minPrice, maxPrice);
         return Ok(events);
+    }
+
+    [HttpGet("get-sold-tickets-for-{eventId}")]
+    public async Task<IActionResult> GetSoldTicketsForEvent(int eventId)
+    {
+        var result = await _ticketQueries.GetSoldTicketsForEvent(eventId);
+        return Ok(result);
+    }
+
+    [HttpGet("get-all-tickets-for-{eventId}")]
+    public async Task<IActionResult> GetAllTicketsForEvent(int eventId)
+    {
+        var result = await _ticketQueries.GetSoldTicketsForEvent(eventId);
+        return Ok(result);
     }
 }

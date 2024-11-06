@@ -8,8 +8,10 @@ public class TicketDto
     public int SeatNumber { get; set; }
     public int RowNumber { get; set; }
     public decimal Price { get; set; }
+    public bool IsSold { get; set; }
+    public bool IsReserved { get; set; }
 
-    public TicketDto(int id, string uniqueCode, string eventName, string placeHallName, int seatNumber, int rowNumber, decimal price)
+    public TicketDto(int id, string uniqueCode, string eventName, string placeHallName, int seatNumber, int rowNumber, decimal price, bool isSold, bool isReserved)
     {
         Id = id;
         UniqueCode = uniqueCode;
@@ -18,6 +20,8 @@ public class TicketDto
         SeatNumber = seatNumber;
         RowNumber = rowNumber;
         Price = price;
+        IsReserved = isReserved;
+        IsSold = isSold;
     }
 }
 

@@ -50,7 +50,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
         var tickets = new List<Ticket>();
         foreach (var item in basket.TicketsWithTime)
         {
-            var ticket = await _ticketRepository.GetAsync(x => x.Id == item.TicketId, "User", "Event", "Seat.PlaceHall.Place");
+            var ticket = await _ticketRepository.GetAsync(x => x.Id == item.TicketId&&!x.IsSold, "User", "Event", "Seat.PlaceHall.Place");
             if (ticket != null)
             {
                 tickets.Add(ticket);
