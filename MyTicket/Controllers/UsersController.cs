@@ -11,6 +11,7 @@ using MyTicket.Application.Features.Commands.User.Register;
 using MyTicket.Application.Features.Commands.User.Subscriber.Create;
 using MyTicket.Application.Features.Commands.User.UpdateUser;
 using MyTicket.Application.Features.Queries.User;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Controllers;
 [ApiController]
@@ -31,14 +32,16 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Subscribe([FromBody] CreateSubscriberCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok("You have successfully subscribed. A welcome email has been sent.") : BadRequest("Subscription failed.");
+        return result ? Ok(UIMessage.GetSuccessMessage("Subscription", "completed"))
+            : BadRequest(UIMessage.GetFailureMessage("Subscription", "complete"));
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterCommand command)
     {
-        await _mediator.Send(command);
-        return Ok();
+        var result=await _mediator.Send(command);
+        return result ? Ok(UIMessage.GetSuccessMessage("User", "registered"))
+            : BadRequest(UIMessage.GetFailureMessage("User", "register"));
     }
 
     [HttpPost("login")]
@@ -60,7 +63,8 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Update([FromBody] UpdateUserCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok("User updated successfully.") : BadRequest("User not found or invalid data.");
+        return result ? Ok(UIMessage.GetSuccessMessage("User", "updated"))
+            : BadRequest(UIMessage.GetFailureMessage("User", "update"));
     }
 
     [HttpPost("refreshToken")]
@@ -68,12 +72,13 @@ public class UsersController : ControllerBase
     {
         return Ok(await _mediator.Send(command));
     }
-    // SoftDelete üçün email təsdiq linki göndərir
+
     [HttpPost("soft-delete")]
     public async Task<IActionResult> SoftDelete([FromBody] SoftDeleteRequestCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok("Confirmation link sent to your email.") : BadRequest("User not found or already deleted.");
+        return result ? Ok(UIMessage.GetSuccessMessage("User", "soft deleted"))
+            : BadRequest(UIMessage.GetFailureMessage("User", "soft delete"));
     }
 
     #region ForgotPassword
@@ -82,22 +87,26 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> SendOtp(SendOtpCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok("OTP has been sent to your email.") : BadRequest("User not found");
+        return result ? Ok(UIMessage.GetSuccessMessage("OTP", "sent"))
+            : NotFound(UIMessage.NotFound("User"));
     }
 
     [HttpPost("verifyOtp")]
     public async Task<IActionResult> VerifyOtp(VerifyOtpCommand command)
     {
         var isValid = await _mediator.Send(command);
-        return isValid ? Ok("OTP is valid.") : BadRequest("Invalid or expired OTP.");
+        return isValid ? Ok(UIMessage.GetSuccessMessage("OTP", "verified"))
+            : BadRequest(UIMessage.GetFailureMessage("OTP", "verify"));
     }
 
     [HttpPost("resetPassword")]
     public async Task<IActionResult> ResetPassword(ResetPasswordCommand command)
     {
         var isReset = await _mediator.Send(command);
-        return isReset ? Ok("Password updated successfully.") : BadRequest("Failed to reset password.");
+        return isReset ? Ok(UIMessage.GetSuccessMessage("Password", "reset"))
+            : BadRequest(UIMessage.GetFailureMessage("Password", "reset"));
     }
 
     #endregion
 }
+

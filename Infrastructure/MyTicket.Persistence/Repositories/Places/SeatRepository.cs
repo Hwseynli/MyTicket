@@ -16,7 +16,6 @@ public class SeatRepository : Repository<Seat>, ISeatRepository
         {
             for (int seat = 1; seat <= seatsPerRow; seat++)
             {
-                // Yeni oturacaq əlavə edirik
                 var newSeat = new Seat();
                 var seatType = newSeat.DetermineSeatType(row, rowCount);
                 newSeat.SetDetail(row, seat, seatType, newSeat.CalculateSeatPrice(seatType), placeHallId, userId);

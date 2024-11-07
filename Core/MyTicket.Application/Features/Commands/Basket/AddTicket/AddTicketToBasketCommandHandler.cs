@@ -3,6 +3,7 @@ using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Baskets;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Basket.AddTicket;
 public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasketCommand, bool>
@@ -24,7 +25,7 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
 
         var ticket = await _ticketRepository.GetAsync(x => x.Id == request.TicketId && x.IsSold == false);
         if (ticket == null)
-            throw new NotFoundException("Ticket not found.");
+            throw new NotFoundException(UIMessage.NotFound("Ticket"));
 
         if (ticket.IsReserved && ticket.UserId != userId)
             throw new BadRequestException("Ticket is reserved");
@@ -39,7 +40,7 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
         }
 
         if (basket.TicketsWithTime.Any(x => x.TicketId == ticket.Id))
-            throw new BadRequestException("Ticket is existed.");
+            throw new BadRequestException(UIMessage.AlreadyExsist("Ticket"));
 
         basket.AddTicket(ticket.Id);
         await _basketRepository.Update(basket);

@@ -2,6 +2,7 @@
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Places;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Place.Location.Update;
 public class UpdatePlaceCommandHandler : IRequestHandler<UpdatePlaceCommand, bool>
@@ -21,10 +22,10 @@ public class UpdatePlaceCommandHandler : IRequestHandler<UpdatePlaceCommand, boo
 
         var place = await _placeRepository.GetAsync(p => p.Id == request.Id);
         if (place == null)
-            throw new NotFoundException("Place not found.");
+            throw new NotFoundException(UIMessage.NotFound("Place"));
 
         if (!await _placeRepository.IsPropertyUniqueAsync(x => x.Name, request.Name, place.Id))
-            throw new BadRequestException("Place Name is already exsist");
+            throw new BadRequestException(UIMessage.AlreadyExsist("Place Name"));
 
         place.SetDetailsForUpdate(request.Name, request.Address, userId);
         await _placeRepository.Update(place);

@@ -15,7 +15,6 @@ public class WishList : BaseEntity
         WishListEvents = new List<WishListEvent>();
     }
 
-    // Tədbir əlavə etmə metodu
     public void AddEventToWishList(Event @event)
     {
         var listEvent = new WishListEvent();
@@ -23,7 +22,6 @@ public class WishList : BaseEntity
         WishListEvents.Add(listEvent);
     }
 
-    // Tədbiri çıxarma metodu
     public void RemoveEventFromWishList(WishListEvent wishListEvent)
     {
         WishListEvents.Remove(wishListEvent);

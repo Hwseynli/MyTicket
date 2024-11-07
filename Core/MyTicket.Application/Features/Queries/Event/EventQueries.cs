@@ -1,6 +1,7 @@
 ﻿using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Queries.Event.ViewModels;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Queries.Event;
 public class EventQueries : IEventQueries
@@ -19,7 +20,7 @@ public class EventQueries : IEventQueries
         var eventEntity = await _eventRepository.GetAsync(x => x.Id == eventId);
 
         if (eventEntity == null)
-            throw new NotFoundException("Tədbir tapılmadı.");
+            throw new NotFoundException(UIMessage.NotFound("Event"));
 
         return eventEntity.GetRating(eventEntity.AverageRating);
     }
@@ -40,7 +41,7 @@ public class EventQueries : IEventQueries
     {
         var events = await _eventRepository.GetAllAsync(null, "EventMedias", "EventMedias.Medias", "PlaceHall", "PlaceHall.Place", "Tickets");
 
-        // Bütün Event-ləri yaddaşa gətirdikdən sonra filtre tətbiq olunur
+        // After storing all Events, the filter is applied
         var filteredEvents = events
             .Where(e => e.Title.Contains(title, StringComparison.OrdinalIgnoreCase))
             .Select(e => EventViewModel.MapToViewModel(e));

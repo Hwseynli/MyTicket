@@ -3,6 +3,7 @@ using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Baskets;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Basket.RemoveTicket;
 public class RemoveTicketFromBasketCommandHandler : IRequestHandler<RemoveTicketFromBasketCommand, bool>
@@ -24,14 +25,14 @@ public class RemoveTicketFromBasketCommandHandler : IRequestHandler<RemoveTicket
 
         var ticket = await _ticketRepository.GetAsync(x => x.Id == request.TicketId);
         if (ticket == null)
-            throw new NotFoundException("Ticket not found.");
+            throw new NotFoundException(UIMessage.NotFound("ticket"));
 
         var basket = await _basketRepository.GetAsync(x => x.UserId == user.Id, "TicketsWithTime");
         if (basket == null)
-            throw new NotFoundException("Basket not found.");
+            throw new NotFoundException(UIMessage.NotFound("Basket"));
 
         if (!basket.TicketsWithTime.Any(x => x.TicketId == ticket.Id))
-            throw new NotFoundException("Ticket not found in Basket");
+            throw new NotFoundException(UIMessage.NotFound("Ticket")+"in Basket");
 
         basket.RemoveTicket(ticket.Id);
         await _basketRepository.Update(basket);

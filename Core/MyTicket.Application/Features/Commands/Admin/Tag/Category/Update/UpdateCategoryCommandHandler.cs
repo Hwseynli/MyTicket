@@ -2,6 +2,7 @@
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Categories;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Tag.Category.Update;
 public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, bool>
@@ -21,7 +22,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
         var category = await _categoryRepository.GetAsync(c=>c.Id==request.Id);
 
         if (category == null)
-            throw new NotFoundException("Category not found.");
+            throw new NotFoundException(UIMessage.NotFound("Category"));
 
         if (!await _categoryRepository.IsPropertyUniqueAsync(c=>c.Name,request.Name,category.Id))
             throw new ValidationException();

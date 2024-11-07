@@ -1,12 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Commands.Admin.User.AssignRoles;
 using MyTicket.Application.Features.Queries.Admin;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.AdminPanel.Controllers;
-
 [Authorize(Roles = "Admin")]
 [Route("api/admin")]
 [ApiController]
@@ -36,9 +35,10 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("assign-role")]
-    public async Task<IActionResult> AssignUsersRole(AssignRolesCommand command)
+    public async Task<IActionResult> AssignUserRole(AssignRolesCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(new { message = "Role assigned successfully"}) : BadRequest(new { message = "Failed to assign role" });
+        return result ? Ok(new { message = UIMessage.GetSuccessMessage("role", "assigned") })
+        : BadRequest(new { message = UIMessage.GetFailureMessage("role", "assign") });
     }
 }

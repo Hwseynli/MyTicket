@@ -21,7 +21,6 @@ public class VerifyOtpCommandHandler : IRequestHandler<VerifyOtpCommand, bool>
         if (user == null)
             throw new BadRequestException("Invalid OTP or OTP has expired.");
 
-        // OTP is valid, proceed to the next step (password reset)
         return true;
     }
 }

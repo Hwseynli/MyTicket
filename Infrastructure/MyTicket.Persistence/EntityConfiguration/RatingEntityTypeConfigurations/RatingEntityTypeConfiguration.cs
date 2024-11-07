@@ -33,7 +33,7 @@ public class RatingEntityTypeConfiguration : IEntityTypeConfiguration<Rating>
         builder.Property(x => x.RatingValue)
                .IsRequired()
                .HasColumnName("rating_value")
-               .HasConversion<int>(); // Enum dəyərinin int kimi saxlanılması
+               .HasConversion<int>(); // Storing the enum value as an int
 
         builder.Property(x => x.RatedAt)
                .IsRequired()

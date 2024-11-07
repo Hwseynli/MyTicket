@@ -2,6 +2,7 @@
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Users;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Admin.User.AssignRoles;
 public class AssignRolesCommandHandler : IRequestHandler<AssignRolesCommand, bool>
@@ -22,18 +23,18 @@ public class AssignRolesCommandHandler : IRequestHandler<AssignRolesCommand, boo
         var admin = await _userManager.GetCurrentUser();
         if (admin.RoleId!=1)
         {
-            throw new UnAuthorizedException("İcazən yoxdur.");
+            throw new UnAuthorizedException(UIMessage.NotAccess());
         }
         var user = await _userRepository.GetAsync(u => u.Id == request.UserId&&u.Id!=admin.Id&&u.RoleId!=1);
         if (user == null)
         {
-            throw new NotFoundException("User tapılmadı.");
+            throw new NotFoundException(UIMessage.NotFound("User"));
         }
 
         var role = await _roleRepository.GetAsync(r => r.Id == request.RoleId);
         if (role == null)
         {
-            throw new NotFoundException("Role tapılmadı.");
+            throw new NotFoundException(UIMessage.NotFound("Role"));
         }
 
         user.UpdateRole(role.Id);

@@ -9,6 +9,7 @@ using MyTicket.Domain.Entities.Medias;
 using MyTicket.Infrastructure.Settings;
 using MyTicket.Infrastructure.Extensions;
 using MyTicket.Domain.Entities.Enums;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Admin.Event.Update;
 public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, bool>
@@ -34,7 +35,7 @@ public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, boo
         // Retrieve event and validate
         var eventEntity = await _eventRepository.GetAsync(e => e.Id == request.Id, "Tickets", "PlaceHall.Seats", "EventMedias.Medias");
         if (eventEntity == null)
-            throw new NotFoundException("Event not found.");
+            throw new NotFoundException(UIMessage.NotFound("Event"));
 
         // Update event details
         eventEntity.SetDetailsForUpdate(request.Title, request.MinPrice, request.StartTime, request.EndTime, request.Description, eventEntity.EventMedias, request.SubCategoryId, request.PlaceHallId, eventEntity.AverageRating, request.Language, request.MinAge, userId);
@@ -90,7 +91,7 @@ public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, boo
                         }
                         else
                         {
-                            throw new BadRequestException("Media formatı şəkil ya da video olamlıdır");
+                            throw new BadRequestException("Media format must be image or video");
                         }
                         eventMedia.Medias.Add(media);
                     }

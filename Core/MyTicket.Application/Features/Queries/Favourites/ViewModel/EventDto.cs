@@ -22,7 +22,7 @@ public class EventDto
             Id = eventEntity.Id,
             Title = eventEntity.Title,
             MinPrice = eventEntity.MinPrice,
-            Description = eventEntity.IsDeleted ? "Müddəti bitib" : eventEntity.Description,
+            Description = eventEntity.IsDeleted ? "Expired" : eventEntity.Description,
             StartTime = eventEntity.StartTime,
             EndTime = eventEntity.EndTime,
             PlaceHallName = eventEntity.PlaceHall.Name,

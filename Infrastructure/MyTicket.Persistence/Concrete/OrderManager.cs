@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
@@ -13,29 +12,27 @@ using Stripe;
 using ZXing;
 using ZXing.Common;
 using ZXing.SkiaSharp;
-using MyTicket.Infrastructure.Utils;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Persistence.Concrete;
 public class OrderManager : IOrderManager
 {
     private readonly IPromoCodeRepository _promoCodeRepository;
-    private readonly BankClient _client;
 
-    public OrderManager(IPromoCodeRepository promoCodeRepository, BankClient client)
+    public OrderManager(IPromoCodeRepository promoCodeRepository)
     {
         _promoCodeRepository = promoCodeRepository;
-        _client = client;
     }
 
     public async Task<PromoCode> GetPromoCodeByIdAsync(int promoCodeId, int userId)
     {
         if (promoCodeId <= 0)
-            throw new BadRequestException("promoCodeId is invalid");
+            throw new BadRequestException(UIMessage.ValidProperty("PromoCodeId"));
         PromoCode promoCode = await _promoCodeRepository.GetAsync(x => x.Id == promoCodeId, nameof(promoCode.UserPromoCodes));
         if (promoCode == null)
-            throw new NotFoundException("PromoCode not fount");
+            throw new NotFoundException(UIMessage.NotFound("PromoCode"));
         if(promoCode.UserPromoCodes.Any(x => x.UserId == userId))
-            throw new BadRequestException("Eyni promocodu 2 ci defe itifadə edə bilmərsiniz)");
+            throw new BadRequestException("You cannot use the same promocode twice)");
         return promoCode;
     }
     public StringContent PaymentForKapital(decimal totalAmount, string orderCode)
@@ -71,13 +68,13 @@ public class OrderManager : IOrderManager
         var serviceCust = new CustomerService();
         Customer customer = serviceCust.Create(optionCust);
 
-        // Stripe ödənişi
+        // Stripe payment
         var chargeOptions = new ChargeCreateOptions
         {
             Amount = (long)(orderTotalAmount * 100),
             Currency = "USD",
             Description = "Ticket Order Payment",
-            Source = token_visa, // Frontend-dən alınan Source burada istifadə olunmalıdır
+            Source = token_visa, // Source from Frontend should be used here
             ReceiptEmail = email
         };
 

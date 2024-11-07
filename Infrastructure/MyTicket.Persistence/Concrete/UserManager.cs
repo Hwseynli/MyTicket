@@ -25,7 +25,6 @@ public class UserManager : IUserManager
     public (string token, DateTime expireAt) GenerateTJwtToken(User user)
     {
         var claims = new List<Claim> {
-            //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
         new Claim(ClaimTypes.Role, user.Role.Name) // Add this claim for the role

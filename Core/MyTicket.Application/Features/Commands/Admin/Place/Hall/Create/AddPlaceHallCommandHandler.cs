@@ -23,14 +23,13 @@ public class AddPlaceHallCommandHandler : IRequestHandler<AddPlaceHallCommand, b
         int userId = await _userManager.GetCurrentUserId();
 
         if (request.SeatCount % request.RowCount != 0)
-            throw new DomainException("Oturacaqların sayı və sıra sayları uyğun deyil, tam bölünmür.");
+            throw new DomainException("The number of seats and the number of rows do not match, they are not fully divided.");
 
         var placeHall = new PlaceHall();
         placeHall.SetDetails(request.Name, request.PlaceId, request.SeatCount, request.RowCount, userId);
         await _placeHallRepository.AddAsync(placeHall);
         await _placeHallRepository.Commit(cancellationToken);
 
-        //yeni oturacaqları yaradaq
         await _seatRepository.CreatSeatsAsync(request.SeatCount, request.RowCount, placeHall.Id, userId, cancellationToken);
         return true;
     }

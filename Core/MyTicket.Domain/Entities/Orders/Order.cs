@@ -3,6 +3,7 @@ using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.PromoCodes;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Domain.Entities.Orders;
 public class Order : BaseEntity
@@ -31,7 +32,7 @@ public class Order : BaseEntity
     public void ApplyPromoCode(PromoCode promoCode)
     {
         if (promoCode == null || !promoCode.IsValid())
-            throw new DomainException("Promo kod keçərli deyil.");
+            throw new DomainException(UIMessage.ValidProperty("Promo code"));
         PromoCode = promoCode;
         PromoCodeId = promoCode.Id;
         if (promoCode.DiscountType==Enums.DiscountType.Percent)
@@ -47,7 +48,7 @@ public class Order : BaseEntity
 
     public void AddTicket(Ticket ticket)
     {
-        if (ticket == null) throw new DomainException("Bilet mövcud deyil.");
+        if (ticket == null) throw new DomainException(UIMessage.NotFound("Ticket"));
         Tickets.Add(ticket);
         TotalAmount += ticket.Price;
     }
@@ -64,7 +65,7 @@ public class Order : BaseEntity
     public void MarkAsPaid()
     {
         if (IsPaid)
-            throw new DomainException("Order is already paid.");
+            throw new DomainException("Order already is paid");
 
         IsPaid = true;
     }

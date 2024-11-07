@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyTicket.Application.Features.Queries.Basket;
 using MyTicket.Application.Features.Queries.Event;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Controllers;
 [Route("api/events")]
@@ -16,7 +17,6 @@ public class EventsController : ControllerBase
         _ticketQueries = ticketQueries;
     }
 
-    // GET: api/values
     [HttpGet("get-rating-by-{eventId}")]
     public async Task<IActionResult> GetRating(int eventId)
     {
@@ -24,7 +24,6 @@ public class EventsController : ControllerBase
         return Ok(result);
     }
 
-    // Bütün tədbirləri gətir
     [HttpGet]
     public async Task<IActionResult> GetAllEvents()
     {
@@ -32,19 +31,13 @@ public class EventsController : ControllerBase
         return Ok(events);
     }
 
-    // Tədbiri ID-yə görə gətir
     [HttpGet("get-event-by-{eventId}")]
     public async Task<IActionResult> GetEventById(int eventId)
     {
         var eventItem = await _eventQueries.GetEventByIdAsync(eventId);
-        if (eventItem == null)
-        {
-            return NotFound("Tədbir tapılmadı.");
-        }
-        return Ok(eventItem);
+        return (eventItem != null) ? Ok(eventItem) : NotFound(UIMessage.NotFound("Event"));
     }
 
-    // Başlıq üzrə axtarış
     [HttpGet("search-by-title")]
     public async Task<IActionResult> GetEventsByTitle(string title)
     {
@@ -52,7 +45,6 @@ public class EventsController : ControllerBase
         return Ok(events);
     }
 
-    // Məkan üzrə axtarış
     [HttpGet("search-by-place")]
     public async Task<IActionResult> GetEventsByPlace(int placeHallId)
     {
@@ -60,7 +52,6 @@ public class EventsController : ControllerBase
         return Ok(events);
     }
 
-    // Qiymət aralığı üzrə axtarış
     [HttpGet("search-by-price")]
     public async Task<IActionResult> GetEventsByPriceRange(decimal? minPrice, decimal? maxPrice)
     {
@@ -82,3 +73,4 @@ public class EventsController : ControllerBase
         return Ok(result);
     }
 }
+

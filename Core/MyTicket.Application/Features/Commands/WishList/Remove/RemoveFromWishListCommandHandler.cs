@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.WishList.Remove;
 public class RemoveFromWishListCommandHandler : IRequestHandler<RemoveFromWishListCommand, bool>
@@ -27,17 +28,15 @@ public class RemoveFromWishListCommandHandler : IRequestHandler<RemoveFromWishLi
         var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents.Event");
 
         if (wishList == null)
-            throw new NotFoundException("User's wishlist not found.");
+            throw new NotFoundException(UIMessage.NotFound("User's wishlist"));
 
         // Check if the event exists in the wishlist
         var wishListEvent = wishList.WishListEvents.FirstOrDefault(x => x.EventId == request.EventId);
         if (wishListEvent == null)
-            throw new BadRequestException("Event not found in wishlist.");
+            throw new BadRequestException(UIMessage.NotFound("Event") +" in wishlist.");
 
-        // Remove the event from the wishlist
         wishList.RemoveEventFromWishList(wishListEvent);
 
-        // Update the wishlist in the repository
         await _wishListRepository.Update(wishList);
         await _wishListRepository.Commit(cancellationToken);
 

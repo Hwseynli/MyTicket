@@ -41,7 +41,6 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
                .HasColumnName("promo_code_id");
 
         // Relationships
-
         builder.HasMany(o => o.Tickets)
                .WithOne(t => t.Order)
                .HasForeignKey(t => t.OrderId)

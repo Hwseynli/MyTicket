@@ -18,7 +18,7 @@ public class EventViewModel
         {
             Id = eventEntity.Id,
             Title = eventEntity.Title,
-            Description = eventEntity.IsDeleted ? "Müddəti bitib" : eventEntity.Description,
+            Description = eventEntity.IsDeleted ? "Expired" : eventEntity.Description,
             StartTime = eventEntity.StartTime,
             EndTime = eventEntity.EndTime,
             PlaceHallName = eventEntity.PlaceHall.Name,

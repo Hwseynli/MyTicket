@@ -18,7 +18,6 @@ public class TicketManager : ITicketManager
     {
         foreach (var seat in seats)
         {
-            // Yeni bilet yaradılması
             var ticket = new Ticket();
             var uniqueCode = Generator.GenerateUniqueCode();
             if (await _ticketRepository.IsPropertyUniqueAsync(x => x.UniqueCode, uniqueCode))

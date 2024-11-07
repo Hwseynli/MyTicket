@@ -3,6 +3,7 @@ using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Commands.User.ViewModels;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Users;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.User.RefreshToken;
 
@@ -23,7 +24,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, J
         if (user == null
             || !user.Activated
             || user.IsDeleted)
-            throw new UnAuthorizedException("Invalid credentials");
+            throw new UnAuthorizedException(UIMessage.Invalid());
 
         if (Convert.ToDateTime(refreshToken[2]) < DateTime.UtcNow)
             throw new UnAuthorizedException("token is expiredd");

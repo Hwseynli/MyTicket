@@ -2,6 +2,7 @@
 using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Domain.Entities.Places;
 public class Seat : Editable<User>
@@ -17,9 +18,9 @@ public class Seat : Editable<User>
     public void SetDetail(int rowNumber, int seatNumber, SeatType seatType, decimal price,int placeHallId, int userId)
     {
         if (rowNumber <= 0 || seatNumber <= 0)
-            throw new DomainException("Sətir və oturacaq nömrələri sıfır və ya mənfi ola bilməz.");
+            throw new DomainException(UIMessage.GreaterThanZero("Row and seat numbers"));
         if (price <= 0)
-            throw new DomainException("Qiymət sıfır və ya mənfi ola bilməz.");
+            throw new DomainException(UIMessage.GreaterThanZero("Price"));
 
         PlaceHallId = placeHallId;
         RowNumber = rowNumber;
@@ -32,9 +33,9 @@ public class Seat : Editable<User>
     public void SetDetailForUpdate(int rowNumber, int seatNumber, SeatType seatType, decimal price, int modifiedById)
     {
         if (rowNumber <= 0 || seatNumber <= 0)
-            throw new DomainException("Sətir və oturacaq nömrələri sıfır və ya mənfi ola bilməz.");
+            throw new DomainException(UIMessage.GreaterThanZero("Row and seat numbers"));
         if (price <= 0)
-            throw new DomainException("Qiymət sıfır və ya mənfi ola bilməz.");
+            throw new DomainException(UIMessage.GreaterThanZero("Price"));
 
         RowNumber = rowNumber;
         SeatNumber = seatNumber;
@@ -47,7 +48,8 @@ public class Seat : Editable<User>
     {
         int front = totalRows / 3;
         int middle = front * 2;
-        // Burada hər sıranın tipini təyin edirik
+
+        // Here we define the type of each row
         if (row <= front)
             return SeatType.FrontRow;
         else if (row > front && row <= middle)
@@ -58,7 +60,6 @@ public class Seat : Editable<User>
 
     public decimal CalculateSeatPrice(SeatType seatType, decimal price=100)
     {
-        // Burada sıraya əsasən qiymət hesablanır
         decimal finelPrice = price;
         switch (seatType)
         {
@@ -72,7 +73,7 @@ public class Seat : Editable<User>
                 finelPrice = price;
                 return finelPrice;
             default:
-                throw new DomainException("Seat type düzgün deyil");
+                throw new DomainException(UIMessage.ValidProperty("Seat type"));
         }
     }
 }

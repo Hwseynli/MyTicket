@@ -5,6 +5,7 @@ using MyTicket.Application.Features.Commands.Admin.Rating.RateEvent;
 using MyTicket.Application.Features.Commands.WishList.Add;
 using MyTicket.Application.Features.Commands.WishList.Remove;
 using MyTicket.Application.Features.Queries.Favourites;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Controllers;
 [Route("api/favourites")]
@@ -25,10 +26,10 @@ public class FavouritesController : ControllerBase
     public async Task<IActionResult> RateEvent([FromBody] RateEventCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok() : BadRequest();
+        return result ? Ok(UIMessage.GetSuccessMessage("Event", "rated"))
+                          : BadRequest(UIMessage.GetFailureMessage("Event", "rate"));
     }
 
-    // GET: api/values
     [HttpGet("get-wishList")]
     public async Task<IActionResult> GetWishList()
     {
@@ -36,19 +37,20 @@ public class FavouritesController : ControllerBase
         return Ok(result);
     }
 
-    // POST api/values
     [HttpPost("add-wishlist-event")]
     public async Task<IActionResult> AddWishLists([FromBody] AddWishListCommand command)
     {
         var result = await _mediator.Send(command);
-        return Ok(result);
+        return result ? Ok(UIMessage.GetSuccessMessage("Item", "added to favourites"))
+            : BadRequest(UIMessage.GetFailureMessage("Item", "add to favourites"));
     }
 
     [HttpDelete("remove-wishlist-event")]
     public async Task<IActionResult> RemoveFromWishList([FromBody] RemoveFromWishListCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok() : BadRequest();
+        return result ? Ok(UIMessage.GetSuccessMessage("Item", "removed from favourites"))
+            : BadRequest(UIMessage.GetFailureMessage("Item", "remove from favourites"));
     }
 }
 

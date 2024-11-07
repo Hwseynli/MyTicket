@@ -10,6 +10,7 @@ using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Entities.Medias;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.BaseMessages;
 using MyTicket.Infrastructure.Extensions;
 using MyTicket.Infrastructure.Settings;
 
@@ -41,19 +42,19 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
 
         var placeHall = await _placeHallRepository.GetAsync(ph => ph.Id == request.PlaceHallId, "Seats");
         if (placeHall == null)
-            throw new NotFoundException("Zal tapılmadı.");
+            throw new NotFoundException(UIMessage.NotFound("Place hall"));
 
-        // Zalda eyni zaman aralığında tədbir olub olmadığını yoxlamaq
+        // Check if there is an event in the hall at the same time slot
         var existingEvents = await _eventRepository.GetAllAsync(e => e.PlaceHallId == request.PlaceHallId &&
-                                                      (e.StartTime < request.EndTime.AddMinutes(30)) &&
+        (e.StartTime < request.EndTime.AddMinutes(30)) &&
                                                       (request.StartTime.AddMinutes(-30) < e.EndTime));
         if (existingEvents.Any())
-            throw new DomainException("Eyni zaman aralığında həmin zalda başqa bir tədbir keçirilir.");
+            throw new DomainException("Another event is being held in the same hall at the same time.");
 
         if (request.EventMediaModels == null || !request.EventMediaModels.Any(m => m.MainImage != null && m.MainImage.IsImage()))
-            throw new DomainException("Əsas şəkil əlavə olunmalıdır.");
+            throw new DomainException(UIMessage.InvalidImage("Main image"));
 
-        // Tədbir məlumatlarını yığmaq
+        // Collect event data
         var newEvent = new Domain.Entities.Events.Event();
         newEvent.SetDetails(request.Title, request.MinPrice, request.StartTime, request.EndTime, request.Description,
                             request.SubCategoryId, request.PlaceHallId, 0,
@@ -101,7 +102,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
                     }
                     else
                     {
-                        throw new BadRequestException("Media formatı şəkil ya da video olamlıdır");
+                        throw new BadRequestException("Media format must be image or video");
                     }
                     media.SetAuditDetails(userId);
                     eventMedia.Medias.Add(media);
@@ -110,11 +111,11 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
             newEvent.EventMedias.Add(eventMedia);
         }
 
-        // Tədbiri əlavə edirik
+        // Add the event
         await _eventRepository.AddAsync(newEvent);
         await _eventRepository.Commit(cancellationToken);
 
-        // Oturacaqlar üzrə bilet yaratma prosesi
+        // Seat ticket creation process
         if (placeHall.Seats.Capacity <= 0)
             throw new ValidationException();
 

@@ -5,6 +5,7 @@ using MyTicket.Domain.Entities.Places;
 using MyTicket.Domain.Entities.Ratings;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.BaseMessages;
 using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Domain.Entities.Events;
@@ -22,16 +23,16 @@ public class Event : Editable<User>
     public SubCategory SubCategory { get; private set; }
     public int PlaceHallId { get; private set; }
     public PlaceHall PlaceHall { get; private set; }
-    public bool IsDeleted { get; private set; } // Soft deletion
+    public bool IsDeleted { get; private set; } 
     public List<WishListEvent> WishListEvents { get; private set; }
     public List<Rating> Ratings { get; private set; }
     public List<Ticket> Tickets { get; private set; }
-    public double AverageRating { get; set; } // Ortalama reytinq
+    public double AverageRating { get; set; }
 
     public void SetDetails(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge, int userId)
     {
         if (startTime >= endTime)
-            throw new DomainException("Başlanğıc vaxtı son vaxtdan əvvəl olmalıdır.");
+            throw new DomainException("The start time must be before the end time.");
 
         Language = language;
         MinAge = minAge;
@@ -60,9 +61,9 @@ public class Event : Editable<User>
     public void SetDetailsForUpdate(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge, int updatedById)
     {
         if (string.IsNullOrEmpty(name) || !eventMedias.Any(x => x.Medias.Any(c => c.IsMain)))
-            throw new DomainException("Tədbirin adı və əsas şəkli boş ola bilməz.");
+            throw new DomainException(UIMessage.NotEmpty("Event name and main image"));
         if (startTime >= endTime)
-            throw new DomainException("Başlanğıc vaxtı son vaxtdan əvvəl olmalıdır.");
+            throw new DomainException("The start time must be before the end time.");
 
         Title = name.Capitalize();
         MinPrice = minPrice;
@@ -78,7 +79,6 @@ public class Event : Editable<User>
         SetEditFields(updatedById);
     }
 
-    // Tədbirin soft deletion (silinməsi)
     public void SoftDelete(int userId)
     {
         IsDeleted = true;
@@ -102,7 +102,7 @@ public class Event : Editable<User>
             case 5:
                 return $"{RatingValue.FiveStars}";
             default:
-                throw new DomainException("Not Found");
+                throw new DomainException(UIMessage.NotFound($"averageRating={averageRating}"));
         }
     }
 }

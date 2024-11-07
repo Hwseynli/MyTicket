@@ -25,12 +25,10 @@ public class AddWishListCommandHandler:IRequestHandler<AddWishListCommand,bool>
         int userId = await _userManager.GetCurrentUserId();
         string cacheKey = $"wishlist_{userId}";
 
-        // İstifadəçinin mövcud WishListini tapırıq
         var wishList = await _wishListRepository.GetAsync(x => x.UserId == userId, "WishListEvents");
 
         if (wishList == null)
         {
-            // Əgər istifadəçinin WishListi yoxdursa, yeni bir WishList yaradılır
             wishList = new Domain.Entities.Favourites.WishList();
             wishList.SetDetails(userId);
             await _wishListRepository.AddAsync(wishList);
@@ -40,15 +38,13 @@ public class AddWishListCommandHandler:IRequestHandler<AddWishListCommand,bool>
         if (wishList.WishListEvents.Any(x => x.EventId == request.EventId))
             throw new BadRequestException("Event is already in the wishlist.");
 
-        // Tədbirin mövcudluğunu yoxlayırıq
+        // Check for the existence of the event
         var @event = await _eventRepository.GetAsync(e => e.Id == request.EventId && !e.IsDeleted);
         if (@event == null)
             throw new NotFoundException("Tədbir tapılmadı.");
 
-        // Tədbiri WishList-ə əlavə edirik
         wishList.AddEventToWishList(@event);
 
-        // Update the wishlist in the repository
         await _wishListRepository.Update(wishList);
         await _wishListRepository.Commit(cancellationToken);
 

@@ -2,6 +2,7 @@
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Users;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.User.Delete.SoftDeleteRequest;
 public class SoftDeleteRequestCommandHandler : IRequestHandler<SoftDeleteRequestCommand, bool>
@@ -21,7 +22,8 @@ public class SoftDeleteRequestCommandHandler : IRequestHandler<SoftDeleteRequest
     {
         var user = await _userManager.GetCurrentUser();
         if (user.Email != request.Email)
-            throw new BadRequestException("Email doğru deyil");
+            throw new BadRequestException(UIMessage.ValidProperty("Email"));
+
         if (user.IsDeleted)
             return false;
 

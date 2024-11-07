@@ -14,7 +14,7 @@ public class Ticket : Editable<User>
     public decimal Price { get; private set; }
     public bool IsReserved { get; private set; }
     public bool IsSold { get; private set; }
-    public int? UserId { get; private set; } // Bilet kimin adınadır.
+    public int? UserId { get; private set; }
     public User? User { get; private set; }
     public int? OrderId { get; private set; }
     public Order? Order { get; private set; }
@@ -40,7 +40,7 @@ public class Ticket : Editable<User>
     public void ReserveTicket(int? userId, bool isReserved = true)
     {
         if (IsSold)
-            throw new DomainException("Bu bilet artıq satılıb.");
+            throw new DomainException("This ticket is already sold.");
 
         IsReserved = isReserved;
         UserId = userId;
@@ -48,9 +48,6 @@ public class Ticket : Editable<User>
 
     public void SellTicket(int userId)
     {
-        //if (IsReserved == false)
-        //    throw new DomainException("Bilet əvvəlcədən rezerv edilməlidir.");
-
         IsSold = true;
         UserId = userId;
         IsReserved = false;

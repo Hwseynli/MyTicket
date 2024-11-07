@@ -3,6 +3,7 @@ using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Users;
 using MyTicket.Domain.Entities.Enums;
+using MyTicket.Infrastructure.BaseMessages;
 using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Application.Features.Commands.User.Subscriber.Create;
@@ -26,25 +27,24 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
         bool isEmail = Helper.IsEmail(request.EmailOrPhoneNumber);
         bool isPhoneNumber = Helper.IsPhoneNumber(request.EmailOrPhoneNumber);
 
-        // Yeni subscriber yaradılır
         var subscriber = new Domain.Entities.Users.Subscriber();
         
-        // Xoş gəldiniz emailini göndər
+        // Send message for welcome
         if (isEmail)
         {
             if (await _userRepository.GetAsync(x => x.Email == request.EmailOrPhoneNumber && x.RoleId == 1) != null)
-                throw new UnAuthorizedException("Sən adminsən və abunə ola bilmərsən");
+                throw new UnAuthorizedException(UIMessage.NotAccess());
             subscriber.SetDetail(request.EmailOrPhoneNumber, (StringType)1);
             await _subscriberRepository.AddAsync(subscriber);
             await _subscriberRepository.Commit(cancellationToken);
-            var subject = "Xoş gəldiniz!";
-            var body = "Bizə abunə olduğunuz üçün təşəkkür edirik!";
+            var subject = "You are Welcome!";
+            var body = "Thank you for subscribing to us!";
             await _emailManager.SendEmailAsync(request.EmailOrPhoneNumber, subject, body);
         }
         else if(isPhoneNumber)
         {
             if (await _userRepository.GetAsync(x => x.PhoneNumber == request.EmailOrPhoneNumber && x.RoleId == 1) != null)
-                throw new UnAuthorizedException("Sən adminsən və abunə ola bilmərsən");
+                throw new UnAuthorizedException(UIMessage.NotAccess());
             subscriber.SetDetail(request.EmailOrPhoneNumber,0);
             await _subscriberRepository.AddAsync(subscriber);
             await _subscriberRepository.Commit(cancellationToken);

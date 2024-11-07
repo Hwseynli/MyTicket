@@ -2,6 +2,7 @@
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Orders;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.PromoCode.Delete;
 public class DeletePromoCodeCommandHandler : IRequestHandler<DeletePromoCodeCommand, bool>
@@ -22,7 +23,7 @@ public class DeletePromoCodeCommandHandler : IRequestHandler<DeletePromoCodeComm
         var promoCode = await _promoCodeRepository.GetAsync(x => x.Id == request.Id);
 
         if (promoCode == null)
-            throw new NotFoundException("Promo code not found.");
+            throw new NotFoundException(UIMessage.NotFound("Promo code"));
 
         promoCode.SoftDelete(userId);
         await _promoCodeRepository.Update(promoCode);

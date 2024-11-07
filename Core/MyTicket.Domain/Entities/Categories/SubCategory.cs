@@ -24,3 +24,4 @@ public class SubCategory : Editable<User>
         SetEditFields(updatedById);
     }
 }
+

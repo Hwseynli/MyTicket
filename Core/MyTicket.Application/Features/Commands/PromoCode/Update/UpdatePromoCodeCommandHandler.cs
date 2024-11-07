@@ -3,6 +3,7 @@ using MediatR;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Orders;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.PromoCode.Update;
 public class UpdatePromoCodeCommandHandler : IRequestHandler<UpdatePromoCodeCommand, bool>
@@ -22,7 +23,7 @@ public class UpdatePromoCodeCommandHandler : IRequestHandler<UpdatePromoCodeComm
         var promoCode = await _promoCodeRepository.GetAsync(x => x.Id == request.Id);
 
         if (promoCode == null)
-            throw new NotFoundException("Promo code not found.");
+            throw new NotFoundException(UIMessage.NotFound("Promo code"));
 
         promoCode.UpdateDetails(
             request.UniqueCode,

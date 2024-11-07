@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MyTicket.Application.Interfaces.IRepositories.Users;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.User.Subscriber.Create;
 public class CreateSubscriberCommandValidator : AbstractValidator<CreateSubscriberCommand>
@@ -9,12 +10,9 @@ public class CreateSubscriberCommandValidator : AbstractValidator<CreateSubscrib
     {
         _subscriberRepository = subscriberRepository;
 
-        RuleFor(x => x.EmailOrPhoneNumber)
-            .NotEmpty().WithMessage("Email or phone number is required.")
-            .Must(_subscriberRepository.IsValidEmailOrPhoneNumber).WithMessage("Invalid email or phone number format.")
-        .MustAsync(async (phoneNumberOrEmail, cancellation) =>
-                await _subscriberRepository.IsPropertyUniqueAsync(u => u.EmailOrPhoneNumber, phoneNumberOrEmail))
-                .WithMessage("Phone number or email already exists."); ;
+        RuleFor(x => x.EmailOrPhoneNumber).NotEmpty().WithMessage(UIMessage.Required("Email or phone number"))
+                 .Must(_subscriberRepository.IsValidEmailOrPhoneNumber).WithMessage(UIMessage.ValidProperty("Email or phone number"))
+                 .MustAsync(async (emailOrPhone, cancellation) => await _subscriberRepository.IsPropertyUniqueAsync(u => u.EmailOrPhoneNumber, emailOrPhone)).WithMessage(UIMessage.UniqueProperty("Email or phone number"));
     }
 }
 

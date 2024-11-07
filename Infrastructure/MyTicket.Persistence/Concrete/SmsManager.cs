@@ -33,7 +33,7 @@ public class SmsManager:ISmsManager
         var payload = new Dictionary<string, string>
     {
         { "To", phone },
-        { "From", "YourTwilioPhoneNumber" }, // Twilio-da qeydiyyatdan keçmiş telefon nömrənizi buraya yazın
+        { "From", "YourTwilioPhoneNumber" }, // Type your Twilio registered phone number here
         { "Body", text }
     };
 

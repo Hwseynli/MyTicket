@@ -3,6 +3,7 @@ using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Places;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Place.Hall.Update;
 public class UpdatePlaceHallCommandHandler : IRequestHandler<UpdatePlaceHallCommand, bool>
@@ -24,14 +25,14 @@ public class UpdatePlaceHallCommandHandler : IRequestHandler<UpdatePlaceHallComm
 
         var placeHall = await _placeHallRepository.GetAsync(ph => ph.Id == request.Id, "Seats");
         if (placeHall == null)
-            throw new NotFoundException("PlaceHall tapılmadı.");
+            throw new NotFoundException(UIMessage.NotFound("Place Hall"));
 
         if (!await _placeHallRepository.IsPropertyUniqueAsync(x => x.Name, request.Name, placeHall.Id))
-            throw new BadRequestException("PlaceHall Name is already exsist");
+            throw new BadRequestException(UIMessage.AlreadyExsist($"{request.Name}"));
 
         // Oturacaqların sayı və sıra sayı uyğun olmalıdır
         if (request.SeatCount % request.RowCount != 0)
-            throw new DomainException("Oturacaqların sayı və sıra sayları uyğun deyil, tam bölünmür.");
+            throw new DomainException("The number of seats and the number of rows do not match, they are not fully divided.");
 
         // Yeniləmələr tətbiq olunur
         placeHall.SetDetailsForUpdate(request.Name, request.PlaceId, request.SeatCount, request.RowCount, userId);

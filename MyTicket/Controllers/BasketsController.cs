@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyTicket.Application.Features.Commands.Basket.AddTicket;
 using MyTicket.Application.Features.Commands.Basket.RemoveTicket;
 using MyTicket.Application.Features.Queries.Basket;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Controllers;
 [Route("api/basket")]
@@ -20,36 +21,27 @@ public class BasketsController : ControllerBase
         _ticketQueries = ticketQueries;
     }
 
-    // GET: api/values
     [HttpGet("get-basket")]
     public async Task<IActionResult> GetBasket()
     {
         return Ok(await _ticketQueries.GetTicketsInBasket());
     }
 
-    // POST api/Basket/AddTicket
     [HttpPost("add-ticket")]
     public async Task<IActionResult> AddTicketToBasket([FromBody] AddTicketToBasketCommand command)
     {
-        // Tiketi əlavə et
         var result = await _mediator.Send(command);
-        if (result)
-        {
-            return Ok("Ticket basketə əlavə olundu.");
-        }
-        return BadRequest("Ticket basketə əlavə olunmadı.");
+        return result ? Ok(UIMessage.GetSuccessMessage("Ticket", "added to the basket"))
+             : BadRequest(UIMessage.GetFailureMessage("Ticket", "add to the basket"));
     }
 
-    // DELETE api/Basket/RemoveTicket
     [HttpDelete("remove-ticket")]
     public async Task<IActionResult> RemoveTicketFromBasket([FromBody] RemoveTicketFromBasketCommand command)
     {
-        // Tiketi sil
         var result = await _mediator.Send(command);
-        if (result)
-        {
-            return Ok("Ticket basketdən silindi.");
-        }
-        return BadRequest("Ticket basketdən silinmədi.");
+        return result
+            ? Ok(UIMessage.GetSuccessMessage("Ticket", "removed from the basket"))
+            : BadRequest(UIMessage.GetFailureMessage("Ticket", "remove from the basket"));
     }
 }
+

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MyTicket.Application.Features.Commands.Admin.Event.ViewModels;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Infrastructure.BaseMessages;
 using MyTicket.Infrastructure.Extensions;
 
 namespace MyTicket.Application.Features.Commands.Admin.Event.Create;
@@ -13,37 +14,37 @@ public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
         _eventRepository = eventRepository;
 
         RuleFor(x => x.Title)
-              .NotEmpty().WithMessage("Tədbirin adı boş ola bilməz.")
+              .NotEmpty().WithMessage(UIMessage.NotEmpty("Event title"))
               .MustAsync(async (title, cancellationToken) => await _eventRepository.IsPropertyUniqueAsync(x => x.Title, title))
-                .WithMessage("Bu başlıqda tədbir yaradılıb istəyirsinizsə update edin ya da başqa ad ilə yaradın")
-              .MaximumLength(100).WithMessage("Tədbirin adı maksimum 100 simvol ola bilər.");
+                .WithMessage(UIMessage.UniqueProperty("Event title"))
+              .MaximumLength(100).WithMessage(UIMessage.MaxLength("Event title", 100));
 
         RuleFor(x => x.MinPrice)
-           .GreaterThan(0).WithMessage("Price düzgün olmalıdır.");
+           .GreaterThan(0).WithMessage(UIMessage.GreaterThanZero("Price"));
 
         RuleFor(x => x.StartTime)
-            .NotEmpty().WithMessage("Tədbirin başlanma vaxtı boş ola bilməz.")
-            .GreaterThan(DateTime.Now).WithMessage("Tədbirin başlanma vaxtı keçmiş tarix ola bilməz.");
+            .NotEmpty().WithMessage(UIMessage.NotEmpty("Event start time"))
+            .GreaterThan(DateTime.Now).WithMessage("Event start time cannot be in the past.");
 
         RuleFor(x => x.EndTime)
-            .NotEmpty().WithMessage("Tədbirin bitmə vaxtı boş ola bilməz.")
-            .GreaterThan(x => x.StartTime).WithMessage("Tədbirin bitmə vaxtı başlanma vaxtından sonra olmalıdır.");
+            .NotEmpty().WithMessage(UIMessage.NotEmpty("Event end time"))
+            .GreaterThan(x => x.StartTime).WithMessage(UIMessage.GreaterThan("Event end time", "Event start time"));
 
         RuleFor(x => x.Description)
-            .NotEmpty().WithMessage("Tədbirin təsviri boş ola bilməz.")
-            .MaximumLength(500).WithMessage("Tədbirin təsviri maksimum 500 simvol ola bilər.");
+            .NotEmpty().WithMessage(UIMessage.NotEmpty("Event description"))
+            .MaximumLength(500).WithMessage(UIMessage.MaxLength("Event description", 500));
 
         RuleFor(x => x.MinAge)
-            .NotEmpty().WithMessage("Tədbirin min neçə yaşında şəxslər üçün olduğu yazılmalıdır. ");
+            .NotEmpty().WithMessage(UIMessage.NotEmpty("Event minimum age"));
 
         RuleFor(x => x.PlaceHallId)
-            .GreaterThan(0).WithMessage("Zal ID-si düzgün olmalıdır.");
+            .GreaterThan(0).WithMessage(UIMessage.ValidProperty("Place Hall ID"));
 
         RuleFor(x => x.SubCategoryId)
-            .GreaterThan(0).WithMessage("Alt kateqoriya ID-si düzgün olmalıdır.");
+            .GreaterThan(0).WithMessage(UIMessage.ValidProperty("Subcategory ID"));
 
         RuleForEach(x => x.EventMediaModels)
-            .NotNull().WithMessage("Media boş ola bilməz")
+            .NotNull().WithMessage(UIMessage.NotEmpty("Event media"))
             .SetValidator(new EventMediaModelValidator());
     }
 }
@@ -53,7 +54,7 @@ public class EventMediaModelValidator : AbstractValidator<EventMediaModel>
     public EventMediaModelValidator()
     {
         RuleFor(x => x.MainImage)
-          .NotNull().WithMessage("Əsas şəkil boş ola bilməz.")
-          .Must((mainImage) => mainImage.IsImage()).WithMessage("Main image mütləq şəkil olmalıdır");
+          .NotNull().WithMessage(UIMessage.NotEmpty("Main image"))
+          .Must((mainImage) => mainImage.IsImage()).WithMessage(UIMessage.InvalidImage("Main image"));
     }
 }

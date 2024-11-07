@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MyTicket.Application.Interfaces.IRepositories.Places;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.Place.Hall.Create;
 public class AddPlaceHallCommandValidator : AbstractValidator<AddPlaceHallCommand>
@@ -10,23 +11,23 @@ public class AddPlaceHallCommandValidator : AbstractValidator<AddPlaceHallComman
         _placeHallRepository = placeHallRepository;
 
         RuleFor(ph => ph.Name).NotEmpty().MinimumLength(3).MaximumLength(100)
-            .WithMessage("min 3 max 100 simvoldan ibarət olmalıdır.")
+            .WithMessage(UIMessage.MaxLength("Place hall name", 100))
             .MustAsync(async (name, cancellationToken) => await _placeHallRepository.IsPropertyUniqueAsync(x => x.Name.ToLower(), name.Trim().ToLower()))
-            .WithMessage("Bu başlıqda placeHall yaradılıb istəyirsinizsə update edin ya da başqa ad ilə yaradın"); ;
+            .WithMessage(UIMessage.UniqueProperty("Place hall name")); ;
 
         RuleFor(ph => ph.SeatCount)
             .GreaterThan(0)
-            .WithMessage("SeatCount valid olmalıdır.")
+            .WithMessage(UIMessage.GreaterThanZero("Seat count"))
             .Must((command, seatCount) => seatCount % command.RowCount == 0)
-            .WithMessage("SeatCount RowCount-a tam bölünməlidir.");
+            .WithMessage("Seat count must be divisible by row count.");
 
         RuleFor(ph => ph.RowCount)
             .GreaterThan(0)
-            .WithMessage("RowCount valid olmalıdır.");
+            .WithMessage(UIMessage.ValidProperty("Row count"));
 
         RuleFor(ph => ph.PlaceId)
             .GreaterThan(0)
-            .WithMessage("PlaceId valid olmalıdır.");
+            .WithMessage(UIMessage.ValidProperty("Place ID"));
     }
 }
 

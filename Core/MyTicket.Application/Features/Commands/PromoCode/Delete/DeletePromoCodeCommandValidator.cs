@@ -1,12 +1,13 @@
 ﻿using FluentValidation;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Commands.PromoCode.Delete;
 public class DeletePromoCodeCommandValidator : AbstractValidator<DeletePromoCodeCommand>
 {
     public DeletePromoCodeCommandValidator()
     {
-        RuleFor(x => x.Id).NotEmpty()
-            .GreaterThan(0).WithMessage("Id amount must be greater than 1.");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(UIMessage.Required("Id"))
+            .GreaterThan(0).WithMessage(UIMessage.GreaterThanZero("Id"));
     }
 }
 

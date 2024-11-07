@@ -6,6 +6,7 @@ using MyTicket.Application.Interfaces.IRepositories.Events;
 using MyTicket.Application.Interfaces.IRepositories.Orders;
 using MyTicket.Domain.Entities.Events;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.BaseMessages;
 using MyTicket.Infrastructure.Utils;
 
 namespace MyTicket.Application.Features.Commands.Order.Create;
@@ -37,14 +38,14 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
         var user = await _userManager.GetCurrentUser();
 
         if (user.RoleId == 1)
-            throw new UnAuthorizedException("You are Admin!");
+            throw new UnAuthorizedException(UIMessage.NotAccess());
 
         var basket = await _basketRepository.GetAsync(x => x.UserId == user.Id, "TicketsWithTime");
         if (basket == null)
-            throw new BadRequestException($"Basket not found for {user.FirstName} {user.LastName}");
+            throw new BadRequestException(UIMessage.NotFound("Basket"));
 
         if (!basket.TicketsWithTime.Any())
-            throw new NotFoundException("Basket is empty");
+            throw new NotFoundException(UIMessage.NotEmpty("Basket"));
 
         // Ticketlər mövcuddurmu?
         var tickets = new List<Ticket>();
@@ -58,7 +59,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
         }
 
         if (!tickets.Any())
-            throw new DomainException("Heç bir bilet tapılmadı.");
+            throw new DomainException(UIMessage.NotFound("Ticket"));
 
         // Sifariş yaratmaq
         var neworder = new Domain.Entities.Orders.Order();
@@ -70,7 +71,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
         {
             var promoCode = await _orderManager.GetPromoCodeByIdAsync(request.PromoCodeId.Value, user.Id);
             if (promoCode == null || !promoCode.IsValid())
-                throw new DomainException("Invalid Promo Code.");
+                throw new DomainException(UIMessage.ValidProperty("Promo code"));
             neworder.ApplyPromoCode(promoCode);
             promoCode.AddUserForPromoCode(user.Id);
             await _promoCodeRepository.Update(promoCode);

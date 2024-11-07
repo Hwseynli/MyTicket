@@ -4,6 +4,7 @@ using MyTicket.Application.Exceptions;
 using MyTicket.Application.Features.Queries.Favourites.ViewModel;
 using MyTicket.Application.Interfaces.IManagers;
 using MyTicket.Application.Interfaces.IRepositories.Events;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Application.Features.Queries.Favourites;
 public class FavouriteQueries : IFavouriteQueries
@@ -41,7 +42,7 @@ public class FavouriteQueries : IFavouriteQueries
         var wishList = await _wishListRepository.GetAsync(x => x.UserId == user.Id, "WishListEvents.Event.EventMedias.Medias", "WishListEvents.Event.PlaceHall.Place", "WishListEvents.Event.Tickets");
         if (wishList == null)
         {
-            throw new NotFoundException("User's wishlist not found.");
+            throw new NotFoundException(UIMessage.NotFound("User's wishlist"));
         }
 
         var wishListDto = WishListDto.MapToViewModel(wishList);

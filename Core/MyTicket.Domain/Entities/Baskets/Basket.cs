@@ -1,6 +1,7 @@
 ﻿using MyTicket.Domain.Common;
 using MyTicket.Domain.Entities.Users;
 using MyTicket.Domain.Exceptions;
+using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Domain.Entities.Baskets;
 public class Basket:BaseEntity
@@ -30,7 +31,7 @@ public class Basket:BaseEntity
     {
         TicketWithTime? ticket = TicketsWithTime.FirstOrDefault(x=>x.TicketId==ticketId);
         if (ticket == null)
-            throw new DomainException();
+            throw new DomainException(UIMessage.NotFound("Ticket"));
 
         TicketsWithTime.Remove(ticket);
     }
