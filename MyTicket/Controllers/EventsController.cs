@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyTicket.Application.Features.Queries.Basket;
 using MyTicket.Application.Features.Queries.Event;
+using MyTicket.Application.Features.Queries.Event.ViewModels;
 using MyTicket.Infrastructure.BaseMessages;
 
 namespace MyTicket.Controllers;
@@ -21,6 +22,13 @@ public class EventsController : ControllerBase
     public async Task<IActionResult> GetRating(int eventId)
     {
         var result = await _eventQueries.GetRating(eventId);
+        return Ok(result);
+    }
+
+    [HttpGet("GetEventsByRating/{rating}")]
+    public async Task<ActionResult<List<EventViewModel>>> GetEventsByRating(double rating)
+    {
+        var result= await _eventQueries.GetEventsForRating(rating);
         return Ok(result);
     }
 

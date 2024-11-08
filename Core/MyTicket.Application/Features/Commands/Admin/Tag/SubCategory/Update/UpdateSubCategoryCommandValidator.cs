@@ -14,7 +14,8 @@ public class UpdateSubCategoryCommandValidator : AbstractValidator<UpdateSubCate
             .MinimumLength(3).WithMessage(UIMessage.MinLength("Name", 3))
             .MaximumLength(100).WithMessage(UIMessage.MaxLength("Name", 100));
 
-        RuleFor(sc => sc.CategoryId).NotEmpty().WithMessage(UIMessage.NotEmpty("Category id"))
-            .GreaterThan(0).WithMessage(UIMessage.GreaterThanZero("Category id"));
+        RuleFor(x => x.CategoryIds)
+             .Must(subCategoryIds => subCategoryIds != null && subCategoryIds.Any(id => id > 0))
+             .WithMessage("Event must have at least one valid SubCategory.");
     }
 }

@@ -35,9 +35,14 @@ public class CategoryEntityTypeConfiguration : IEntityTypeConfiguration<Category
                .HasColumnName("last_update_date_time");
 
         builder.HasMany(c => c.SubCategories)
-               .WithOne(sc => sc.Category)
-               .HasForeignKey(sc => sc.CategoryId)
-               .OnDelete(DeleteBehavior.Cascade);
+              .WithMany(sc => sc.Categories)
+              .UsingEntity(j => j.ToTable("category_subcategories"));
+
+        builder.HasMany(e => e.Events)
+            .WithOne(c => c.Category)
+            .HasForeignKey(e => e.CategoryId)
+            .IsRequired();
+
     }
 }
 

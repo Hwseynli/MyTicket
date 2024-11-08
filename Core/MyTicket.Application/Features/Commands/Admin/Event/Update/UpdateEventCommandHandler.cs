@@ -10,23 +10,26 @@ using MyTicket.Infrastructure.Settings;
 using MyTicket.Infrastructure.Extensions;
 using MyTicket.Domain.Entities.Enums;
 using MyTicket.Infrastructure.BaseMessages;
+using MyTicket.Application.Interfaces.IRepositories.Categories;
 
 namespace MyTicket.Application.Features.Commands.Admin.Event.Update;
 public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, bool>
 {
     private readonly IUserManager _userManager;
     private readonly IEventRepository _eventRepository;
+    private readonly ISubCategoryRepository _subCategoryRepository;
     private readonly ITicketManager _ticketManager;
     private readonly IOptions<FileSettings> _fileSettings;
     private readonly IEventMediaRepository _eventMediaRepository;
 
-    public UpdateEventCommandHandler(IUserManager userManager, IEventRepository eventRepository, ITicketManager ticketManager, IOptions<FileSettings> fileSettings, IEventMediaRepository eventMediaRepository)
+    public UpdateEventCommandHandler(IUserManager userManager, IEventRepository eventRepository, ITicketManager ticketManager, IOptions<FileSettings> fileSettings, IEventMediaRepository eventMediaRepository, ISubCategoryRepository subCategoryRepository)
     {
         _userManager = userManager;
         _eventRepository = eventRepository;
         _ticketManager = ticketManager;
         _fileSettings = fileSettings;
         _eventMediaRepository = eventMediaRepository;
+        _subCategoryRepository = subCategoryRepository;
     }
 
     public async Task<bool> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
@@ -37,8 +40,14 @@ public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, boo
         if (eventEntity == null)
             throw new NotFoundException(UIMessage.NotFound("Event"));
 
+        // Retrieve SubCategories by Ids
+        var subCategories = await _subCategoryRepository.GetAllAsync(sc => request.SubCategoryIds.Contains(sc.Id));
+
+        if (!subCategories.Any())
+            throw new BadRequestException("Event must have at least one subcategory.");
+
         // Update event details
-        eventEntity.SetDetailsForUpdate(request.Title, request.MinPrice, request.StartTime, request.EndTime, request.Description, eventEntity.EventMedias, request.SubCategoryId, request.PlaceHallId, eventEntity.AverageRating, request.Language, request.MinAge, userId);
+        eventEntity.SetDetailsForUpdate(request.Title, request.MinPrice, request.StartTime, request.EndTime, request.Description, eventEntity.EventMedias, request.CategoryId, subCategories,request.PlaceHallId, eventEntity.AverageRating, request.Language, request.MinAge, userId);
 
         if (request.DeletedMediaIds != null)
         {

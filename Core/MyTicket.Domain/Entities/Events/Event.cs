@@ -19,8 +19,9 @@ public class Event : Editable<User>
     public LanguageType Language { get; set; }
     public byte MinAge { get; set; }
     public List<EventMedia> EventMedias { get; private set; }
-    public int SubCategoryId { get; private set; }
-    public SubCategory SubCategory { get; private set; }
+    public List<SubCategory> SubCategories { get; private set; }
+    public int CategoryId { get; private set; }
+    public Category Category { get; private set; }
     public int PlaceHallId { get; private set; }
     public PlaceHall PlaceHall { get; private set; }
     public bool IsDeleted { get; private set; } 
@@ -29,7 +30,7 @@ public class Event : Editable<User>
     public List<Ticket> Tickets { get; private set; }
     public double AverageRating { get; set; }
 
-    public void SetDetails(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge, int userId)
+    public void SetDetails(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, int categoryId, IEnumerable<SubCategory> subCategories, int placeHallId, double averageRating, LanguageType language, byte minAge, int userId)
     {
         if (startTime >= endTime)
             throw new DomainException("The start time must be before the end time.");
@@ -38,7 +39,7 @@ public class Event : Editable<User>
         MinAge = minAge;
         AverageRating = averageRating;
         Title = name.Capitalize();
-        SubCategoryId = categoryId;
+        CategoryId = categoryId;
         StartTime = startTime;
         EndTime = endTime;
         Description = description;
@@ -46,6 +47,7 @@ public class Event : Editable<User>
         Ratings = new List<Rating>();
         Tickets = new List<Ticket>();
         WishListEvents = new List<WishListEvent>();
+        SubCategories = subCategories.ToList();
         PlaceHallId = placeHallId;
         IsDeleted = false;
         MinPrice = minPrice;
@@ -58,7 +60,7 @@ public class Event : Editable<User>
         AverageRating = (AverageRating * (Ratings.Count - 1) + (int)rating.RatingValue) / Ratings.Count;
     }
 
-    public void SetDetailsForUpdate(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int categoryId, int placeHallId, double averageRating, LanguageType language, byte minAge, int updatedById)
+    public void SetDetailsForUpdate(string name, decimal minPrice, DateTime startTime, DateTime endTime, string description, List<EventMedia> eventMedias, int categoryId, IEnumerable<SubCategory> subCategories, int placeHallId, double averageRating, LanguageType language, byte minAge, int updatedById)
     {
         if (string.IsNullOrEmpty(name) || !eventMedias.Any(x => x.Medias.Any(c => c.IsMain)))
             throw new DomainException(UIMessage.NotEmpty("Event name and main image"));
@@ -71,7 +73,8 @@ public class Event : Editable<User>
         EndTime = endTime;
         Description = description;
         EventMedias = eventMedias ?? new List<EventMedia>();
-        SubCategoryId = categoryId;
+        CategoryId = categoryId;
+        SubCategories = subCategories.ToList();
         PlaceHallId = placeHallId;
         AverageRating = averageRating;
         Language = language;

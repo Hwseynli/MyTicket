@@ -17,7 +17,8 @@ public class CreateSubCategoryCommandValidator : AbstractValidator<CreateSubCate
             .MustAsync(async (name,cancellationToken)=> await _subCategoryRepository.IsPropertyUniqueAsync(x=>x.Name,name))
             .WithMessage(UIMessage.AlreadyExsist("Name"));
 
-        RuleFor(sc => sc.CategoryId).NotEmpty().WithMessage(UIMessage.NotEmpty("Category id"))
-            .GreaterThan(0).WithMessage(UIMessage.GreaterThanZero("Category id"));
+        RuleFor(x => x.CategoryIds)
+            .Must(subCategoryIds => subCategoryIds != null && subCategoryIds.Any(id => id > 0))
+            .WithMessage("Event must have at least one valid SubCategory.");
     }
 }

@@ -22,9 +22,6 @@ public class SubCategoryEntityTypeConfiguration : IEntityTypeConfiguration<SubCa
         builder.HasIndex(sc => sc.Name)
                 .IsUnique();
 
-        builder.Property(sc => sc.CategoryId)
-               .HasColumnName("category_id");
-
         builder.Property(sc => sc.CreatedById)
                .HasColumnName("created_by_id");
 

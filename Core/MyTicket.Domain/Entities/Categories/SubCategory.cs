@@ -6,21 +6,20 @@ namespace MyTicket.Domain.Entities.Categories;
 public class SubCategory : Editable<User>
 {
     public string Name { get; private set; }
-    public int CategoryId { get; private set; }
-    public Category Category { get; private set; }
+    public List<Category> Categories { get; set; }
     public List<Event> Events { get; set; }
 
-    public void SetDetails(string name, int categoryId, int createdById)
+    public void SetDetails(string name, IEnumerable<Category> categories, int createdById)
     {
         Name = name.Capitalize();
-        CategoryId = categoryId;
+        Categories = categories.ToList();
         Events = new List<Event>();
         SetAuditDetails(createdById);
     }
-    public void SetDetailsForUpdate(string name, int categoryId, int updatedById)
+    public void SetDetailsForUpdate(string name, IEnumerable<Category> categories, int updatedById)
     {
         Name = name.Capitalize();
-        CategoryId = categoryId;
+        Categories = categories.ToList();
         SetEditFields(updatedById);
     }
 }

@@ -53,10 +53,6 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
             .IsRequired()
             .HasColumnName("place_hall_id");
 
-        builder.Property(e => e.SubCategoryId)
-           .IsRequired()
-           .HasColumnName("sub_category_id");
-
         builder.Property(e => e.AverageRating)
            .IsRequired()
            .HasColumnName("average_rating");
@@ -82,6 +78,10 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
                .WithOne(we => we.Event)
                .HasForeignKey(we => we.EventId)
                .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(e => e.SubCategories)
+               .WithMany(sc => sc.Events)
+               .UsingEntity(j => j.ToTable("event_subcategories"));
 
         // Audit Fields
         builder.Property(e => e.CreatedById)

@@ -14,7 +14,8 @@ public class UpdateEventCommand : IRequest<bool>
     public LanguageType Language { get; set; }
     public byte MinAge { get; set; }
     public int PlaceHallId { get; set; }
-    public int SubCategoryId { get; set; }
+    public int CategoryId { get; set; }
+    public List<int> SubCategoryIds { get; set; }
     public List<EventMediaUpdateModel> EventMediaModels { get; set; }
     public List<int>? DeletedMediaIds { get; set; }
     public bool IsDeleted { get; set; }

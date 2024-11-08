@@ -554,6 +554,7 @@
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
@@ -584,6 +585,7 @@
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/PdfSharp.WPFonts.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/PdfSharp.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/PdfSharpCore.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Pipelines.Sockets.Unofficial.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Polly.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Polly.Extensions.Http.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Scrutor.dll
@@ -601,6 +603,7 @@
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/SixLabors.ImageSharp.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/SkiaSharp.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/SkiaSharp.Extended.dll
+/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/StackExchange.Redis.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Stripe.net.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -717,6 +720,3 @@
 /Users/zeyneb/Projects/MyTicket/MyTicket/obj/Debug/net8.0/MyTicket.pdb
 /Users/zeyneb/Projects/MyTicket/MyTicket/obj/Debug/net8.0/MyTicket.genruntimeconfig.cache
 /Users/zeyneb/Projects/MyTicket/MyTicket/obj/Debug/net8.0/ref/MyTicket.dll
-/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Pipelines.Sockets.Unofficial.dll
-/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/StackExchange.Redis.dll
-/Users/zeyneb/Projects/MyTicket/MyTicket/bin/Debug/net8.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll

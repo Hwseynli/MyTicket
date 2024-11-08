@@ -22,6 +22,36 @@ namespace MyTicket.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("CategorySubCategory", b =>
+                {
+                    b.Property<int>("CategoriesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SubCategoriesId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CategoriesId", "SubCategoriesId");
+
+                    b.HasIndex("SubCategoriesId");
+
+                    b.ToTable("category_subcategories", (string)null);
+                });
+
+            modelBuilder.Entity("EventSubCategory", b =>
+                {
+                    b.Property<int>("EventsId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SubCategoriesId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("EventsId", "SubCategoriesId");
+
+                    b.HasIndex("SubCategoriesId");
+
+                    b.ToTable("event_subcategories", (string)null);
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Baskets.Basket", b =>
                 {
                     b.Property<int>("Id")
@@ -117,10 +147,6 @@ namespace MyTicket.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("category_id");
-
                     b.Property<int>("CreatedById")
                         .HasColumnType("integer")
                         .HasColumnName("created_by_id");
@@ -145,8 +171,6 @@ namespace MyTicket.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("Name")
                         .IsUnique();
 
@@ -165,6 +189,9 @@ namespace MyTicket.Persistence.Migrations
                     b.Property<double>("AverageRating")
                         .HasColumnType("double precision")
                         .HasColumnName("average_rating");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CreatedById")
                         .HasColumnType("integer")
@@ -212,10 +239,6 @@ namespace MyTicket.Persistence.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("start_date_time");
 
-                    b.Property<int>("SubCategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("sub_category_id");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text")
@@ -227,9 +250,9 @@ namespace MyTicket.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlaceHallId");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("SubCategoryId");
+                    b.HasIndex("PlaceHallId");
 
                     b.HasIndex("Title")
                         .IsUnique();
@@ -979,6 +1002,36 @@ namespace MyTicket.Persistence.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("CategorySubCategory", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Categories.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyTicket.Domain.Entities.Categories.SubCategory", null)
+                        .WithMany()
+                        .HasForeignKey("SubCategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EventSubCategory", b =>
+                {
+                    b.HasOne("MyTicket.Domain.Entities.Events.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyTicket.Domain.Entities.Categories.SubCategory", null)
+                        .WithMany()
+                        .HasForeignKey("SubCategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MyTicket.Domain.Entities.Baskets.Basket", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Users.User", "User")
@@ -1009,34 +1062,23 @@ namespace MyTicket.Persistence.Migrations
                     b.Navigation("Ticket");
                 });
 
-            modelBuilder.Entity("MyTicket.Domain.Entities.Categories.SubCategory", b =>
+            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
                 {
                     b.HasOne("MyTicket.Domain.Entities.Categories.Category", "Category")
-                        .WithMany("SubCategories")
+                        .WithMany("Events")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Events.Event", b =>
-                {
                     b.HasOne("MyTicket.Domain.Entities.Places.PlaceHall", "PlaceHall")
                         .WithMany("Events")
                         .HasForeignKey("PlaceHallId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyTicket.Domain.Entities.Categories.SubCategory", "SubCategory")
-                        .WithMany("Events")
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Category");
 
                     b.Navigation("PlaceHall");
-
-                    b.Navigation("SubCategory");
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Events.EventMedia", b =>
@@ -1215,11 +1257,6 @@ namespace MyTicket.Persistence.Migrations
                 });
 
             modelBuilder.Entity("MyTicket.Domain.Entities.Categories.Category", b =>
-                {
-                    b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("MyTicket.Domain.Entities.Categories.SubCategory", b =>
                 {
                     b.Navigation("Events");
                 });

@@ -40,8 +40,12 @@ public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
         RuleFor(x => x.PlaceHallId)
             .GreaterThan(0).WithMessage(UIMessage.ValidProperty("Place Hall ID"));
 
-        RuleFor(x => x.SubCategoryId)
-            .GreaterThan(0).WithMessage(UIMessage.ValidProperty("Subcategory ID"));
+        RuleFor(x => x.CategoryId)
+            .GreaterThan(0).WithMessage(UIMessage.ValidProperty("Category ID"));
+
+        RuleFor(x => x.SubCategoryIds)
+            .Must(subCategoryIds => subCategoryIds != null && subCategoryIds.Any(id => id > 0))
+            .WithMessage("Event must have at least one valid SubCategory.");
 
         RuleForEach(x => x.EventMediaModels)
             .NotNull().WithMessage(UIMessage.NotEmpty("Event media"))

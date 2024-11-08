@@ -80,6 +80,8 @@
     <None Remove="Features\Commands\Admin\Event\Update\" />
     <None Remove="Features\Queries\Favourites\" />
     <None Remove="Features\Queries\Favourites\ViewModel\" />
+    <None Remove="Features\Queries\Tag\" />
+    <None Remove="Features\Queries\Tag\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -150,6 +152,8 @@
     <Folder Include="Features\Commands\Admin\Event\Update\" />
     <Folder Include="Features\Queries\Favourites\" />
     <Folder Include="Features\Queries\Favourites\ViewModel\" />
+    <Folder Include="Features\Queries\Tag\" />
+    <Folder Include="Features\Queries\Tag\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTicket.Domain\MyTicket.Domain.csproj" />

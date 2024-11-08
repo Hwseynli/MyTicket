@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using MyTicket.Application.Exceptions;
 using MyTicket.Application.Interfaces.IManagers;
+using MyTicket.Application.Interfaces.IRepositories.Categories;
 using MyTicket.Application.Interfaces.IRepositories.Events;
 using MyTicket.Application.Interfaces.IRepositories.Places;
 using MyTicket.Application.Interfaces.IRepositories.Users;
@@ -23,9 +24,10 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
     private readonly IUserManager _userManager;
     private readonly IOptions<FileSettings> _fileSettings;
     private readonly ISubscriberRepository _subscriberRepository;
+    private readonly ISubCategoryRepository _subCategoryRepository;
     private readonly IEmailManager _emailManager;
 
-    public CreateEventCommandHandler(IEventRepository eventRepository, ITicketManager ticketManager, IPlaceHallRepository placeHallRepository, IUserManager userManager, IOptions<FileSettings> fileSettings, ISubscriberRepository subscriberRepository, IEmailManager emailManager)
+    public CreateEventCommandHandler(IEventRepository eventRepository, ITicketManager ticketManager, IPlaceHallRepository placeHallRepository, IUserManager userManager, IOptions<FileSettings> fileSettings, ISubscriberRepository subscriberRepository, IEmailManager emailManager, ISubCategoryRepository subCategoryRepository)
     {
         _eventRepository = eventRepository;
         _ticketManager = ticketManager;
@@ -34,6 +36,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
         _fileSettings = fileSettings;
         _subscriberRepository = subscriberRepository;
         _emailManager = emailManager;
+        _subCategoryRepository = subCategoryRepository;
     }
 
     public async Task<bool> Handle(CreateEventCommand request, CancellationToken cancellationToken)
@@ -46,18 +49,29 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
 
         // Check if there is an event in the hall at the same time slot
         var existingEvents = await _eventRepository.GetAllAsync(e => e.PlaceHallId == request.PlaceHallId &&
-        (e.StartTime < request.EndTime.AddMinutes(30)) &&
-                                                      (request.StartTime.AddMinutes(-30) < e.EndTime));
+        (e.StartTime < request.EndTime.AddMinutes(30)) && (request.StartTime.AddMinutes(-30) < e.EndTime));
         if (existingEvents.Any())
             throw new DomainException("Another event is being held in the same hall at the same time.");
 
         if (request.EventMediaModels == null || !request.EventMediaModels.Any(m => m.MainImage != null && m.MainImage.IsImage()))
             throw new DomainException(UIMessage.InvalidImage("Main image"));
 
+        // Validate SubCategories and Categories
+        var subCategories = await _subCategoryRepository.GetAllAsync(sc => request.SubCategoryIds.Contains(sc.Id));
+        if (!subCategories.Any())
+            throw new DomainException("Event must be assigned to at least one valid SubCategory.");
+
+        // Ensure all SubCategories belong to at least one Category
+        foreach (var subCategory in subCategories)
+        {
+            if (!subCategory.Categories.Any())
+                throw new DomainException($"SubCategory '{subCategory.Name}' must belong to at least one Category.");
+        }
+
         // Collect event data
         var newEvent = new Domain.Entities.Events.Event();
         newEvent.SetDetails(request.Title, request.MinPrice, request.StartTime, request.EndTime, request.Description,
-                            request.SubCategoryId, request.PlaceHallId, 0,
+                            request.CategoryId, subCategories, request.PlaceHallId, 0,
                             request.Language, request.MinAge, userId);
 
         for (int i = 0; i < request.EventMediaModels.Count; i++)
