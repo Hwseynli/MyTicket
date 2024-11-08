@@ -18,6 +18,5 @@ public class UpdateEventCommand : IRequest<bool>
     public List<int> SubCategoryIds { get; set; }
     public List<EventMediaUpdateModel> EventMediaModels { get; set; }
     public List<int>? DeletedMediaIds { get; set; }
-    public bool IsDeleted { get; set; }
 }
 

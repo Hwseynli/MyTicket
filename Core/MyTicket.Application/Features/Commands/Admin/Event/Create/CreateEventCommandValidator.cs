@@ -58,7 +58,7 @@ public class EventMediaModelValidator : AbstractValidator<EventMediaModel>
     public EventMediaModelValidator()
     {
         RuleFor(x => x.MainImage)
-          .NotNull().WithMessage(UIMessage.NotEmpty("Main image"))
-          .Must((mainImage) => mainImage.IsImage()).WithMessage(UIMessage.InvalidImage("Main image"));
+            .NotNull().WithMessage(UIMessage.NotEmpty("Main image"))
+            .Must((mainImage) => mainImage.IsImage()).WithMessage(UIMessage.InvalidImage("Main image"));
     }
 }

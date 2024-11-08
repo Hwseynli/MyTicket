@@ -7,32 +7,48 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.MyTicket.AdminPanel PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Core/MyTicket.Application/Features/Commands/Admin/Event/Create/CreateEventCommandHandler.cs">
+    <Files>
+      <File FileName="Infrastructure/MyTicket.Infrastructure/BaseMessages/UIMessage.cs" Line="24" Column="1" />
+      <File FileName="Core/MyTicket.Application/Common/Behaviour/ValidationBehaviour.cs" Line="11" Column="1" />
+      <File FileName="MyTicket.AdminPanel/Controllers/EventsController.cs" Line="27" Column="1" />
+      <File FileName="Core/MyTicket.Application/Features/Commands/Admin/Event/Create/CreateEventCommandHandler.cs" Line="27" Column="68" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MyTicket">
+          <Node name="MyTicket" expanded="True">
             <Node name="Core" expanded="True">
-              <Node name="MyTicket.Domain">
-                <Node name="Entities">
-                  <Node name="Events" expanded="True">
-                    <Node name="Event.cs" selected="True" />
+              <Node name="MyTicket.Application">
+                <Node name="Common" expanded="True">
+                  <Node name="Behaviour" expanded="True" />
+                </Node>
+                <Node name="Features">
+                  <Node name="Commands">
+                    <Node name="Admin">
+                      <Node name="Event">
+                        <Node name="Create">
+                          <Node name="CreateEventCommandHandler.cs" selected="True" />
+                        </Node>
+                        <Node name="Update" expanded="True" />
+                      </Node>
+                    </Node>
                   </Node>
-                  <Node name="Places" expanded="True" />
-                  <Node name="Users" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="MyTicket.Domain" expanded="True">
+                <Node name="Entities" expanded="True">
+                  <Node name="Categories" expanded="True" />
                 </Node>
               </Node>
             </Node>
             <Node name="Infrastructure" expanded="True">
-              <Node name="MyTicket.Infrastructure">
+              <Node name="MyTicket.Infrastructure" expanded="True">
                 <Node name="BaseMessages" expanded="True" />
               </Node>
-              <Node name="MyTicket.Persistence" expanded="True">
-                <Node name="EntityConfiguration" expanded="True">
-                  <Node name="CategoryEntityTypeConfigurations" expanded="True" />
-                  <Node name="EventEntityTypeConfigurations" expanded="True" />
-                </Node>
-              </Node>
+            </Node>
+            <Node name="MyTicket.AdminPanel" expanded="True">
+              <Node name="Controllers" expanded="True" />
             </Node>
           </Node>
         </State>

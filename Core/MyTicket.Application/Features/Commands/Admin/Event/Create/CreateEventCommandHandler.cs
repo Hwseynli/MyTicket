@@ -25,9 +25,10 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
     private readonly IOptions<FileSettings> _fileSettings;
     private readonly ISubscriberRepository _subscriberRepository;
     private readonly ISubCategoryRepository _subCategoryRepository;
+    private readonly ICategoryRepository _categoryRepository;
     private readonly IEmailManager _emailManager;
 
-    public CreateEventCommandHandler(IEventRepository eventRepository, ITicketManager ticketManager, IPlaceHallRepository placeHallRepository, IUserManager userManager, IOptions<FileSettings> fileSettings, ISubscriberRepository subscriberRepository, IEmailManager emailManager, ISubCategoryRepository subCategoryRepository)
+    public CreateEventCommandHandler(IEventRepository eventRepository, ITicketManager ticketManager, IPlaceHallRepository placeHallRepository, IUserManager userManager, IOptions<FileSettings> fileSettings, ISubscriberRepository subscriberRepository, IEmailManager emailManager, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository)
     {
         _eventRepository = eventRepository;
         _ticketManager = ticketManager;
@@ -37,6 +38,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
         _subscriberRepository = subscriberRepository;
         _emailManager = emailManager;
         _subCategoryRepository = subCategoryRepository;
+        _categoryRepository = categoryRepository;
     }
 
     public async Task<bool> Handle(CreateEventCommand request, CancellationToken cancellationToken)
@@ -57,16 +59,24 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, boo
             throw new DomainException(UIMessage.InvalidImage("Main image"));
 
         // Validate SubCategories and Categories
-        var subCategories = await _subCategoryRepository.GetAllAsync(sc => request.SubCategoryIds.Contains(sc.Id));
+        var subCategories = await _subCategoryRepository.GetAllAsync(sc => request.SubCategoryIds.Contains(sc.Id),"Categories");
         if (!subCategories.Any())
             throw new DomainException("Event must be assigned to at least one valid SubCategory.");
+
+        var category = await _categoryRepository.GetAsync(x => x.Id == request.CategoryId, "SubCategories");
+        if (category == null)
+            throw new NotFoundException(UIMessage.NotFound("Category id"));
 
         // Ensure all SubCategories belong to at least one Category
         foreach (var subCategory in subCategories)
         {
-            if (!subCategory.Categories.Any())
-                throw new DomainException($"SubCategory '{subCategory.Name}' must belong to at least one Category.");
+            if (!subCategory.Categories.Any(x=>x.Id==category.Id))
+            {
+                category.SubCategories.Add(subCategory);
+            }    
         }
+        await _categoryRepository.Update(category);
+        await _categoryRepository.Commit(cancellationToken);
 
         // Collect event data
         var newEvent = new Domain.Entities.Events.Event();

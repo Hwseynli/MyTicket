@@ -18,11 +18,12 @@ public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, boo
     private readonly IUserManager _userManager;
     private readonly IEventRepository _eventRepository;
     private readonly ISubCategoryRepository _subCategoryRepository;
+    private readonly ICategoryRepository _categoryRepository;
     private readonly ITicketManager _ticketManager;
     private readonly IOptions<FileSettings> _fileSettings;
     private readonly IEventMediaRepository _eventMediaRepository;
 
-    public UpdateEventCommandHandler(IUserManager userManager, IEventRepository eventRepository, ITicketManager ticketManager, IOptions<FileSettings> fileSettings, IEventMediaRepository eventMediaRepository, ISubCategoryRepository subCategoryRepository)
+    public UpdateEventCommandHandler(IUserManager userManager, IEventRepository eventRepository, ITicketManager ticketManager, IOptions<FileSettings> fileSettings, IEventMediaRepository eventMediaRepository, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository)
     {
         _userManager = userManager;
         _eventRepository = eventRepository;
@@ -30,24 +31,56 @@ public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, boo
         _fileSettings = fileSettings;
         _eventMediaRepository = eventMediaRepository;
         _subCategoryRepository = subCategoryRepository;
+        _categoryRepository = categoryRepository;
     }
 
     public async Task<bool> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
     {
         int userId = await _userManager.GetCurrentUserId();
         // Retrieve event and validate
-        var eventEntity = await _eventRepository.GetAsync(e => e.Id == request.Id, "Tickets", "PlaceHall.Seats", "EventMedias.Medias");
+        var eventEntity = await _eventRepository.GetAsync(e => e.Id == request.Id, "Tickets", "PlaceHall.Seats", "EventMedias.Medias", "SubCategories");
         if (eventEntity == null)
             throw new NotFoundException(UIMessage.NotFound("Event"));
 
-        // Retrieve SubCategories by Ids
-        var subCategories = await _subCategoryRepository.GetAllAsync(sc => request.SubCategoryIds.Contains(sc.Id));
+        var category = await _categoryRepository.GetAsync(x=>x.Id==request.CategoryId,"SubCategories");
+        if (category == null)
+            throw new NotFoundException(UIMessage.NotFound("Category id"));
+        // Collect existing SubCategories and check for updates
+        var existingSubCategoryIds = eventEntity.SubCategories.Select(sc => sc.Id).ToList();
+        var newSubCategoryIds = request.SubCategoryIds.Except(existingSubCategoryIds).ToList();
+        var removedSubCategoryIds = existingSubCategoryIds.Except(request.SubCategoryIds).ToList();
 
-        if (!subCategories.Any())
-            throw new BadRequestException("Event must have at least one subcategory.");
+        // Get and add new SubCategories
+        if (newSubCategoryIds.Any())
+        {
+            var newSubCategories = await _subCategoryRepository.GetAllAsync(sc => newSubCategoryIds.Contains(sc.Id),"Categories");
+            if (newSubCategories.Any())
+            {
+                foreach (var subCategory in newSubCategories)
+                {
+                    eventEntity.SubCategories.Add(subCategory);
+                    if (!subCategory.Categories.Any(x=>x.Id==category.Id))
+                    {
+                        category.SubCategories.Add(subCategory);
+                    }
+                }
+                await _categoryRepository.Update(category);
+                await _categoryRepository.Commit(cancellationToken);
+            }
+        }
+
+        // Extract the SubCategories to be removed
+        if (removedSubCategoryIds.Any())
+        {
+            var removedSubCategories = eventEntity.SubCategories.Where(sc => removedSubCategoryIds.Contains(sc.Id)).ToList();
+            foreach (var subCategory in removedSubCategories)
+            {
+                eventEntity.SubCategories.Remove(subCategory);
+            }
+        }
 
         // Update event details
-        eventEntity.SetDetailsForUpdate(request.Title, request.MinPrice, request.StartTime, request.EndTime, request.Description, eventEntity.EventMedias, request.CategoryId, subCategories,request.PlaceHallId, eventEntity.AverageRating, request.Language, request.MinAge, userId);
+        eventEntity.SetDetailsForUpdate(request.Title, request.MinPrice, request.StartTime, request.EndTime, request.Description, eventEntity.EventMedias, request.CategoryId, eventEntity.SubCategories, request.PlaceHallId, eventEntity.AverageRating, request.Language, request.MinAge, userId);
 
         if (request.DeletedMediaIds != null)
         {
