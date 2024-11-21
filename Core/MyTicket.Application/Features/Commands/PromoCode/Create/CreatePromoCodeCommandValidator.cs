@@ -15,7 +15,7 @@ namespace MyTicket.Application.Features.Commands.PromoCode.Create
                     .Matches(@"^[a-zA-Z0-9]{5,10}$")
                 .WithMessage("Unique code must be alphanumeric and 5-10 characters long.")
                     .MustAsync((async (uniqueCode, cancellationToken) => await _promoCodeRepository.IsPropertyUniqueAsync(x => x.UniqueCode, uniqueCode)))
-                .WithMessage(UIMessage.AlreadyExsist("Unique code"));
+                .WithMessage(UIMessage.AlreadyExist("Unique code"));
 
             RuleFor(x => x.DiscountAmount)
                     .GreaterThan(0)

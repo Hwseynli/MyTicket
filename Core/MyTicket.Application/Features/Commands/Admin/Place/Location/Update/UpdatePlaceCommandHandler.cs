@@ -25,7 +25,7 @@ public class UpdatePlaceCommandHandler : IRequestHandler<UpdatePlaceCommand, boo
             throw new NotFoundException(UIMessage.NotFound("Place"));
 
         if (!await _placeRepository.IsPropertyUniqueAsync(x => x.Name, request.Name, place.Id))
-            throw new BadRequestException(UIMessage.AlreadyExsist("Place Name"));
+            throw new BadRequestException(UIMessage.AlreadyExist("Place Name"));
 
         place.SetDetailsForUpdate(request.Name, request.Address, userId);
         await _placeRepository.Update(place);

@@ -25,9 +25,7 @@ public static class UIMessage
     public static string ValidProperty(string propertyName) => $"{propertyName} must be valid.";
     public static string UniqueProperty(string fieldName) => $"{fieldName} must be unique.";
     public static string InvalidImage(string fieldName) => $"{fieldName} must be a valid image.";
-    public static string AlreadyExsist(string fieldName) => $"{fieldName} is already exsist. ";
-    public static string Beetween(string fieldName, int min, int max) => $"The {fieldName} can be between {min} and {max}.";
-
-   
+    public static string AlreadyExist(string fieldName) => $"{fieldName} is already exsist. ";
+    public static string Between(string fieldName, int min, int max) => $"The {fieldName} can be between {min} and {max}.";
 }
 

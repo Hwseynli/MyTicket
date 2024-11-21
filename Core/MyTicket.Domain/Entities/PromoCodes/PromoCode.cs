@@ -21,7 +21,7 @@ public class PromoCode : Editable<User>
     public void SetDetails(string uniqueCodde, decimal discountAmount, DiscountType discountType, byte expirationAfterDays, int usageLimit, bool isActive, int userId)
     {
         if ((discountAmount <= 0 || discountAmount > 100) && discountType == 0)
-            throw new DomainException(UIMessage.Beetween("discount percentage", 0, 100));
+            throw new DomainException(UIMessage.Between("discount percentage", 0, 100));
         UniqueCode = uniqueCodde;
         DiscountType = discountType;
         DiscountAmount = discountAmount;

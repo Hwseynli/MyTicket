@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bzYif2bUZ/8SBRH/oPRyY6jyq6nC3mClLnt3dsqKCxRpjJD+pPr2GFIcE6fQxPP11dj6kZmBHCA/X4XKtv88Kg==",
+  "dgSpecHash": "ZWU71s6wJ7ONcChE2UM1w6V12XZNVus02Y/66WR60dVhEX5ApvAPkZSNlemLwxUDfA9StVM7k7tRNvIKWb/h5A==",
   "success": true,
   "projectFilePath": "/Users/zeyneb/Projects/MyTicket/Infrastructure/MyTicket.Persistence/MyTicket.Persistence.csproj",
   "expectedPackageFiles": [
@@ -81,8 +81,8 @@
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.fileproviders.composite/2.2.0/microsoft.extensions.fileproviders.composite.2.2.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.filesystemglobbing/2.2.0/microsoft.extensions.filesystemglobbing.2.2.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.hosting.abstractions/2.2.0/microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
-    "/Users/zeyneb/.nuget/packages/microsoft.extensions.localization/2.2.0/microsoft.extensions.localization.2.2.0.nupkg.sha512",
-    "/Users/zeyneb/.nuget/packages/microsoft.extensions.localization.abstractions/2.2.0/microsoft.extensions.localization.abstractions.2.2.0.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/microsoft.extensions.localization/8.0.0/microsoft.extensions.localization.8.0.0.nupkg.sha512",
+    "/Users/zeyneb/.nuget/packages/microsoft.extensions.localization.abstractions/8.0.0/microsoft.extensions.localization.abstractions.8.0.0.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.logging/8.0.1/microsoft.extensions.logging.8.0.1.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.2/microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
     "/Users/zeyneb/.nuget/packages/microsoft.extensions.objectpool/2.2.0/microsoft.extensions.objectpool.2.2.0.nupkg.sha512",

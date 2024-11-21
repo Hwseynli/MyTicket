@@ -15,7 +15,7 @@ public class CreateSubCategoryCommandValidator : AbstractValidator<CreateSubCate
             .MinimumLength(3).WithMessage(UIMessage.MinLength("Name", 3))
             .MaximumLength(100).WithMessage(UIMessage.MaxLength("Name", 100))
             .MustAsync(async (name,cancellationToken)=> await _subCategoryRepository.IsPropertyUniqueAsync(x=>x.Name,name))
-            .WithMessage(UIMessage.AlreadyExsist("Name"));
+            .WithMessage(UIMessage.AlreadyExist("Name"));
 
         RuleFor(x => x.CategoryIds)
             .Must(subCategoryIds => subCategoryIds != null && subCategoryIds.Any(id => id > 0))

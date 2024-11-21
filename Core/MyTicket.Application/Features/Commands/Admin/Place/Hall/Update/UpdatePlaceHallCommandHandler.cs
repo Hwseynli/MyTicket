@@ -28,7 +28,7 @@ public class UpdatePlaceHallCommandHandler : IRequestHandler<UpdatePlaceHallComm
             throw new NotFoundException(UIMessage.NotFound("Place Hall"));
 
         if (!await _placeHallRepository.IsPropertyUniqueAsync(x => x.Name, request.Name, placeHall.Id))
-            throw new BadRequestException(UIMessage.AlreadyExsist($"{request.Name}"));
+            throw new BadRequestException(UIMessage.AlreadyExist($"{request.Name}"));
 
         // Oturacaqların sayı və sıra sayı uyğun olmalıdır
         if (request.SeatCount % request.RowCount != 0)

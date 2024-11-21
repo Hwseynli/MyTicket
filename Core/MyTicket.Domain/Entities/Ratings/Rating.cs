@@ -18,7 +18,7 @@ public class Rating : BaseEntity
     public void SetRating(int ratingValue, int userId, int eventId)
     {
         if (ratingValue < 1 || ratingValue > 5)
-            throw new DomainException(UIMessage.Beetween("Rating value",1,5));
+            throw new DomainException(UIMessage.Between("Rating value",1,5));
 
         RatingValue = (RatingValue)ratingValue;
         RatedAt = DateTime.UtcNow.AddHours(4);
@@ -28,7 +28,7 @@ public class Rating : BaseEntity
     public void SetRatingForUpdate(int ratingValue)
     {
         if (ratingValue < 1 || ratingValue > 5)
-            throw new DomainException(UIMessage.Beetween("Rating value", 1, 5));
+            throw new DomainException(UIMessage.Between("Rating value", 1, 5));
 
         RatingValue = (RatingValue)ratingValue;
         RatedAt = DateTime.UtcNow.AddHours(4);

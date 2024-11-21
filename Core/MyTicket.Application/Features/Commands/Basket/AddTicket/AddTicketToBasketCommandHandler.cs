@@ -40,7 +40,7 @@ public class AddTicketToBasketCommandHandler : IRequestHandler<AddTicketToBasket
         }
 
         if (basket.TicketsWithTime.Any(x => x.TicketId == ticket.Id))
-            throw new BadRequestException(UIMessage.AlreadyExsist("Ticket"));
+            throw new BadRequestException(UIMessage.AlreadyExist("Ticket"));
 
         basket.AddTicket(ticket.Id);
         await _basketRepository.Update(basket);

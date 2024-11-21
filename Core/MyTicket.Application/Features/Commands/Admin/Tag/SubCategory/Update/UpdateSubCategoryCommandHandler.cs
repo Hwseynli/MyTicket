@@ -34,7 +34,7 @@ public class UpdateSubCategoryCommandHandler : IRequestHandler<UpdateSubCategory
         var categories = await _categoryRepository.GetAllAsync(sc => request.CategoryIds.Contains(sc.Id)&& !subCategory.Categories.Any(x => x.Id == sc.Id));
 
         if (await _subCategoryRepository.IsPropertyUniqueAsync(x => x.Name, request.Name, request.Id))
-            throw new DomainException(UIMessage.AlreadyExsist("Name"));
+            throw new DomainException(UIMessage.AlreadyExist("Name"));
 
         subCategory.SetDetailsForUpdate(request.Name, categories, userId);
 
