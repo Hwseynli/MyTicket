@@ -18,7 +18,7 @@ public class UserQueries : IUserQueries
         {
             FistName = user.FirstName,
             LastName = user.LastName,
-            Gender=user.Gender,
+            Gender=user.Gender.ToString(),
             Birthday=user.Birthday,
             PhoneNumber = user.PhoneNumber,
             Email = user.Email
