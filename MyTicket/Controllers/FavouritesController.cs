@@ -26,8 +26,8 @@ public class FavouritesController : ControllerBase
     public async Task<IActionResult> RateEvent([FromBody] RateEventCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("Event", "rated"))
-                          : BadRequest(UIMessage.GetFailureMessage("Event", "rate"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+                          : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpGet("get-wishList")]
@@ -41,16 +41,16 @@ public class FavouritesController : ControllerBase
     public async Task<IActionResult> AddWishLists([FromBody] AddWishListCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("Item", "added to favourites"))
-            : BadRequest(UIMessage.GetFailureMessage("Item", "add to favourites"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpDelete("remove-wishlist-event")]
     public async Task<IActionResult> RemoveFromWishList([FromBody] RemoveFromWishListCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("Item", "removed from favourites"))
-            : BadRequest(UIMessage.GetFailureMessage("Item", "remove from favourites"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 }
 

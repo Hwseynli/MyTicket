@@ -13,6 +13,11 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Security.Claims;
 using MyTicket.Infrastructure.Settings;
 using MyTicket.Infrastructure;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
+using MyTicket.Infrastructure.BaseMessages;
+using MyTicket.Infrastructure.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,11 +47,31 @@ builder.Services.AddCors(option =>
 var jwtSettings = configuration.GetSection("JWTSettings");
 var secretKey = jwtSettings["Secret"];
 
+builder.Services.AddLocalization();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
+
 builder.Services.AddMvc(options =>
 {
     options.MaxModelBindingCollectionSize = int.MaxValue;
 
+}).AddDataAnnotationsLocalization(options =>
+{
+    options.DataAnnotationLocalizerProvider = (_, factory) => factory.Create(typeof(UIMessage));
 });
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("az-Latn"),
+        new CultureInfo("en-US"),
+    };
+
+    options.DefaultRequestCulture = new RequestCulture(culture: supportedCultures[0]);
+    options.SupportedCultures = supportedCultures;
+});
+
+
 builder.Services.Configure<KestrelServerOptions>(options =>
 {
     options.AddServerHeader = false;
@@ -150,6 +175,17 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors("CorsPolicy");
+
+
+var factory = app.Services.GetService<IStringLocalizerFactory>();
+UIMessage.Configure(factory);
+
+var supportedCultures = new[] { "az-Latn", "en-US" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture("en-US")
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+app.UseRequestLocalization(localizationOptions);
 
 app.UseAuthentication();
 app.UseAuthorization();

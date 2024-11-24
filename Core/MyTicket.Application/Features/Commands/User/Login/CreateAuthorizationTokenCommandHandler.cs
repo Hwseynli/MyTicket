@@ -23,11 +23,11 @@ public class CreateAuthorizationTokenCommandHandler : IRequestHandler<CreateAuth
                                                           || x.PhoneNumber == request.EmailOrPhoneNumber,"Role");
 
         if (user == null)
-            throw new UnAuthorizedException(UIMessage.Invalid());
+            throw new UnAuthorizedException(UIMessage.Invalid);
 
         // PasswordHasher is used to verify the password
         if (user.PasswordHash != PasswordHasher.HashPassword(request.Password))
-        throw new UnAuthorizedException(UIMessage.Invalid());
+        throw new UnAuthorizedException(UIMessage.Invalid);
 
         user.SetForLogin(true);
 

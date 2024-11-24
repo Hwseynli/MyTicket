@@ -38,7 +38,7 @@ public class AdminController : ControllerBase
     public async Task<IActionResult> AssignUserRole(AssignRolesCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(new { message = UIMessage.GetSuccessMessage("role", "assigned") })
-        : BadRequest(new { message = UIMessage.GetFailureMessage("role", "assign") });
+        return result ? Ok(new { message = UIMessage.GetSuccessMessage})
+        : BadRequest(new { message = UIMessage.GetFailureMessage});
     }
 }

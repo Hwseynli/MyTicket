@@ -24,7 +24,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, J
         if (user == null
             || !user.Activated
             || user.IsDeleted)
-            throw new UnAuthorizedException(UIMessage.Invalid());
+            throw new UnAuthorizedException(UIMessage.Invalid);
 
         if (Convert.ToDateTime(refreshToken[2]) < DateTime.UtcNow)
             throw new UnAuthorizedException("token is expiredd");

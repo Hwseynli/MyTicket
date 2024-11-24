@@ -38,7 +38,7 @@ public class ExceptionHandlingMiddleware
         switch (ex)
         {
             case ApplicationException:
-                response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
                 problemDetails.Detail = ex.Message;
                 problemDetails.Title = "Application Error";
                 break;
@@ -62,12 +62,12 @@ public class ExceptionHandlingMiddleware
                 problemDetails.Title = "Unauthorized";
                 break;
             case BadRequestException:
-                response.StatusCode = (int)HttpStatusCode.NotFound;
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
                 problemDetails.Detail = ex.Message;
                 problemDetails.Title = "Bad Request";
                 break;
             case DomainException:
-                response.StatusCode = (int)HttpStatusCode.NotFound;
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
                 problemDetails.Detail = ex.Message;
                 problemDetails.Title = "Domain Error";
                 break;

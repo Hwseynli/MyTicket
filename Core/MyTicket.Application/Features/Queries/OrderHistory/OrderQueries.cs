@@ -89,7 +89,7 @@ public class OrderQueries : IOrderQueries
     {
         var userId = await _userManager.GetCurrentUserId();
         if (userId <= 0)
-            throw new UnAuthorizedException(UIMessage.NotAccess());
+            throw new UnAuthorizedException(UIMessage.NotAccess);
 
         var order = await _orderRepository.GetAsync(o => o.Id == orderId && o.UserId == userId,
             "Tickets", "Tickets.User", "Tickets.Event", "Tickets.Seat.PlaceHall.Place", "PromoCode");

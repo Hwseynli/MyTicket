@@ -1,0 +1,19 @@
+﻿{
+    "SuccessOperation": "The operation was successfully completed.",
+    "FailureOperation": "Operation Failed.",
+    "PasswordResetMessage": "{0} successfully {1}",
+    "NotAccess": "You have not access.",
+    "NotFound": "{0} not found.",
+    "Required": "{0} is required.",
+    "MaxLength": "{0} cannot exceed {1} characters.",
+    "MinLength": "{0} cannot be less than {1} characters.",
+    "Invalid": "Invalid credentials",
+    "GreaterThanZero": "{0} must be greater than 0.",
+    "GreaterThan": "{0} must be greater than {1}.",
+    "NotEmpty": "{0} cannot be empty.",
+    "ValidProperty": "{0} must be valid.",
+    "UniqueProperty": "{0} must be unique.",
+    "InvalidImage": "{0} must be a valid image.",
+    "AlreadyExist": "{0} is already exsist. ",
+    "Between": "The {0} can be between {1} and {2}."
+}

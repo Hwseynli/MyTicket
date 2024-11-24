@@ -22,8 +22,8 @@ public class SettingsController : ControllerBase
     public async Task<IActionResult> CreateAsync([FromForm] CreateSettingCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("setting", "created"))
-        : BadRequest(UIMessage.GetFailureMessage("setting", "create"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 
     // PUT api/values/5
@@ -31,7 +31,7 @@ public class SettingsController : ControllerBase
     public async Task<IActionResult> UpdateAsync([FromForm] UpdateSettingCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("setting", "updated"))
-        : BadRequest(UIMessage.GetFailureMessage("setting", "update"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 }

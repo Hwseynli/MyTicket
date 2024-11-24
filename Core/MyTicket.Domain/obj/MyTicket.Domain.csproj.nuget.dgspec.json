@@ -107,18 +107,6 @@
               "target": "Package",
               "version": "[2.2.2, )"
             },
-            "Microsoft.AspNetCore.Mvc": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Microsoft.Extensions.Caching.Abstractions": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Caching.Memory": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
               "target": "Package",
               "version": "[8.0.10, )"
@@ -133,7 +121,7 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[13.0.3, )"
+              "version": "[13.0.1, )"
             },
             "PdfSharpCore": {
               "target": "Package",

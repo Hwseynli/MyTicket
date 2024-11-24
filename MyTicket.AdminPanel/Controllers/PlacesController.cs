@@ -25,16 +25,16 @@ public class PlacesController : ControllerBase
     public async Task<IActionResult> AddPlace([FromBody] AddPlaceCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("place", "added"))
-        : BadRequest(UIMessage.GetFailureMessage("place", "add"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPut("update-places")]
     public async Task<IActionResult> UpdatePlace([FromBody] UpdatePlaceCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("place", "updated"))
-        : BadRequest(UIMessage.GetFailureMessage("place", "update"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 
     // POST: api/places/halls
@@ -42,15 +42,15 @@ public class PlacesController : ControllerBase
     public async Task<IActionResult> AddPlaceHall([FromBody] AddPlaceHallCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("place hall", "added"))
-        : BadRequest(UIMessage.GetFailureMessage("place hall", "add"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPut("update-place_halls")]
     public async Task<IActionResult> UpdatePlaceHall([FromBody] UpdatePlaceHallCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("place hall", "updated"))
-        : BadRequest(UIMessage.GetFailureMessage("place hall", "update"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 }

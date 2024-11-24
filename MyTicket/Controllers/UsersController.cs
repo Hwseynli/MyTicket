@@ -32,16 +32,16 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Subscribe([FromBody] CreateSubscriberCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("Subscription", "completed"))
-            : BadRequest(UIMessage.GetFailureMessage("Subscription", "complete"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterCommand command)
     {
         var result=await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("User", "registered"))
-            : BadRequest(UIMessage.GetFailureMessage("User", "register"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPost("login")]
@@ -63,8 +63,8 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Update([FromBody] UpdateUserCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("User", "updated"))
-            : BadRequest(UIMessage.GetFailureMessage("User", "update"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPost("refreshToken")]
@@ -77,8 +77,8 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> SoftDelete([FromBody] SoftDeleteRequestCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("User", "soft deleted"))
-            : BadRequest(UIMessage.GetFailureMessage("User", "soft delete"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 
     #region ForgotPassword
@@ -87,7 +87,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> SendOtp(SendOtpCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("OTP", "sent"))
+        return result ? Ok(UIMessage.PasswordResetMessage("OTP", "sent"))
             : NotFound(UIMessage.NotFound("User"));
     }
 
@@ -95,16 +95,16 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> VerifyOtp(VerifyOtpCommand command)
     {
         var isValid = await _mediator.Send(command);
-        return isValid ? Ok(UIMessage.GetSuccessMessage("OTP", "verified"))
-            : BadRequest(UIMessage.GetFailureMessage("OTP", "verify"));
+        return isValid ? Ok(UIMessage.PasswordResetMessage("OTP", "verified"))
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPost("resetPassword")]
     public async Task<IActionResult> ResetPassword(ResetPasswordCommand command)
     {
         var isReset = await _mediator.Send(command);
-        return isReset ? Ok(UIMessage.GetSuccessMessage("Password", "reset"))
-            : BadRequest(UIMessage.GetFailureMessage("Password", "reset"));
+        return isReset ? Ok(UIMessage.PasswordResetMessage("Password", "reset"))
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 
     #endregion

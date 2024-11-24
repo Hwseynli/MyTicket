@@ -24,31 +24,31 @@ public class CategoriesController : ControllerBase
     public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand command)
     {
             var result = await _mediator.Send(command);
-            return result ? Ok(UIMessage.GetSuccessMessage("category", "created"))
-        : BadRequest(UIMessage.GetFailureMessage("category", "create"));
+            return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPut("update-category")]
     public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryCommand command)
     {
             var result = await _mediator.Send(command);
-            return result ? Ok(UIMessage.GetSuccessMessage("category", "updated"))
-        : NotFound(UIMessage.GetFailureMessage("category", "update"));
+            return result ? Ok(UIMessage.GetSuccessMessage)
+        : NotFound(UIMessage.GetFailureMessage);
     }
 
     [HttpPost("create-sub_category")]
     public async Task<IActionResult> CreateSubCategory([FromBody] CreateSubCategoryCommand command)
     {
             var result = await _mediator.Send(command);
-            return result ? Ok(UIMessage.GetSuccessMessage("sub-category", "create"))
-        : NotFound(UIMessage.GetFailureMessage("sub-category", "create"));
+            return result ? Ok(UIMessage.GetSuccessMessage)
+        : NotFound(UIMessage.GetFailureMessage);
     }
 
     [HttpPut("update-sub_category")]
     public async Task<IActionResult> UpdateSubCategory([FromBody] UpdateSubCategoryCommand command)
     {
             var result = await _mediator.Send(command);
-            return result ? Ok(UIMessage.GetSuccessMessage("sub-category", "updated"))
-        : NotFound(UIMessage.GetFailureMessage("sub-category", "update"));
+            return result ? Ok(UIMessage.GetSuccessMessage)
+        : NotFound(UIMessage.GetFailureMessage);
     }
 }

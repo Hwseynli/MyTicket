@@ -11,12 +11,14 @@
     <None Remove="Extensions\" />
     <None Remove="Settings\" />
     <None Remove="BaseMessages\" />
+    <None Remove="Localization\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />
     <Folder Include="Extensions\" />
     <Folder Include="Settings\" />
     <Folder Include="BaseMessages\" />
+    <Folder Include="Localization\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
@@ -24,5 +26,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.8.16" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 </Project>

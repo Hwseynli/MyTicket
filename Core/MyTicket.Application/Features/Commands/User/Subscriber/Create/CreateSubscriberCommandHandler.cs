@@ -33,7 +33,7 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
         if (isEmail)
         {
             if (await _userRepository.GetAsync(x => x.Email == request.EmailOrPhoneNumber && x.RoleId == 1) != null)
-                throw new UnAuthorizedException(UIMessage.NotAccess());
+                throw new UnAuthorizedException(UIMessage.NotAccess);
             subscriber.SetDetail(request.EmailOrPhoneNumber, (StringType)1);
             await _subscriberRepository.AddAsync(subscriber);
             await _subscriberRepository.Commit(cancellationToken);
@@ -44,7 +44,7 @@ public class CreateSubscriberCommandHandler : IRequestHandler<CreateSubscriberCo
         else if(isPhoneNumber)
         {
             if (await _userRepository.GetAsync(x => x.PhoneNumber == request.EmailOrPhoneNumber && x.RoleId == 1) != null)
-                throw new UnAuthorizedException(UIMessage.NotAccess());
+                throw new UnAuthorizedException(UIMessage.NotAccess);
             subscriber.SetDetail(request.EmailOrPhoneNumber,0);
             await _subscriberRepository.AddAsync(subscriber);
             await _subscriberRepository.Commit(cancellationToken);

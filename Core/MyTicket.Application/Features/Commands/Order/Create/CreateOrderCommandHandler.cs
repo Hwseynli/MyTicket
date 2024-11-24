@@ -38,7 +38,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
         var user = await _userManager.GetCurrentUser();
 
         if (user.RoleId == 1)
-            throw new UnAuthorizedException(UIMessage.NotAccess());
+            throw new UnAuthorizedException(UIMessage.NotAccess);
 
         var basket = await _basketRepository.GetAsync(x => x.UserId == user.Id, "TicketsWithTime");
         if (basket == null)

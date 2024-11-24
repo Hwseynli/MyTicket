@@ -25,16 +25,16 @@ public class EventsController : ControllerBase
     public async Task<IActionResult> CreateEvent([FromForm]CreateEventCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("event", "created"))
-        : BadRequest(UIMessage.GetFailureMessage("event", "create"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpPut("update-events")]
     public async Task<IActionResult> UpdateEvent([FromForm] UpdateEventCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("event", "updated"))
-        : BadRequest(UIMessage.GetFailureMessage("event", "update"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpGet("get-reserved-tickets-for-{eventId}")]

@@ -31,8 +31,8 @@ public class BasketsController : ControllerBase
     public async Task<IActionResult> AddTicketToBasket([FromBody] AddTicketToBasketCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("Ticket", "added to the basket"))
-             : BadRequest(UIMessage.GetFailureMessage("Ticket", "add to the basket"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+             : BadRequest(UIMessage.GetFailureMessage);
     }
 
     [HttpDelete("remove-ticket")]
@@ -40,8 +40,8 @@ public class BasketsController : ControllerBase
     {
         var result = await _mediator.Send(command);
         return result
-            ? Ok(UIMessage.GetSuccessMessage("Ticket", "removed from the basket"))
-            : BadRequest(UIMessage.GetFailureMessage("Ticket", "remove from the basket"));
+            ? Ok(UIMessage.GetSuccessMessage)
+            : BadRequest(UIMessage.GetFailureMessage);
     }
 }
 

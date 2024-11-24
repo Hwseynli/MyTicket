@@ -1,0 +1,19 @@
+﻿{
+    "SuccessOperation": "Əməliyyat müvəffəqiyyətlə başa çatdı.",
+    "FailureOperation": "Əməliyyat uğursuz oldu.",
+    "PasswordResetMessage": "{0} uğurla {1} edildi.",
+    "NotAccess": "Sizin girişi olmur.",
+    "NotFound": "{0} tapılmadı.",
+    "Required": "{0} tələb olunur.",
+    "MaxLength": "{0} {1} simvoldan çox ola bilməz.",
+    "MinLength": "{0} {1} simvoldan az ola bilməz.",
+    "Invalid": "Keçərli məlumatlar deyil.",
+    "GreaterThanZero": "{0} sıfırdan böyük olmalıdır.",
+    "GreaterThan": "{0} {1}-dən böyük olmalıdır.",
+    "NotEmpty": "{0} boş ola bilməz.",
+    "ValidProperty": "{0} düzgün olmalıdır.",
+    "UniqueProperty": "{0} unikal olmalıdır.",
+    "InvalidImage": "{0} düzgün şəkil olmalıdır.",
+    "AlreadyExist": "{0} artıq mövcuddur.",
+    "Between": "{0} {1} ilə {2} arasında ola bilər."
+}

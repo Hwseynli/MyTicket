@@ -23,7 +23,7 @@ public class AssignRolesCommandHandler : IRequestHandler<AssignRolesCommand, boo
         var admin = await _userManager.GetCurrentUser();
         if (admin.RoleId!=1)
         {
-            throw new UnAuthorizedException(UIMessage.NotAccess());
+            throw new UnAuthorizedException(UIMessage.NotAccess);
         }
         var user = await _userRepository.GetAsync(u => u.Id == request.UserId&&u.Id!=admin.Id&&u.RoleId!=1);
         if (user == null)

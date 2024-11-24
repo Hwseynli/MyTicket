@@ -23,22 +23,22 @@ public class PromoCodesController : ControllerBase
     public async Task<IActionResult> CreatePromoCode([FromForm] CreatePromoCodeCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("promo code", "created"))
-        : BadRequest(UIMessage.GetFailureMessage("promo code", "create"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
     [HttpPut("update-promoCode")]
     public async Task<IActionResult> UpdatePromoCode([FromForm] UpdatePromoCodeCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("promo code", "updated"))
-        : BadRequest(UIMessage.GetFailureMessage("promo code", "update"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
     [HttpDelete("delete-promoCode")]
     public async Task<IActionResult> DeletePromoCode([FromForm] DeletePromoCodeCommand command)
     {
         var result = await _mediator.Send(command);
-        return result ? Ok(UIMessage.GetSuccessMessage("promo code", "deleted"))
-        : BadRequest(UIMessage.GetFailureMessage("promo code", "delete"));
+        return result ? Ok(UIMessage.GetSuccessMessage)
+        : BadRequest(UIMessage.GetFailureMessage);
     }
 }
 
